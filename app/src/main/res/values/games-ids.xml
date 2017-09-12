@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">175120789881</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.riseapps.taplor</string>
+    <!-- achievement Easy Score 10 -->
+    <string name="achievement_easy_score_10" translatable="false">CgkI-eKMsIwFEAIQBA</string>
+    <!-- achievement Easy Score 20 -->
+    <string name="achievement_easy_score_20" translatable="false">CgkI-eKMsIwFEAIQBQ</string>
+    <!-- achievement Easy Score 50 -->
+    <string name="achievement_easy_score_50" translatable="false">CgkI-eKMsIwFEAIQBg</string>
+    <!-- achievement Easy Score 80 -->
+    <string name="achievement_easy_score_80" translatable="false">CgkI-eKMsIwFEAIQBw</string>
+    <!-- achievement Easy Score 100 -->
+    <string name="achievement_easy_score_100" translatable="false">CgkI-eKMsIwFEAIQCA</string>
+    <!-- achievement Medium Score 10 -->
+    <string name="achievement_medium_score_10" translatable="false">CgkI-eKMsIwFEAIQCQ</string>
+    <!-- achievement Medium Score 20 -->
+    <string name="achievement_medium_score_20" translatable="false">CgkI-eKMsIwFEAIQCg</string>
+    <!-- achievement Medium Score 50 -->
+    <string name="achievement_medium_score_50" translatable="false">CgkI-eKMsIwFEAIQCw</string>
+    <!-- achievement Medium Score 80 -->
+    <string name="achievement_medium_score_80" translatable="false">CgkI-eKMsIwFEAIQDA</string>
+    <!-- achievement Medium Score 100 -->
+    <string name="achievement_medium_score_100" translatable="false">CgkI-eKMsIwFEAIQDQ</string>
+    <!-- achievement Hard Score 10 -->
+    <string name="achievement_hard_score_10" translatable="false">CgkI-eKMsIwFEAIQDg</string>
+    <!-- achievement Hard Score 20 -->
+    <string name="achievement_hard_score_20" translatable="false">CgkI-eKMsIwFEAIQDw</string>
+    <!-- achievement Hard Score 50 -->
+    <string name="achievement_hard_score_50" translatable="false">CgkI-eKMsIwFEAIQEA</string>
+    <!-- achievement Hard Score 80 -->
+    <string name="achievement_hard_score_80" translatable="false">CgkI-eKMsIwFEAIQEQ</string>
+    <!-- achievement Hard Score 100 -->
+    <string name="achievement_hard_score_100" translatable="false">CgkI-eKMsIwFEAIQEg</string>
+    <!-- leaderboard Easy -->
+    <string name="leaderboard_easy" translatable="false">CgkI-eKMsIwFEAIQAQ</string>
+    <!-- leaderboard Medium -->
+    <string name="leaderboard_medium" translatable="false">CgkI-eKMsIwFEAIQAg</string>
+    <!-- leaderboard Hard -->
+    <string name="leaderboard_hard" translatable="false">CgkI-eKMsIwFEAIQAw</string>
+</resources>

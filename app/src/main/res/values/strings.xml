@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Taplor</string>
+    <string name="signin_other_error">There was
+        // an issue with sign-in, please try again later.</string>
+    <string name="signin_failure">Unable to sign in</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ad_app_id">ca-app-pub-6474186767554757~3148599990</string>
+    <string name="banner_ad_id">ca-app-pub-6474186767554757/4597413032</string>
+    <string name="interstitial_ad_id">ca-app-pub-6474186767554757/6472589723</string>
+    <string name="native_ad_id">ca-app-pub-6474186767554757/3574608428</string>
+
+    <!--About Game Popup-->
+    <string name="developer_details">By RiseApps @riseandroidapps</string>
+    <string name="credits">Credits</string>
+    <string name="share">Share</string>
+    <string name="review">Review</string>
+
+    <!--Home Screen-->
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+
+    <!--Game Over PopUp-->
+    <string name="game_over">GAME OVER</string>
+    <string name="your_score">Your Score</string>
+    <string name="see_leaderboard">See Leaderboard</string>
+    <string name="try_again">Try Again</string>
+    <string name="share_score">Share Score</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="_5_sec_time_pause_freeze">5 sec time pause/freeze</string>
+    <string name="get_premium">GET PREMIUM</string>
+
+    <!--Notification-->
+    <string name="notification_title">Time freezers replenished</string>
+    <string name="notification_context">Get back to create new High Score</string>
+
+
+</resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "175120789881",
+    "firebase_url": "https://taplor-950d7.firebaseio.com",
+    "project_id": "taplor-950d7",
+    "storage_bucket": "taplor-950d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175120789881:android:ac4e1a570cffb3ba",
+        "android_client_info": {
+          "package_name": "com.riseapps.taplor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175120789881-qc0695ekv6uht2o1b7v33l8ua9c2gs4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.riseapps.taplor",
+            "certificate_hash": "6504aa4f75058273e923eb9d3c82fc24f5c55cc7"
+          }
+        },
+        {
+          "client_id": "175120789881-mnihbbp94saoa2ui71cip74pfmn7p487.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuMxIeFGDgqf4Bkm960-n_60-PNp1f7nA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175120789881-mnihbbp94saoa2ui71cip74pfmn7p487.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
