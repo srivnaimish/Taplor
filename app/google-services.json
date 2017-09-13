@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "175120789881-ir2qkjr5da5rh70vbv38pvfdu4huf6t5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.riseapps.taplor",
+            "certificate_hash": "af86df18eeb0a42229c6823ba52346304482b2ce"
+          }
+        },
+        {
           "client_id": "175120789881-qc0695ekv6uht2o1b7v33l8ua9c2gs4a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -30,6 +38,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyDuMxIeFGDgqf4Bkm960-n_60-PNp1f7nA"
+        },
+        {
+          "current_key": "AIzaSyBxoPb-Hg3mZJzkRHlpvMf8Suuraz8jk7U"
         }
       ],
       "services": {

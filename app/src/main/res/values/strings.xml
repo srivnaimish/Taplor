@@ -34,6 +34,7 @@
     <!--Notification-->
     <string name="notification_title">Time freezers replenished</string>
     <string name="notification_context">Get back to create new High Score</string>
+    <string name="already_paused">Time Already Paused</string>
 
 
 </resources>

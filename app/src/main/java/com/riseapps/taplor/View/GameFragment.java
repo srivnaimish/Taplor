@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -68,7 +69,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     int boost;
     private Dialog dialog;
     private long timeToShow;
-    private Animation animation1, animation2, animation3;
+    private MediaPlayer correct,wrong;
+
 
     public GameFragment() {
         // Required empty public constructor
@@ -118,7 +120,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             view.findViewById(AppConstants.powerups[i]).setVisibility(View.VISIBLE);
         }
 
-
         easyOne.setOnClickListener(this);
         easyTwo.setOnClickListener(this);
         easyThree.setOnClickListener(this);
@@ -141,6 +142,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         switch (level) {
             case 0:
                 easy_game.setVisibility(View.VISIBLE);
+                easyOne.startAnimation(AppConstants.getFloatingAnimation(getContext()));
+                easyTwo.startAnimation(AppConstants.getFloatingAnimation(getContext()));
+                easyThree.startAnimation(AppConstants.getFloatingAnimation(getContext()));
+
                 break;
             case 1:
                 medium_game.setVisibility(View.VISIBLE);
@@ -156,12 +161,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         countDownTimer.start();
         changeColors();
 
-        initiallizeAnimations();
+        correct = MediaPlayer.create(getContext(), R.raw.correct);
+        wrong = MediaPlayer.create(getContext(),R.raw.wrong);
         return view;
     }
 
     @SuppressLint("SetTextI18n")
     private void gameOver() {
+        wrong.start();
         timer.setVisibility(View.GONE);
         if (boost == 0)
             setTimer(15);
@@ -204,23 +211,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                                         getString(R.string.leaderboard_easy)), 0);
                     }
                 });
-                if (score >= 10 && score < 20) {
+                if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_score_10));
-                } else if (score >= 20 && score < 50) {
+                }if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_score_20));
-                } else if (score >= 50 && score < 80) {
+                }if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_score_50));
-                } else if (score >= 80 && score < 100) {
+                }if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_score_80));
-                } else if (score >= 100) {
+                }if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_score_100));
@@ -237,23 +244,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                                         getString(R.string.leaderboard_medium)), 0);
                     }
                 });
-                if (score >= 10 && score < 20) {
+                if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_score_10));
-                } else if (score >= 20 && score < 50) {
+                }if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_score_20));
-                } else if (score >= 50 && score < 80) {
+                }if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_score_50));
-                } else if (score >= 80 && score < 100) {
+                }if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_score_80));
-                } else if (score >= 100) {
+                }if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_score_100));
@@ -270,23 +277,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                                         getString(R.string.leaderboard_hard)), 0);
                     }
                 });
-                if (score >= 10 && score < 20) {
+                if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_score_10));
-                } else if (score >= 20 && score < 50) {
+                }if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_score_20));
-                } else if (score >= 50 && score < 80) {
+                }if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_score_50));
-                } else if (score >= 80 && score < 100) {
+                }if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_score_80));
-                } else if (score >= 100) {
+                }if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_score_100));
@@ -326,7 +333,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.bubble));
+        view.startAnimation(AppConstants.getBubbleAnimation(getContext(),view));
         switch (view.getId()) {
 
             case R.id.easy_one:
@@ -427,37 +434,38 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.add1:
                 if (!stopped) {
-                    add1.startAnimation(animation1);
+                    add1.setVisibility(View.GONE);
                     pauseResumeTimer();
                     sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
                 } else {
-                    Toast.makeText(getActivity(), "Time Already Paused", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.add2:
                 if (!stopped) {
-                    add2.startAnimation(animation2);
+                    add2.setVisibility(View.GONE);
                     pauseResumeTimer();
                     sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
                 } else {
-                    Toast.makeText(getActivity(), "Time Already Paused", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.add3:
                 if (!stopped) {
-                    add3.startAnimation(animation3);
+                    add3.setVisibility(View.GONE);
                     pauseResumeTimer();
                     sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
                 } else {
-                    Toast.makeText(getActivity(), "Time Already Paused", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
 
     void pauseResumeTimer() {
+        Toast.makeText(getContext(), "Timer pause for "+pauseTime/1000+" seconds", Toast.LENGTH_SHORT).show();
         countDownTimer.cancel();
         stopped = true;
         timer.postDelayed(runnable, pauseTime);
@@ -623,61 +631,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         stopGame();
     }
 
-    public void initiallizeAnimations() {
-        animation1 = AnimationUtils.loadAnimation(getContext(), R.anim.bubble);
-        animation1.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                add1.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        animation2 = AnimationUtils.loadAnimation(getContext(), R.anim.bubble);
-        animation2.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                add2.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        animation3 = AnimationUtils.loadAnimation(getContext(), R.anim.bubble);
-        animation3.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                add3.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-
-    }
-
     void stopGame() {
         timer.removeCallbacks(runnable);
         countDownTimer.cancel();
@@ -699,7 +652,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             totalTime--;
         }
         changeColors();
-
+        correct.start();
     }
 
     public class MyCountDownTimer extends CountDownTimer {
