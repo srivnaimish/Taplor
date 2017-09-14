@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .build();
 
 
-        heading.setAnimation(AppConstants.generateFloatFadeAnimator(2000, 2000,heading,this));
+        heading.setAnimation(AppConstants.generateFloatFadeAnimator(2000, 2000, heading, this));
         easy.setAnimation(AppConstants.generateFadeInAnimator(0, 2000));
         medium.setAnimation(AppConstants.generateFadeInAnimator(0, 3000));
         hard.setAnimation(AppConstants.generateFadeInAnimator(0, 4000));
@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         share.setType("text/plain");
         share.putExtra(Intent.EXTRA_TEXT, message);
         startActivity(Intent.createChooser(share, "Share via.."));
-    } //TODO:Replace URL with correct
+    }
 
     public void reviewApp(View view) {
         final Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
@@ -415,4 +415,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.TWITTER_URL));
         startActivity(browserIntent);
     }   //TODO:Replace URL with correct
+
+    public void launchTutorial(View view) {
+        DemoFragment demoFragment = new DemoFragment();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.replace(R.id.container, demoFragment);
+        ft.addToBackStack("DemoFragment");
+        ft.commit();
+    }
 }

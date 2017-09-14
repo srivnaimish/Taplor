@@ -37,6 +37,10 @@
     <string name="timer_paused">Timer pause for 5 seconds</string>
     <string name="time_freezers">Time Freezers :</string>
     <string name="time_freezers_3">Time Freezers : 3</string>
-
+    <string name="app_walk1">You get 5 seconds to answer correctly.\n\n During a game,when you pass the score of 20,50 and 80,the time to answer also decreases by 1 seconds.</string>
+    <string name="app_walk2">Freeze the clock.\n\n Each of these freezers lets you pause the timer for 5 seconds.\n\n Use it wisely to score higher as you only get 3 freezers for a single game.</string>
+    <string name="app_walk3">Your aim is to tap the flame containing the name of the background color.\n\nHere, the background color name is </string>
+    <string name="app_walk4">Therefore tap the flame bearing this name.</string>
+    <string name="this_is_only_the_demo_feel_free_to_practise_here_anytime">Scores made here are just for practise and would not reflect on the Leaderboards.</string>
 
 </resources>
