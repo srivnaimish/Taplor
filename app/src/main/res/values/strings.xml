@@ -11,7 +11,7 @@
     <string name="native_ad_id">ca-app-pub-6474186767554757/3574608428</string>
 
     <!--About Game Popup-->
-    <string name="developer_details">By RiseApps @riseandroidapps</string>
+    <string name="developer_details">By\nRiseApps\n@riseandroidapps</string>
     <string name="credits">Credits</string>
     <string name="share">Share</string>
     <string name="review">Review</string>
@@ -28,13 +28,15 @@
     <string name="try_again">Try Again</string>
     <string name="share_score">Share Score</string>
     <string name="remove_ads">Remove Ads</string>
-    <string name="_5_sec_time_pause_freeze">5 sec time pause/freeze</string>
+    <string name="_5_sec_time_pause_freeze">2 Extra Time Freezers</string>
     <string name="get_premium">GET PREMIUM</string>
 
-    <!--Notification-->
-    <string name="notification_title">Time freezers replenished</string>
-    <string name="notification_context">Get back to create new High Score</string>
+    <!--Game-->
     <string name="already_paused">Time Already Paused</string>
+    <string name="no_freezers_left">No Freezers Left</string>
+    <string name="timer_paused">Timer pause for 5 seconds</string>
+    <string name="time_freezers">Time Freezers :</string>
+    <string name="time_freezers_3">Time Freezers : 3</string>
 
 
 </resources>

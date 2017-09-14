@@ -1,14 +1,9 @@
 package com.riseapps.taplor.View;
-//TODO : Sounds
-//TODO : Update variables according to in app billing status
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +13,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -29,12 +25,12 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.games.Games;
-import com.riseapps.taplor.Executor.BoostReciever;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
@@ -54,22 +50,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Button mediumOne, mediumTwo, mediumThree, mediumFour;
     Button hardOne, hardTwo, hardThree, hardFour, hardFive;
     String answer = "";
-    TextView timer;
+    Button timer;
     int score = 0;
     int totalTime = 6;
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
-    private int level;
+    private int level,powerups=3;
     private CountDownTimer countDownTimer;
     private int ansPos;
-    private Button add1, add2, add3;
+    private Button freeze;
     boolean stopped = false;
-    private long pauseTime = 5000;
-    int boost;
     private Dialog dialog;
     private long timeToShow;
-    private MediaPlayer correct,wrong;
+    private MediaPlayer correct, wrong;
+    private TextView Score;
+    private Handler handler = new Handler();
+    private Animation floating;
 
 
     public GameFragment() {
@@ -90,9 +87,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for getActivity() fragment
         View view = inflater.inflate(R.layout.fragment_game, container, false);
         closeGameFragment = (CloseGameFragment) getActivity();
-        boost = sharedPreferenceSingelton.getSavedBoost(getContext(), "Boost");
         background = view.findViewById(R.id.background);
-
+        Score = view.findViewById(R.id.score);
         easy_game = view.findViewById(R.id.easy_game);
         medium_game = view.findViewById(R.id.medium_game);
         hard_game = view.findViewById(R.id.hard_game);
@@ -112,13 +108,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         hardFour = view.findViewById(R.id.hard_four);
         hardFive = view.findViewById(R.id.hard_five);
 
-        add1 = view.findViewById(R.id.add1);
-        add2 = view.findViewById(R.id.add2);
-        add3 = view.findViewById(R.id.add3);
+        freeze = view.findViewById(R.id.time_freezer);
 
-        for (int i = 0; i < boost; i++) {
-            view.findViewById(AppConstants.powerups[i]).setVisibility(View.VISIBLE);
-        }
+        checkPayment();
 
         easyOne.setOnClickListener(this);
         easyTwo.setOnClickListener(this);
@@ -135,23 +127,33 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         hardFour.setOnClickListener(this);
         hardFive.setOnClickListener(this);
 
-        add1.setOnClickListener(this);
-        add2.setOnClickListener(this);
-        add3.setOnClickListener(this);
+        freeze.setOnClickListener(this);
+
+        floating=AppConstants.getFloatingAnimation(getContext());
 
         switch (level) {
             case 0:
                 easy_game.setVisibility(View.VISIBLE);
-                easyOne.startAnimation(AppConstants.getFloatingAnimation(getContext()));
-                easyTwo.startAnimation(AppConstants.getFloatingAnimation(getContext()));
-                easyThree.startAnimation(AppConstants.getFloatingAnimation(getContext()));
+                easyOne.startAnimation(floating);
+                easyTwo.startAnimation(floating);
+                easyThree.startAnimation(floating);
 
                 break;
             case 1:
                 medium_game.setVisibility(View.VISIBLE);
+                mediumOne.startAnimation(floating);
+                mediumTwo.startAnimation(floating);
+                mediumThree.startAnimation(floating);
+                mediumFour.startAnimation(floating);
+
                 break;
             case 2:
                 hard_game.setVisibility(View.VISIBLE);
+                hardOne.startAnimation(floating);
+                hardTwo.startAnimation(floating);
+                hardThree.startAnimation(floating);
+                hardFour.startAnimation(floating);
+                hardFive.startAnimation(floating);
                 break;
         }
 
@@ -162,22 +164,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         changeColors();
 
         correct = MediaPlayer.create(getContext(), R.raw.correct);
-        wrong = MediaPlayer.create(getContext(),R.raw.wrong);
+        wrong = MediaPlayer.create(getContext(), R.raw.wrong);
         return view;
     }
 
     @SuppressLint("SetTextI18n")
     private void gameOver() {
+        stopGame();
         wrong.start();
         timer.setVisibility(View.GONE);
-        if (boost == 0)
-            setTimer(15);
-        else if (boost == 1)
-            setTimer(10);
-        else if (boost == 2)
-            setTimer(5);
-
-        stopGame();
         dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.game_over);
@@ -193,13 +188,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Button leaderboard = dialog.findViewById(R.id.high_score);
         Score.setText("" + score);
 
-       /* NativeExpressAdView adView = dialog.findViewById(R.id.adView);
-
-        AdRequest request = new AdRequest.Builder()
-                .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
-                .build();
-        adView.loadAd(request);
-*/
         switch (level) {
             case 0:
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_easy), score);
@@ -214,23 +202,27 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_score_10));
-                }if (score >= 20) {
+                                    getString(R.string.achievement_easy_10));
+                }
+                if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_score_20));
-                }if (score >= 50) {
+                                    getString(R.string.achievement_easy_20));
+                }
+                if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_score_50));
-                }if (score >= 80) {
+                                    getString(R.string.achievement_easy_50));
+                }
+                if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_score_80));
-                }if (score >= 100) {
+                                    getString(R.string.achievement_easy_80));
+                }
+                if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_score_100));
+                                    getString(R.string.achievement_easy_100));
                 }
                 break;
             case 1:
@@ -247,23 +239,27 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_score_10));
-                }if (score >= 20) {
+                                    getString(R.string.achievement_medium_10));
+                }
+                if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_score_20));
-                }if (score >= 50) {
+                                    getString(R.string.achievement_medium_20));
+                }
+                if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_score_50));
-                }if (score >= 80) {
+                                    getString(R.string.achievement_medium_50));
+                }
+                if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_score_80));
-                }if (score >= 100) {
+                                    getString(R.string.achievement_medium_80));
+                }
+                if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_score_100));
+                                    getString(R.string.achievement_medium_100));
                 }
                 break;
             case 2:
@@ -280,23 +276,27 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_score_10));
-                }if (score >= 20) {
+                                    getString(R.string.achievement_hard_10));
+                }
+                if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_score_20));
-                }if (score >= 50) {
+                                    getString(R.string.achievement_hard_20));
+                }
+                if (score >= 50) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_score_50));
-                }if (score >= 80) {
+                                    getString(R.string.achievement_hard_50));
+                }
+                if (score >= 80) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_score_80));
-                }if (score >= 100) {
+                                    getString(R.string.achievement_hard_80));
+                }
+                if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_score_100));
+                                    getString(R.string.achievement_hard_100));
                 }
                 break;
         }
@@ -333,11 +333,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        view.startAnimation(AppConstants.getBubbleAnimation(getContext(),view));
         switch (view.getId()) {
-
             case R.id.easy_one:
                 if (answer.equalsIgnoreCase(easyOne.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -346,6 +345,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.easy_two:
                 if (answer.equalsIgnoreCase(easyTwo.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -354,6 +354,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.easy_three:
                 if (answer.equalsIgnoreCase(easyThree.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -362,6 +363,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.medium_one:
                 if (answer.equalsIgnoreCase(mediumOne.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -370,6 +372,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.medium_two:
                 if (answer.equalsIgnoreCase(mediumTwo.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -378,6 +381,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.medium_three:
                 if (answer.equalsIgnoreCase(mediumThree.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -386,6 +390,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.medium_four:
                 if (answer.equalsIgnoreCase(mediumFour.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -394,6 +399,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.hard_one:
                 if (answer.equalsIgnoreCase(hardOne.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -402,6 +408,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.hard_two:
                 if (answer.equalsIgnoreCase(hardTwo.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -410,6 +417,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.hard_three:
                 if (answer.equalsIgnoreCase(hardThree.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -418,6 +426,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.hard_four:
                 if (answer.equalsIgnoreCase(hardFour.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
@@ -426,49 +435,35 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
             case R.id.hard_five:
                 if (answer.equalsIgnoreCase(hardFive.getText().toString())) {
+                    view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
                     gameOver();
                 }
                 break;
 
-            case R.id.add1:
+            case R.id.time_freezer:
                 if (!stopped) {
-                    add1.setVisibility(View.GONE);
-                    pauseResumeTimer();
-                    sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
+                    if (powerups>0) {
+                        pauseResumeTimer();
+                        freeze.setText(getString(R.string.time_freezers)+(--powerups));
+                    }else {
+                        Toast.makeText(getContext(), getContext().getString(R.string.no_freezers_left), Toast.LENGTH_SHORT).show();
+                    }
+
                 } else {
                     Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
                 }
                 break;
 
-            case R.id.add2:
-                if (!stopped) {
-                    add2.setVisibility(View.GONE);
-                    pauseResumeTimer();
-                    sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
-                } else {
-                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
-                }
-                break;
-
-            case R.id.add3:
-                if (!stopped) {
-                    add3.setVisibility(View.GONE);
-                    pauseResumeTimer();
-                    sharedPreferenceSingelton.saveAs(getContext(), "Boost", --boost);
-                } else {
-                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
-                }
-                break;
         }
     }
 
     void pauseResumeTimer() {
-        Toast.makeText(getContext(), "Timer pause for "+pauseTime/1000+" seconds", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),getContext().getString(R.string.timer_paused), Toast.LENGTH_SHORT).show();
         countDownTimer.cancel();
         stopped = true;
-        timer.postDelayed(runnable, pauseTime);
+        handler.postDelayed(runnable, 5000);
     }
 
     private void changeColors() {
@@ -628,7 +623,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (stopped) {
+            handler.removeCallbacksAndMessages(null);
+        }
         stopGame();
+
     }
 
     void stopGame() {
@@ -646,16 +645,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     };
 
 
-    public void onCorrectAnswer() {
+    private void onCorrectAnswer() {
         score++;
         if (score == 20 || score == 50 || score == 80) {
             totalTime--;
         }
+        Score.setText("" + score);
         changeColors();
         correct.start();
     }
 
-    public class MyCountDownTimer extends CountDownTimer {
+    private class MyCountDownTimer extends CountDownTimer {
         public MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -680,20 +680,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    void setTimer(int minutes) {
-        Toast.makeText(getContext(), "Set Timer", Toast.LENGTH_SHORT).show();
-        long d = System.currentTimeMillis() + (minutes * 1000);
-        Intent intent = new Intent(getContext(), BoostReciever.class);
-        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 5, intent, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, d, pi);
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, d, pi);
-        else
-            alarmManager.set(AlarmManager.RTC_WAKEUP, d, pi);
-    }
-
     private void shareTextUrl() {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
@@ -701,5 +687,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on ColorMind?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.xmusic");
 
         startActivity(Intent.createChooser(share, "Share Score!"));
+    }
+
+    private void checkPayment() {
+        if (sharedPreferenceSingelton.getSavedBoolean(getContext(), "Payment")) {
+            powerups=5;
+        }
     }
 }

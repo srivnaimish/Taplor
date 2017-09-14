@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <Button
         android:id="@+id/hard_one"
@@ -19,8 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="24dp"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        android:paddingBottom="10dp" />
+        android:gravity="bottom|center"/>
 
     <Button
         android:id="@+id/hard_two"
@@ -35,8 +35,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="24dp"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        android:paddingBottom="10dp" />
+        android:gravity="bottom|center" />
 
     <Button
         android:id="@+id/hard_three"
@@ -48,8 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="bottom|center"
-        android:paddingBottom="10dp" />
+        android:gravity="bottom|center" />
 
     <Button
         android:id="@+id/hard_four"
@@ -65,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/hard_three"
         android:layout_marginLeft="24dp"
         android:gravity="bottom|center"
-        android:paddingBottom="10dp" />
+        android:layout_marginBottom="24dp"/>
 
     <Button
         android:id="@+id/hard_five"
@@ -81,5 +79,5 @@
         app:layout_constraintTop_toBottomOf="@+id/hard_three"
         android:layout_marginRight="24dp"
         android:gravity="bottom|center"
-        android:paddingBottom="10dp" />
+        android:layout_marginBottom="24dp"/>
 </android.support.constraint.ConstraintLayout>

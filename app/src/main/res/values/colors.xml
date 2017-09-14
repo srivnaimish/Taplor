@@ -8,7 +8,7 @@
     <color name="RED">#f44336</color>
     <color name="BLUE">#2196f3</color>
     <color name="GREEN">#27ae60</color>
-    <color name="YELLOW">#ffeb3b</color>
+    <color name="YELLOW">#f1c40f</color>
     <color name="BLACK">#020202</color>
 
     <!--MEDIUM COLORS-->
@@ -28,15 +28,14 @@
 
     <!--MAINACTIVITY DARK COLORS-->
     <color name="ONE">#C3272B</color>
-    <color name="TWO">#FF8C7C</color>
-    <color name="THREE">#674172</color>
-    <color name="FOUR">#BE90D4</color>
-    <color name="FIVE">#D4AF61</color>
+    <color name="THREE">#4e046d</color>
+    <color name="FIVER">#e67e22</color>
     <color name="SIX">#E1B493</color>
-    <color name="SEVEN">#8FA8F6</color>
-    <color name="EIGHT">#D8E2EC</color>
-    <color name="NINE">#26C281</color>
-    <color name="TEN">#BADEB2</color>
+    <color name="SEVEN">#9a0038</color>
+    <color name="NINE">#f1c40f</color>
+
+
+    <color name="FIVE">#D4AF61</color>
 
 
 </resources>

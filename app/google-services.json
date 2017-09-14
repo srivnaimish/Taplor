@@ -1,29 +1,29 @@
 {
   "project_info": {
-    "project_number": "175120789881",
-    "firebase_url": "https://taplor-950d7.firebaseio.com",
-    "project_id": "taplor-950d7",
-    "storage_bucket": "taplor-950d7.appspot.com"
+    "project_number": "540098631478",
+    "firebase_url": "https://taplor-dfdb9.firebaseio.com",
+    "project_id": "taplor-dfdb9",
+    "storage_bucket": "taplor-dfdb9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:175120789881:android:ac4e1a570cffb3ba",
+        "mobilesdk_app_id": "1:540098631478:android:ac4e1a570cffb3ba",
         "android_client_info": {
           "package_name": "com.riseapps.taplor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "175120789881-ir2qkjr5da5rh70vbv38pvfdu4huf6t5.apps.googleusercontent.com",
+          "client_id": "540098631478-9ocsqprc3uentc80sfrod7cshqpfl0ui.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.riseapps.taplor",
-            "certificate_hash": "af86df18eeb0a42229c6823ba52346304482b2ce"
+            "certificate_hash": "df0b9e52d722bbdf62c24e644c6a3112044bfafc"
           }
         },
         {
-          "client_id": "175120789881-qc0695ekv6uht2o1b7v33l8ua9c2gs4a.apps.googleusercontent.com",
+          "client_id": "540098631478-kvm8pak2akjrre3su95u9j6gdpgtgpeo.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.riseapps.taplor",
@@ -31,16 +31,13 @@
           }
         },
         {
-          "client_id": "175120789881-mnihbbp94saoa2ui71cip74pfmn7p487.apps.googleusercontent.com",
+          "client_id": "540098631478-jmaenibk84npak9ijnq3t8vksif62cvu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDuMxIeFGDgqf4Bkm960-n_60-PNp1f7nA"
-        },
-        {
-          "current_key": "AIzaSyBxoPb-Hg3mZJzkRHlpvMf8Suuraz8jk7U"
+          "current_key": "AIzaSyB1Rlx22DQ32KPRXw16P75QaHUdHiOnoGg"
         }
       ],
       "services": {
@@ -51,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "175120789881-mnihbbp94saoa2ui71cip74pfmn7p487.apps.googleusercontent.com",
+              "client_id": "540098631478-jmaenibk84npak9ijnq3t8vksif62cvu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

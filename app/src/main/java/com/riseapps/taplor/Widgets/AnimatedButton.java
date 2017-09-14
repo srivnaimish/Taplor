@@ -1,6 +1,7 @@
 package com.riseapps.taplor.Widgets;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.animation.AnimationUtils;
@@ -11,16 +12,16 @@ import com.riseapps.taplor.R;
  * Created by naimish on 12/9/17.
  */
 
-public class AnimatedTextView extends AppCompatTextView {
-    public AnimatedTextView(Context context) {
+public class AnimatedButton extends AppCompatButton {
+    public AnimatedButton(Context context) {
         super(context);
     }
 
-    public AnimatedTextView(Context context, AttributeSet attrs) {
+    public AnimatedButton(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AnimatedTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public AnimatedButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

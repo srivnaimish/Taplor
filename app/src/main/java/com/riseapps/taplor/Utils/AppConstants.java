@@ -32,8 +32,6 @@ public class AppConstants {
 
     public static final int[] hardColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE, R.color.GREY, R.color.TEAL, R.color.LIME, R.color.DEEP_BLUE, R.color.MAROON};
 
-    public static final int[] powerups = {R.id.add1, R.id.add2, R.id.add3};
-
     public static AnimationSet generateFadeInAnimator(int l1, int l2) {
         AnimationSet set = new AnimationSet(true);
         Animation trAnimation = new TranslateAnimation(0, 0, -100, 0);
@@ -87,7 +85,7 @@ public class AppConstants {
         return set;
     }
 
-    public static final int[] GradientPrimaryColors = {R.color.ONE, R.color.THREE, R.color.FIVE, R.color.SEVEN, R.color.NINE};
+    public static final int[] GradientPrimaryColors = {R.color.ONE, R.color.THREE, R.color.FIVER, R.color.SEVEN, R.color.NINE};
 
     public static final String FB_URL = "https://www.facebook.com";
 
@@ -117,4 +115,34 @@ public class AppConstants {
         });
         return animation;
     }
+
+    public static AnimationSet generateFloatFadeAnimator(int l1, int l2, final View view, final Context context) {
+        AnimationSet set = new AnimationSet(true);
+        Animation trAnimation = new TranslateAnimation(0, 0, -100, 0);
+        trAnimation.setDuration(l1);
+
+        trAnimation.setRepeatMode(Animation.REVERSE);
+        set.addAnimation(trAnimation);
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(l2);
+        set.addAnimation(anim);
+        set.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.startAnimation(AnimationUtils.loadAnimation(context,R.anim.floating2));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        return set;
+    }
+
 }

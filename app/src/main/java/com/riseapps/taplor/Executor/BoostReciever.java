@@ -24,9 +24,10 @@ public class BoostReciever extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         new SharedPreferenceSingelton().saveAs(context, "Boost", 3);
-        NotificationUtils mNotificationUtils = new NotificationUtils(context);
-        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+
+        /*Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
         if(Build.VERSION.SDK_INT>= 26) {
+            NotificationUtils mNotificationUtils = new NotificationUtils(context);
             Notification.Builder nb = mNotificationUtils.
                     getChannelNotification(context.getString(R.string.notification_title), context.getString(R.string.notification_context),largeIcon);
             mNotificationUtils.getManager().notify(NOTIFICATION_ID, nb.build());
@@ -53,6 +54,6 @@ public class BoostReciever extends BroadcastReceiver {
             if (mNotificationManager != null) {
                 mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
             }
-        }
+        }*/
     }
 }
