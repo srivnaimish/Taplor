@@ -57,7 +57,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/font2"
             android:text="@string/get_premium"
-            android:textColor="@color/FIVE" />
+            android:textColor="@color/FIVE"
+            android:textStyle="bold"/>
     </LinearLayout>
 
     <ImageButton

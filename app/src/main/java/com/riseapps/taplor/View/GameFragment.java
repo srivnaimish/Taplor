@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,16 +15,14 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.AnimationSet;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -58,21 +55,21 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
-    private int level,powerups=3;
+    private int level,powerups;
     private CountDownTimer countDownTimer;
     private int ansPos;
     private Button freeze;
     boolean stopped = false;
-    private Dialog dialog;
-    private long timeToShow;
     private MediaPlayer correct, wrong;
     private TextView Score;
     private Handler handler = new Handler();
-    private WaveHelper mWaveHelper;
 
     private int mBorderColor = Color.parseColor("#44FFFFFF");
-    private int mBorderWidth = 0;
 
+    private CardView game_over_dialog;
+    private TextView dialog_score;
+    private Button leaderboard,try_again,share_score;
+    private ImageView close_dialog;
 
     public GameFragment() {
         // Required empty public constructor
@@ -116,9 +113,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         freeze = view.findViewById(R.id.time_freezer);
 
         WaveView waveView = view.findViewById(R.id.wave);
-        waveView.setBorder(mBorderWidth, mBorderColor);
+        waveView.setBorder(0, mBorderColor);
 
-        mWaveHelper = new WaveHelper(waveView);
+        WaveHelper mWaveHelper = new WaveHelper(waveView);
         waveView.setShapeType(WaveView.ShapeType.SQUARE);
         waveView.setWaveColor(
                 Color.parseColor("#0DFAFAFA"),
@@ -180,6 +177,20 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         correct = MediaPlayer.create(getContext(), R.raw.correct);
         wrong = MediaPlayer.create(getContext(), R.raw.wrong);
+
+        game_over_dialog=view.findViewById(R.id.game_over_dialog);
+
+        dialog_score=view.findViewById(R.id.new_score);
+
+        leaderboard=view.findViewById(R.id.high_score);
+        try_again=view.findViewById(R.id.try_again);
+        share_score=view.findViewById(R.id.share);
+        close_dialog=view.findViewById(R.id.close_dialog);
+
+        leaderboard.setOnClickListener(this);
+        try_again.setOnClickListener(this);
+        share_score.setOnClickListener(this);
+        close_dialog.setOnClickListener(this);
         return view;
     }
 
@@ -187,33 +198,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void gameOver() {
         stopGame();
         wrong.start();
-        timer.setVisibility(View.GONE);
-        dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.game_over);
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        try {
-            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        } catch (NullPointerException e) {
-        }
-
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCanceledOnTouchOutside(false);
-        TextView Score = dialog.findViewById(R.id.score);
-        Button leaderboard = dialog.findViewById(R.id.high_score);
-        Score.setText("" + score);
+        game_over_dialog.setAnimation(AppConstants.dialogEnter());
+        game_over_dialog.setVisibility(View.VISIBLE);
+        dialog_score.setText("" + score);
 
         switch (level) {
             case 0:
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_easy), score);
-                leaderboard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivityForResult(
-                                Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                        getString(R.string.leaderboard_easy)), 0);
-                    }
-                });
+
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
@@ -243,14 +235,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             case 1:
 
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_medium), score);
-                leaderboard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivityForResult(
-                                Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                        getString(R.string.leaderboard_medium)), 0);
-                    }
-                });
+
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
@@ -280,14 +265,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             case 2:
 
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_hard), score);
-                leaderboard.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivityForResult(
-                                Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                        getString(R.string.leaderboard_hard)), 0);
-                    }
-                });
+
                 if (score >= 10) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
@@ -316,34 +294,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
-        Button tryAgain = dialog.findViewById(R.id.try_again);
-        tryAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                closeGameFragment.restartGame(level);
-            }
-        });
-        Button share = dialog.findViewById(R.id.share);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                shareTextUrl();
-            }
-        });
-        dialog.show();
-
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    dialog.dismiss();
-                    closeGameFragment.closeGame();
-                }
-                return true;
-            }
-        });
     }
 
     @Override
@@ -471,6 +421,20 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
 
+            case R.id.high_score:
+                viewLeaderboard();
+                break;
+
+            case R.id.try_again:
+                tryAgain();
+                break;
+
+            case R.id.share:
+                share_score();
+                break;
+
+            case R.id.close_dialog:
+                closeGameFragment.closeGame();
         }
     }
 
@@ -636,8 +600,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     void stopGame() {
         timer.removeCallbacks(runnable);
         countDownTimer.cancel();
-        timer.setVisibility(View.INVISIBLE);
-        mWaveHelper.cancel();
     }
 
     Runnable runnable = new Runnable() {
@@ -670,7 +632,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onTick(long l) {
             currentTimeLeft = l;
-            timeToShow = currentTimeLeft / 1000;
+            long timeToShow = currentTimeLeft / 1000;
             timer.setText("" + timeToShow);
         }
 
@@ -680,18 +642,53 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void shareTextUrl() {
+    private void checkPayment() {
+        if (sharedPreferenceSingelton.getSavedBoolean(getContext(), "Payment")) {
+            powerups=5;
+        }else
+            powerups=3;
+    }
+
+    public void viewLeaderboard() {
+        switch (level) {
+            case 0:
+                startActivityForResult(
+                        Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
+                                getString(R.string.leaderboard_easy)), 0);
+                break;
+            case 1:
+                startActivityForResult(
+                        Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
+                                getString(R.string.leaderboard_medium)), 0);
+                break;
+            case 2:
+                startActivityForResult(
+                        Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
+                                getString(R.string.leaderboard_hard)), 0);
+                break;
+        }
+    }
+
+    public void tryAgain() {
+        game_over_dialog.setVisibility(View.GONE);
+        totalTime=6;
+        score=0;
+        stopped=false;
+        Score.setText("0");
+        checkPayment();
+        freeze.setText(getString(R.string.time_freezers_3));
+        countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
+        countDownTimer.start();
+        changeColors();
+    }
+
+    public void share_score() {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on ColorMind?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
+        share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
 
         startActivity(Intent.createChooser(share, "Share Score!"));
     }
 
-    private void checkPayment() {
-        if (sharedPreferenceSingelton.getSavedBoolean(getContext(), "Payment")) {
-            powerups=5;
-        }
-    }
 }

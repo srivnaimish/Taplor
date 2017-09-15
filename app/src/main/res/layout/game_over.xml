@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
-    android:background="@drawable/dialog_bg">
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/game_over"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/font1"
         android:text="@string/game_over"
@@ -17,7 +19,7 @@
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/close_dialog" />
 
     <LinearLayout
         android:id="@+id/ll"
@@ -38,11 +40,12 @@
             android:fontFamily="@font/font2"
             android:text="@string/your_score"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:textColor="@color/FIVE"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/score"
+            android:id="@+id/new_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -71,12 +74,16 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll" />
+        app:layout_constraintTop_toBottomOf="@+id/ll"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/high_score">
@@ -104,6 +111,18 @@
             android:textColor="@color/FIVE"
             android:textSize="17sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close"
+        android:layout_marginLeft="24dp"
+        android:tint="@color/FIVE"/>
 
 
     <!-- <com.google.android.gms.ads.NativeExpressAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
