@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 .build();
 
 
-        heading.setAnimation(AppConstants.generateFloatFadeAnimator(2000, 2000, heading, this));
+        heading.setAnimation(AppConstants.generateFadeInAnimator(1000, 2000));
         easy.setAnimation(AppConstants.generateFadeInAnimator(0, 2000));
         medium.setAnimation(AppConstants.generateFadeInAnimator(0, 3000));
         hard.setAnimation(AppConstants.generateFadeInAnimator(0, 4000));

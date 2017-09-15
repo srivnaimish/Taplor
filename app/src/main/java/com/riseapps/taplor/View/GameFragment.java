@@ -28,13 +28,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.gelitenight.waveview.library.WaveView;
 import com.google.android.gms.games.Games;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
 import com.riseapps.taplor.Utils.SharedPreferenceSingelton;
+import com.riseapps.taplor.Utils.WaveHelper;
+import com.riseapps.taplor.Widgets.MyToast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +68,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private MediaPlayer correct, wrong;
     private TextView Score;
     private Handler handler = new Handler();
-    private Animation floating;
+    private WaveHelper mWaveHelper;
+
+    private int mBorderColor = Color.parseColor("#44FFFFFF");
+    private int mBorderWidth = 0;
 
 
     public GameFragment() {
@@ -110,6 +115,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         freeze = view.findViewById(R.id.time_freezer);
 
+        WaveView waveView = view.findViewById(R.id.wave);
+        waveView.setBorder(mBorderWidth, mBorderColor);
+
+        mWaveHelper = new WaveHelper(waveView);
+        waveView.setShapeType(WaveView.ShapeType.SQUARE);
+        waveView.setWaveColor(
+                Color.parseColor("#0DFAFAFA"),
+                Color.parseColor("#0DFAFAFA"));
+        mWaveHelper.start();
+
         checkPayment();
 
         easyOne.setOnClickListener(this);
@@ -129,7 +144,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         freeze.setOnClickListener(this);
 
-        floating=AppConstants.getFloatingAnimation(getContext());
+        Animation floating = AppConstants.getFloatingAnimation(getContext());
 
         switch (level) {
             case 0:
@@ -448,11 +463,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                         pauseResumeTimer();
                         freeze.setText(getString(R.string.time_freezers)+(--powerups));
                     }else {
-                        Toast.makeText(getContext(), getContext().getString(R.string.no_freezers_left), Toast.LENGTH_SHORT).show();
+                        MyToast.showShort(getContext(), getString(R.string.no_freezers_left));
                     }
 
                 } else {
-                    Toast.makeText(getActivity(), getContext().getString(R.string.already_paused), Toast.LENGTH_SHORT).show();
+                    MyToast.showShort(getContext(), getString(R.string.already_paused));
                 }
                 break;
 
@@ -460,7 +475,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void pauseResumeTimer() {
-        Toast.makeText(getContext(),getContext().getString(R.string.timer_paused), Toast.LENGTH_SHORT).show();
+        MyToast.showShort(getContext(), getString(R.string.timer_paused));
         countDownTimer.cancel();
         stopped = true;
         handler.postDelayed(runnable, 5000);
@@ -472,13 +487,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
             countDownTimer.start();
         }
+        ArrayList<Integer> colorslist = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            colorslist.add(AppConstants.splashBackground[i]);
+        }
+        Collections.shuffle(colorslist);
         switch (level) {
             case 0:
-                ArrayList<Integer> colorslist = new ArrayList<>();
-                for (int i = 0; i < 5; i++) {
-                    colorslist.add(AppConstants.splashBackground[i]);
-                }
-                Collections.shuffle(colorslist);
 
                 ArrayList<String> namelist = new ArrayList<>();
                 for (int i = 0; i < 5; i++) {
@@ -521,22 +536,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case 1:
-                ArrayList<Integer> mediumColorslist = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    mediumColorslist.add(AppConstants.splashBackground[i]);
-                }
-                Collections.shuffle(mediumColorslist);
-
                 ArrayList<String> mediumNamelist = new ArrayList<>();
                 for (int i = 0; i < 10; i++) {
                     mediumNamelist.add(AppConstants.mediumColorNames[i]);
                 }
                 Collections.shuffle(mediumNamelist);
 
-                mediumOne.setBackgroundResource(mediumColorslist.get(0));
-                mediumTwo.setBackgroundResource(mediumColorslist.get(1));
-                mediumThree.setBackgroundResource(mediumColorslist.get(2));
-                mediumFour.setBackgroundResource(mediumColorslist.get(3));
+                mediumOne.setBackgroundResource(colorslist.get(0));
+                mediumTwo.setBackgroundResource(colorslist.get(1));
+                mediumThree.setBackgroundResource(colorslist.get(2));
+                mediumFour.setBackgroundResource(colorslist.get(3));
 
                 mediumOne.setText(mediumNamelist.get(0));
                 mediumTwo.setText(mediumNamelist.get(1));
@@ -569,23 +578,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case 2:
-                ArrayList<Integer> hardColorslist = new ArrayList<>();
-                for (int i = 0; i < 15; i++) {
-                    hardColorslist.add(AppConstants.splashBackground[i]);
-                }
-                Collections.shuffle(hardColorslist);
-
                 ArrayList<String> hardNamelist = new ArrayList<>();
                 for (int i = 0; i < 15; i++) {
                     hardNamelist.add(AppConstants.hardColorNames[i]);
                 }
                 Collections.shuffle(hardNamelist);
 
-                hardOne.setBackgroundResource(hardColorslist.get(0));
-                hardTwo.setBackgroundResource(hardColorslist.get(1));
-                hardThree.setBackgroundResource(hardColorslist.get(2));
-                hardFour.setBackgroundResource(hardColorslist.get(3));
-                hardFive.setBackgroundResource(hardColorslist.get(4));
+                hardOne.setBackgroundResource(colorslist.get(0));
+                hardTwo.setBackgroundResource(colorslist.get(1));
+                hardThree.setBackgroundResource(colorslist.get(2));
+                hardFour.setBackgroundResource(colorslist.get(3));
+                hardFive.setBackgroundResource(colorslist.get(4));
 
                 hardOne.setText(hardNamelist.get(0));
                 hardTwo.setText(hardNamelist.get(1));
@@ -633,6 +636,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     void stopGame() {
         timer.removeCallbacks(runnable);
         countDownTimer.cancel();
+        timer.setVisibility(View.INVISIBLE);
+        mWaveHelper.cancel();
     }
 
     Runnable runnable = new Runnable() {
@@ -647,8 +652,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void onCorrectAnswer() {
         score++;
-        if (score == 20 || score == 50 || score == 80) {
+        if (score == 20 || score == 50 || score == 80 || score == 120) {
             totalTime--;
+            MyToast.showShort(getContext(), getString(R.string.timer_reduced));
         }
         Score.setText("" + score);
         changeColors();
@@ -656,7 +662,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     private class MyCountDownTimer extends CountDownTimer {
-        public MyCountDownTimer(long millisInFuture, long countDownInterval) {
+        MyCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
 
@@ -665,13 +671,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         public void onTick(long l) {
             currentTimeLeft = l;
             timeToShow = currentTimeLeft / 1000;
-            if (timeToShow != 0) {
-                timer.setText("" + timeToShow);
-
-            } else {
-                timer.setVisibility(View.GONE);
-            }
-
+            timer.setText("" + timeToShow);
         }
 
         @Override
@@ -684,7 +684,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on ColorMind?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.xmusic");
+        share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on ColorMind?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
 
         startActivity(Intent.createChooser(share, "Share Score!"));
     }

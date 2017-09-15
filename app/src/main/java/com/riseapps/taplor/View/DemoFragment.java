@@ -139,7 +139,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     private void changeColors() {
 
         ArrayList<Integer> colorslist = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             colorslist.add(AppConstants.splashBackground[i]);
         }
         Collections.shuffle(colorslist);
@@ -186,7 +186,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
             new TapTargetSequence(getActivity()).targets(
                     TapTarget.forView(timer, getString(R.string.app_walk1))
                             .dimColor(android.R.color.black)
-                            .outerCircleColor(R.color.DEEP_BLUE)
+                            .outerCircleColor(R.color.MAGENTA)
                             .targetCircleColor(R.color.buttonTextColor)
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)
@@ -195,7 +195,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .id(1),
                     TapTarget.forView(freeze, getString(R.string.app_walk2))
                             .dimColor(android.R.color.black)
-                            .outerCircleColor(R.color.DEEP_BLUE)
+                            .outerCircleColor(R.color.CHOCOLATE)
                             .targetCircleColor(R.color.buttonTextColor)
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)
@@ -204,7 +204,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .id(2),
                     TapTarget.forView(game, getString(R.string.app_walk3)+" "+answer+". "+getString(R.string.app_walk4))
                             .dimColor(android.R.color.black)
-                            .outerCircleColor(R.color.DEEP_BLUE)
+                            .outerCircleColor(R.color.ONE)
                             .targetCircleColor(R.color.buttonTextColor)
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)

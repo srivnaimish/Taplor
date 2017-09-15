@@ -18,19 +18,19 @@ public class AppConstants {
 
     /*Color Constants*/
 
-    public static final int[] splashBackground = {R.drawable.splash_red, R.drawable.splash_blue, R.drawable.splash_green, R.drawable.splash_yellow, R.drawable.splash_black, R.drawable.splash_orange, R.drawable.splash_brown, R.drawable.splash_indigo, R.drawable.splash_pink, R.drawable.splash_purple, R.drawable.splash_grey, R.drawable.splash_teal, R.drawable.splash_lime, R.drawable.splash_midnight_blue, R.drawable.splash_maroon};
+    public static final int[] splashBackground = {R.drawable.splash_one,R.drawable.splash_two,R.drawable.splash_three,R.drawable.splash_four,R.drawable.splash_five,R.drawable.splash_six,R.drawable.splash_seven,R.drawable.splash_eight,R.drawable.splash_nine,R.drawable.splash_ten };
 
     public static final String[] easyColorNames = {"Red", "Blue", "Green", "Yellow", "Black"};
 
     public static final String[] mediumColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple"};
 
-    public static final String[] hardColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple", "Grey", "Teal", "Lime", "Deep Blue", "Maroon"};
+    public static final String[] hardColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple", "Grey", "Magenta", "Peach", "Chocolate", "Maroon"};
 
     public static final int[] easyColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK};
 
     public static final int[] mediumColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE};
 
-    public static final int[] hardColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE, R.color.GREY, R.color.TEAL, R.color.LIME, R.color.DEEP_BLUE, R.color.MAROON};
+    public static final int[] hardColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE, R.color.GREY, R.color.MAGENTA, R.color.PEACH, R.color.CHOCOLATE, R.color.MAROON};
 
     public static AnimationSet generateFadeInAnimator(int l1, int l2) {
         AnimationSet set = new AnimationSet(true);
@@ -116,33 +116,5 @@ public class AppConstants {
         return animation;
     }
 
-    public static AnimationSet generateFloatFadeAnimator(int l1, int l2, final View view, final Context context) {
-        AnimationSet set = new AnimationSet(true);
-        Animation trAnimation = new TranslateAnimation(0, 0, -100, 0);
-        trAnimation.setDuration(l1);
-
-        trAnimation.setRepeatMode(Animation.REVERSE);
-        set.addAnimation(trAnimation);
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(l2);
-        set.addAnimation(anim);
-        set.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                view.startAnimation(AnimationUtils.loadAnimation(context,R.anim.floating2));
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        return set;
-    }
 
 }
