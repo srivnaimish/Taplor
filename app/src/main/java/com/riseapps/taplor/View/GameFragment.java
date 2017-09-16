@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,7 +65,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private TextView Score;
     private Handler handler = new Handler();
 
-    private int mBorderColor = Color.parseColor("#44FFFFFF");
+    private int mBorderColor = Color.parseColor("#1AFFFFFF");
 
     private CardView game_over_dialog;
     private TextView dialog_score;
@@ -111,6 +112,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         hardFive = view.findViewById(R.id.hard_five);
 
         freeze = view.findViewById(R.id.time_freezer);
+        timer = view.findViewById(R.id.timer);
+
+        game_over_dialog=view.findViewById(R.id.game_over_dialog);
+        dialog_score=view.findViewById(R.id.new_score);
+        leaderboard=view.findViewById(R.id.high_score);
+        try_again=view.findViewById(R.id.try_again);
+        share_score=view.findViewById(R.id.share);
+        close_dialog=view.findViewById(R.id.close_dialog);
 
         WaveView waveView = view.findViewById(R.id.wave);
         waveView.setBorder(0, mBorderColor);
@@ -141,7 +150,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         freeze.setOnClickListener(this);
 
+        leaderboard.setOnClickListener(this);
+        try_again.setOnClickListener(this);
+        share_score.setOnClickListener(this);
+        close_dialog.setOnClickListener(this);
+
         Animation floating = AppConstants.getFloatingAnimation(getContext());
+        Animation floating2 = AppConstants.getFloatingAnimation2(getContext());
 
         switch (level) {
             case 0:
@@ -169,8 +184,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
-        timer = view.findViewById(R.id.timer);
-
         countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
         countDownTimer.start();
         changeColors();
@@ -178,21 +191,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         correct = MediaPlayer.create(getContext(), R.raw.correct);
         wrong = MediaPlayer.create(getContext(), R.raw.wrong);
 
-        game_over_dialog=view.findViewById(R.id.game_over_dialog);
+        view.findViewById(R.id.bubble).startAnimation(floating2);
+        view.findViewById(R.id.bubble2).startAnimation(floating2);
+        view.findViewById(R.id.bubble3).startAnimation(floating2);
+        view.findViewById(R.id.bubble4).startAnimation(floating2);
+        view.findViewById(R.id.bubble5).startAnimation(floating2);
 
-        dialog_score=view.findViewById(R.id.new_score);
-
-        leaderboard=view.findViewById(R.id.high_score);
-        try_again=view.findViewById(R.id.try_again);
-        share_score=view.findViewById(R.id.share);
-        close_dialog=view.findViewById(R.id.close_dialog);
-
-        leaderboard.setOnClickListener(this);
-        try_again.setOnClickListener(this);
-        share_score.setOnClickListener(this);
-        close_dialog.setOnClickListener(this);
         return view;
     }
+
 
     @SuppressLint("SetTextI18n")
     private void gameOver() {

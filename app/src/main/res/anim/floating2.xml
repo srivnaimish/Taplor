@@ -7,8 +7,8 @@
     <translate
         android:interpolator="@android:anim/bounce_interpolator"
         android:fromYDelta="0%p"
-        android:toYDelta="2%p"
-        android:duration="1000"
+        android:toYDelta="1.5%p"
+        android:duration="1500"
         android:startOffset="0"
         android:repeatCount="infinite"
         android:repeatMode="reverse" />

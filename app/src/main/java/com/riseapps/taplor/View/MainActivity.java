@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -30,11 +31,21 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
+import com.riseapps.taplor.Utils.SharedPreferenceSingelton;
+import com.riseapps.taplor.Widgets.MyToast;
+import com.riseapps.taplor.billing.IabHelper;
+import com.riseapps.taplor.billing.IabResult;
+import com.riseapps.taplor.billing.Inventory;
+import com.riseapps.taplor.billing.Purchase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, CloseGameFragment {
 
-    private static final String TAG = "MAINACTIVITY";
+    private static final String TAG = "In-App Billing";
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -63,7 +74,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private int colorFrom;
     private int colorTo1;
-
+    SharedPreferenceSingelton sharedPreferenceSingelton=new SharedPreferenceSingelton();
+    IabHelper mHelper;
+    private boolean billinSupported;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +96,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         premium = findViewById(R.id.premium_dialog);
         about_game = findViewById(R.id.about_game);
+
+        mHelper = new IabHelper(this, AppConstants.KEY);
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            @Override
+            public void onIabSetupFinished(IabResult result) {
+                if (!result.isSuccess()) {
+                    Log.d(TAG, "In-app billing failed " + result);
+                    billinSupported = false;
+                } else {
+                    Log.d(TAG, "In-app billing setup OK ");
+                    billinSupported = true;
+                    if (mHelper == null) return;
+                    List<String> st = new ArrayList<String>();
+                    st.add(AppConstants.products);
+                    try {
+                        mHelper.queryInventoryAsync(true, st, mGotInventoryListener);
+                    } catch (IabHelper.IabAsyncInProgressException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -238,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (!mHelper.handleActivityResult(requestCode, resultCode, data))
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             mSignInClicked = false;
@@ -249,9 +285,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         requestCode, resultCode, R.string.signin_failure);
             }
         }
-       /* if (!mHelper.handleActivityResult(requestCode, resultCode, data))
-            super.onActivityResult(requestCode, resultCode, data);*/
-
 
     }
 
@@ -297,12 +330,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       /* if (mHelper != null) try {
-            mHelper.dispose();
-        } catch (IabHelper.IabAsyncInProgressException e) {
-            e.printStackTrace();
+        if (billinSupported) {
+            if (mHelper != null) try {
+                mHelper.dispose();
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                e.printStackTrace();
+            }
+            mHelper = null;
         }
-        mHelper = null;*/
     }
 
     public void openRanking(View view) {
@@ -349,8 +384,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void paymentStart(View view) {
-        Toast.makeText(this, "Start Payment", Toast.LENGTH_SHORT).show(); //TODO: In App Billing
-    }
+        if (billinSupported) {
+            try {
+                mHelper.launchPurchaseFlow(MainActivity.this, AppConstants.products, 10001, mPurchaseFinishedListener, "mypurchaseToken");
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                e.printStackTrace();
+            }
+        } else
+            Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();    }
 
     public void openExportDialog(View view) {
         if (!dialogOpen) {
@@ -425,4 +466,35 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         ft.addToBackStack("DemoFragment");
         ft.commit();
     }
+
+    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
+        @Override
+        public void onIabPurchaseFinished(IabResult result, Purchase info) {
+            if (result.isFailure()) {
+                MyToast.showShort(MainActivity.this,getString(R.string.aborted));
+                return;
+            }
+            if (info.getSku().equalsIgnoreCase(AppConstants.products)) {
+                sharedPreferenceSingelton.saveAs(MainActivity.this,"Payment",true);
+                MyToast.showShort(MainActivity.this,getString(R.string.thanks));
+            }
+        }
+    };
+
+    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
+
+            if (mHelper == null) return;
+
+            if (result.isFailure()) {
+                return;
+            }
+
+            if (inventory.hasPurchase(AppConstants.products)) {
+                new SharedPreferenceSingelton().saveAs(MainActivity.this,"Payment",true);
+            }
+
+
+        }
+    };
 }

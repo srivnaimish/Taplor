@@ -114,7 +114,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:fontFamily="@font/font1"
-        android:text="Score"
+        android:text="@string/score"
         android:textColor="@color/buttonTextColor"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -135,7 +135,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/bubble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
@@ -146,7 +146,7 @@
         app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/bubble2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -156,9 +156,8 @@
         app:srcCompat="@drawable/ic_bubbles"
         android:layout_marginLeft="32dp" />
 
-
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/bubble3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -170,7 +169,7 @@
         app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
-        android:id="@+id/bubble"
+        android:id="@+id/bubble4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -184,7 +183,7 @@
         app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
-        android:id="@+id/bubble1"
+        android:id="@+id/bubble5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
