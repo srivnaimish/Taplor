@@ -35,11 +35,12 @@
         android:fontFamily="@font/font1"
         android:gravity="bottom|center"
         android:text="5"
-        android:textColor="@color/MAGENTA"
+        android:textColor="@color/PURPLE"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="@+id/score"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/score" />
+        app:layout_constraintTop_toTopOf="@+id/score"
+        android:layout_marginRight="8dp" />
 
 
     <android.support.constraint.ConstraintLayout

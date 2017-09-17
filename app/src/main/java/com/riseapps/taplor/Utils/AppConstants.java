@@ -24,13 +24,13 @@ public class AppConstants {
 
     public static final String[] mediumColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple"};
 
-    public static final String[] hardColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple", "Grey", "Magenta", "Peach", "Chocolate", "Maroon"};
+    public static final String[] hardColorNames = {"Red", "Blue", "Green", "Yellow", "Black", "Orange", "Brown", "Indigo", "Pink", "Purple", "Grey", "Olive", "Peach", "Chocolate", "Maroon"};
 
     public static final int[] easyColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK};
 
     public static final int[] mediumColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE};
 
-    public static final int[] hardColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE, R.color.GREY, R.color.MAGENTA, R.color.PEACH, R.color.CHOCOLATE, R.color.MAROON};
+    public static final int[] hardColorCodes = {R.color.RED, R.color.BLUE, R.color.GREEN, R.color.YELLOW, R.color.BLACK, R.color.ORANGE, R.color.BROWN, R.color.INDIGO, R.color.PINK, R.color.PURPLE, R.color.GREY, R.color.OLIVE, R.color.PEACH, R.color.CHOCOLATE, R.color.MAROON};
     public static final String KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr821xbTS2bc6dxwlDFtEY31SOkLX7hgrPEYqGp6LgnbNrb2exrThD08bEuPonIoe7X1LRjVM5XxD/yGV4rTZ2XxCJjhTSzOCx05IGBd9cgzEMpHr7OD1215dxbS9axzM6bVw+Hn0AixgAtsPEANWFP5GWZ1XHBGbvEmxIwBlcJjj/V3pN/g1PeLARP6/rzVgjX2zr6Y+4EXsNm9bwMF0sS0n8XX3uhUQUwB2Y6dgi1Fm1ZizV7VDphIpt1FCE89NrRMmbjbLgYWdcsl1Vx/iCrlaDzjb+JAHTXEb069lrJHhUg4wSYwFOViKppGMS4nNRra019REVQRDkhfaSyp6DwIDAQAB";
 
     public static AnimationSet generateFadeInAnimator(int l1, int l2) {

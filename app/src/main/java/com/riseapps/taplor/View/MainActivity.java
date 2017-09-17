@@ -2,7 +2,6 @@ package com.riseapps.taplor.View;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -25,7 +24,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,7 +40,6 @@ import com.riseapps.taplor.billing.Inventory;
 import com.riseapps.taplor.billing.Purchase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -57,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     ConstraintLayout background;
     TextView heading;
     Button easy, medium, hard;
-    ImageButton rank, achievement, purchase, about;
+    ImageButton rank, achievement, colors, purchase, about;
     //TODO:ADS
     private AdView mAdView;
-    CardView premium, about_game;
+    CardView premium, about_game, game_colors;
 
     boolean mExplicitSignOut = false;
     boolean mInSignInFlow = false;
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     private int colorFrom;
     private int colorTo1;
-    SharedPreferenceSingelton sharedPreferenceSingelton=new SharedPreferenceSingelton();
+    SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     IabHelper mHelper;
     private boolean billinSupported;
 
@@ -97,9 +94,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         achievement = findViewById(R.id.achievement);
         purchase = findViewById(R.id.purchase);
         about = findViewById(R.id.about);
+        colors = findViewById(R.id.colors);
 
         premium = findViewById(R.id.premium_dialog);
         about_game = findViewById(R.id.about_game);
+        game_colors = findViewById(R.id.game_colors);
 
         mAdView = findViewById(R.id.adView);
         /*if(!sharedPreferenceSingelton.getSavedBoolean(this,"Payment")) {
@@ -149,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         achievement.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
         purchase.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
         about.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
+        colors.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
 
         colorFrom = getResources().getColor(R.color.ONE);
         Drawable back = background.getBackground();
@@ -288,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (!mHelper.handleActivityResult(requestCode, resultCode, data))
-        super.onActivityResult(requestCode, resultCode, data);
+            super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             mSignInClicked = false;
             mResolvingConnectionFailure = false;
@@ -405,7 +405,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 e.printStackTrace();
             }
         } else
-            Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();    }
+            Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();
+    }
 
     public void openExportDialog(View view) {
         if (!dialogOpen) {
@@ -485,12 +486,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         @Override
         public void onIabPurchaseFinished(IabResult result, Purchase info) {
             if (result.isFailure()) {
-                MyToast.showShort(MainActivity.this,getString(R.string.aborted));
+                MyToast.showShort(MainActivity.this, getString(R.string.aborted));
                 return;
             }
             if (info.getSku().equalsIgnoreCase(AppConstants.products)) {
-                sharedPreferenceSingelton.saveAs(MainActivity.this,"Payment",true);
-                MyToast.showShort(MainActivity.this,getString(R.string.thanks));
+                sharedPreferenceSingelton.saveAs(MainActivity.this, "Payment", true);
+                MyToast.showShort(MainActivity.this, getString(R.string.thanks));
                 mAdView.setVisibility(View.GONE);
             }
         }
@@ -506,14 +507,42 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
 
             if (inventory.hasPurchase(AppConstants.products)) {
-                new SharedPreferenceSingelton().saveAs(MainActivity.this,"Payment",true);
+                new SharedPreferenceSingelton().saveAs(MainActivity.this, "Payment", true);
             }
-
-
         }
     };
 
 
     public void openColors(View view) {
+        if (!dialogOpen) {
+            game_colors.setAnimation(AppConstants.dialogEnter());
+            game_colors.setVisibility(View.VISIBLE);
+            dialogOpen = true;
+        }
+    }
+
+    public void closeColorsDialog(View view) {
+        if (dialogOpen) {
+            AnimationSet animationSet = AppConstants.dialogExit();
+            animationSet.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    game_colors.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            game_colors.setAnimation(animationSet);
+            dialogOpen = false;
+        }
+
     }
 }

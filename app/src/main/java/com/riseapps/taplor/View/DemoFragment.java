@@ -204,7 +204,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
             new TapTargetSequence(getActivity()).targets(
                     TapTarget.forView(timer, getString(R.string.app_walk1))
                             .dimColor(android.R.color.black)
-                            .outerCircleColor(R.color.MAGENTA)
+                            .outerCircleColor(R.color.PURPLE)
                             .targetCircleColor(R.color.buttonTextColor)
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)
@@ -222,7 +222,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .id(2),
                     TapTarget.forView(game, getString(R.string.app_walk3)+" "+answer+". "+getString(R.string.app_walk4))
                             .dimColor(android.R.color.black)
-                            .outerCircleColor(R.color.ONE)
+                            .outerCircleColor(R.color.PEACH)
                             .targetCircleColor(R.color.buttonTextColor)
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)

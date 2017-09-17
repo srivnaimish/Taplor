@@ -56,7 +56,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     String answer = "";
     Button timer;
     int score = 0;
-    int totalTime = 6;
+    int totalTime = 5000;
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
@@ -188,7 +188,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
         }
 
-        countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
+        countDownTimer = new MyCountDownTimer(totalTime, 500);
         countDownTimer.start();
         changeColors();
 
@@ -459,7 +459,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void changeColors() {
         countDownTimer.cancel();
         if (!stopped) {
-            countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
+            countDownTimer = new MyCountDownTimer(totalTime, 500);
             countDownTimer.start();
         }
         ArrayList<Integer> colorslist = new ArrayList<>();
@@ -616,7 +616,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            countDownTimer = new MyCountDownTimer(currentTimeLeft, 1000);
+            countDownTimer = new MyCountDownTimer(currentTimeLeft, 500);
             countDownTimer.start();
             stopped = false;
         }
@@ -625,9 +625,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void onCorrectAnswer() {
         score++;
-        if (score == 20 || score == 50 || score == 80 || score == 120) {
-            totalTime--;
-            MyToast.showShort(getContext(), getString(R.string.timer_reduced));
+        if (score == 15 || score == 30 || score == 45 || score == 60 || score == 75|| score == 90|| score == 105) {
+            totalTime=totalTime-500;
+            MyToast.showShort(getContext(), getString(R.string.timer_reduced)+(float)totalTime/1000);
         }
         Score.setText("" + score);
         changeColors();
@@ -643,7 +643,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onTick(long l) {
             currentTimeLeft = l;
-            long timeToShow = currentTimeLeft / 1000;
+            long timeToShow = l / 1000;
             timer.setText("" + timeToShow);
         }
 
@@ -656,8 +656,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private void checkPayment() {
         if (sharedPreferenceSingelton.getSavedBoolean(getContext(), "Payment")) {
             powerups=5;
-        }else
-            powerups=3;
+            freeze.setText(getString(R.string.time_freezers_5));
+        }else {
+            powerups = 3;
+            freeze.setText(getString(R.string.time_freezers_3));
+        }
     }
 
     public void viewLeaderboard() {
@@ -682,13 +685,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     public void tryAgain() {
         game_over_dialog.setVisibility(View.GONE);
-        totalTime=6;
+        totalTime=5000;
         score=0;
         stopped=false;
         Score.setText("0");
         checkPayment();
         freeze.setText(getString(R.string.time_freezers_3));
-        countDownTimer = new MyCountDownTimer(totalTime * 1000, 1000);
+        countDownTimer = new MyCountDownTimer(totalTime, 500);
         countDownTimer.start();
         changeColors();
     }

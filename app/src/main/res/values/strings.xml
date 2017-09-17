@@ -42,11 +42,12 @@
     <string name="app_walk3">Your aim is to tap the flame containing the name of the background color.\n\nHere, the background color name is </string>
     <string name="app_walk4">Therefore tap the flame bearing this name.</string>
     <string name="this_is_only_the_demo_feel_free_to_practise_here_anytime">Scores made here are just for practise and would not reflect on the Leaderboards.</string>
-    <string name="timer_reduced">Timer Reduced</string>
+    <string name="timer_reduced">Timer Reduced to </string>
     <string name="score">Score</string>
     <string name="aborted">Transaction Aborted</string>
     <string name="thanks">Thanks for the purchase</string>
     <string name="Version">v.1.0.0.4</string>
     <string name="how_to_play">How to Play?</string>
+    <string name="time_freezers_5">Time Freezers : 5</string>
 
 </resources>
