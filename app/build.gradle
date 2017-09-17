@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.riseapps.taplor"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 7
             versionName "1.0.0.4"
@@ -36,7 +36,6 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:26.1.0'
     compile 'com.android.support:support-v4:26.1.0'
     compile 'com.getkeepsafe.taptargetview:taptargetview:1.9.1'
-    compile 'com.github.Todd-Davies:ProgressWheel:1.2'
     compile 'com.gelitenight.waveview:waveview:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

@@ -303,23 +303,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     @Override
-    public void closeGame() {
+    public void closeFragment() {
         getSupportFragmentManager().popBackStackImmediate();
     }
 
-    @Override
-    public void restartGame(int level) {
-        getSupportFragmentManager().popBackStackImmediate();
-        GameFragment gamesFragment = new GameFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("LEVEL", level);
-        gamesFragment.setArguments(bundle);
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.container, gamesFragment, "GamesFragment");
-        ft.addToBackStack(null);
-        ft.commit();
-    }
 
     public void changeBackgroundColor() {
         colorTo1 = getResources().getColor(AppConstants.GradientPrimaryColors[ansPos]);

@@ -1,6 +1,9 @@
 package com.riseapps.taplor.View;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -20,12 +23,16 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gelitenight.waveview.library.WaveView;
@@ -54,19 +61,19 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Button mediumOne, mediumTwo, mediumThree, mediumFour;
     Button hardOne, hardTwo, hardThree, hardFour, hardFive;
     String answer = "";
-    Button timer;
+    ImageButton home;
+    ProgressBar progressBar;
     int score = 0;
     int totalTime = 5000;
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
     private int level,powerups;
-    private CountDownTimer countDownTimer;
     private int ansPos;
     private Button freeze;
     boolean stopped = false;
     private MediaPlayer correct, wrong;
-    private TextView Score;
+    private TextView Score,ans;
     private Handler handler = new Handler();
 
     private int mBorderColor = Color.parseColor("#1AFFFFFF");
@@ -75,6 +82,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private TextView dialog_score;
     private Button leaderboard,try_again,share_score;
     private ImageView close_dialog;
+    private ObjectAnimator animation;
 
     public GameFragment() {
         // Required empty public constructor
@@ -115,8 +123,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         hardFour = view.findViewById(R.id.hard_four);
         hardFive = view.findViewById(R.id.hard_five);
 
+        home = view.findViewById(R.id.home);
         freeze = view.findViewById(R.id.time_freezer);
-        timer = view.findViewById(R.id.timer);
+        progressBar = view.findViewById(R.id.progressBar);
 
         game_over_dialog=view.findViewById(R.id.game_over_dialog);
         dialog_score=view.findViewById(R.id.new_score);
@@ -124,6 +133,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         try_again=view.findViewById(R.id.try_again);
         share_score=view.findViewById(R.id.share);
         close_dialog=view.findViewById(R.id.close_dialog);
+        ans=view.findViewById(R.id.ans);
 
         WaveView waveView = view.findViewById(R.id.wave);
         waveView.setBorder(0, mBorderColor);
@@ -134,7 +144,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 Color.parseColor("#0DFAFAFA"),
                 Color.parseColor("#0DFAFAFA"));
         mWaveHelper.start();
-
+        correct = MediaPlayer.create(getContext(), R.raw.correct);
+        wrong = MediaPlayer.create(getContext(), R.raw.wrong);
         checkPayment();
 
         easyOne.setOnClickListener(this);
@@ -153,6 +164,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         hardFive.setOnClickListener(this);
 
         freeze.setOnClickListener(this);
+        home.setOnClickListener(this);
 
         leaderboard.setOnClickListener(this);
         try_again.setOnClickListener(this);
@@ -187,13 +199,24 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 hardFive.startAnimation(floating);
                 break;
         }
+        animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
+        animation.setDuration (totalTime); //in milliseconds
+        animation.setInterpolator (new AccelerateInterpolator());
+        animation.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+            }
 
-        countDownTimer = new MyCountDownTimer(totalTime, 500);
-        countDownTimer.start();
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                gameOver();
+            }
+        });
+        animation.start ();
+
         changeColors();
-
-        correct = MediaPlayer.create(getContext(), R.raw.correct);
-        wrong = MediaPlayer.create(getContext(), R.raw.wrong);
 
         view.findViewById(R.id.bubble).startAnimation(floating2);
         view.findViewById(R.id.bubble2).startAnimation(floating2);
@@ -204,15 +227,13 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-
-    @SuppressLint("SetTextI18n")
     private void gameOver() {
         stopGame();
         wrong.start();
         game_over_dialog.setAnimation(AppConstants.dialogEnter());
         game_over_dialog.setVisibility(View.VISIBLE);
         dialog_score.setText("" + score);
-
+        ans.setText(answer);
         switch (level) {
             case 0:
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_easy), score);
@@ -304,7 +325,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
-
     }
 
     @Override
@@ -418,6 +438,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
 
+            case R.id.home:
+                closeGameFragment.closeFragment();
+                break;
+
             case R.id.time_freezer:
                 if (!stopped) {
                     if (powerups>0) {
@@ -445,22 +469,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.close_dialog:
-                closeGameFragment.closeGame();
+                closeGameFragment.closeFragment();
         }
     }
 
     void pauseResumeTimer() {
         MyToast.showShort(getContext(), getString(R.string.timer_paused));
-        countDownTimer.cancel();
+        currentTimeLeft=animation.getCurrentPlayTime();
+        animation.pause();
         stopped = true;
         handler.postDelayed(runnable, 5000);
     }
 
     private void changeColors() {
-        countDownTimer.cancel();
         if (!stopped) {
-            countDownTimer = new MyCountDownTimer(totalTime, 500);
-            countDownTimer.start();
+            animation.pause();
+            animation.setDuration(totalTime);
+            animation.start();
         }
         ArrayList<Integer> colorslist = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
@@ -609,48 +634,27 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     void stopGame() {
-        timer.removeCallbacks(runnable);
-        countDownTimer.cancel();
+        progressBar.removeCallbacks(runnable);
+        animation.pause();
     }
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            countDownTimer = new MyCountDownTimer(currentTimeLeft, 500);
-            countDownTimer.start();
+            animation.resume();
             stopped = false;
         }
     };
-
 
     private void onCorrectAnswer() {
         score++;
         if (score == 15 || score == 30 || score == 45 || score == 60 || score == 75|| score == 90|| score == 105) {
             totalTime=totalTime-500;
-            MyToast.showShort(getContext(), getString(R.string.timer_reduced)+(float)totalTime/1000);
+            MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
         }
         Score.setText("" + score);
         changeColors();
         correct.start();
-    }
-
-    private class MyCountDownTimer extends CountDownTimer {
-        MyCountDownTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @SuppressLint("SetTextI18n")
-        @Override
-        public void onTick(long l) {
-            currentTimeLeft = l;
-            long timeToShow = l / 1000;
-            timer.setText("" + timeToShow);
-        }
-
-        @Override
-        public void onFinish() {
-            gameOver();
-        }
     }
 
     private void checkPayment() {
@@ -689,10 +693,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         score=0;
         stopped=false;
         Score.setText("0");
+        animation.setDuration(totalTime);
+        animation.start();
         checkPayment();
-        freeze.setText(getString(R.string.time_freezers_3));
-        countDownTimer = new MyCountDownTimer(totalTime, 500);
-        countDownTimer.start();
         changeColors();
     }
 

@@ -1,6 +1,9 @@
 package com.riseapps.taplor.View;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -24,10 +27,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +60,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     Button easyOne, easyTwo, easyThree,timer,freeze;
     String answer = "";
     int score = 0;
+    ImageButton home;
     private int ansPos;
     private MediaPlayer correct, wrong;
     private TextView Score;
@@ -62,6 +69,9 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     ConstraintLayout game;
     private AdView mAdView;
     private SharedPreferenceSingelton sharedPreferenceSingelton=new SharedPreferenceSingelton();
+    private Animator animation;
+    private ProgressBar progressBar;
+    private CloseGameFragment closeFragment;
 
     public DemoFragment() {
         // Required empty public constructor
@@ -80,7 +90,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_demo, container, false);
         background = view.findViewById(R.id.background);
         Score = view.findViewById(R.id.score);
-
+        closeFragment=(MainActivity)getActivity();
         easyOne = view.findViewById(R.id.easy_one);
         easyTwo = view.findViewById(R.id.easy_two);
         easyThree = view.findViewById(R.id.easy_three);
@@ -88,16 +98,16 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         easyOne.setOnClickListener(this);
         easyTwo.setOnClickListener(this);
         easyThree.setOnClickListener(this);
-        timer=view.findViewById(R.id.timer);
         freeze=view.findViewById(R.id.time_freezer);
         floating=AppConstants.getFloatingAnimation(getContext());
 
         easyOne.startAnimation(floating);
         easyTwo.startAnimation(floating);
         easyThree.startAnimation(floating);
-
+        home = view.findViewById(R.id.home);
+        home.setOnClickListener(this);
         game=view.findViewById(R.id.easy_game);
-
+        progressBar = view.findViewById(R.id.progressBar);
         mAdView = view.findViewById(R.id.adView);
         /*if(!sharedPreferenceSingelton.getSavedBoolean(getActivity(),"Payment")) {
             AdRequest adRequest = new AdRequest.Builder()
@@ -107,6 +117,10 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         }else {
             mAdView.setVisibility(View.GONE);
         }*/
+        animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
+        animation.setDuration (5000); //in milliseconds
+        animation.setInterpolator (new AccelerateInterpolator());
+        animation.start();
         changeColors();
 
         correct = MediaPlayer.create(getContext(), R.raw.correct);
@@ -126,6 +140,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                     onCorrectAnswer();
                 } else {
                     wrong.start();
+                    Score.setText("0");
                     //gameOver();
                 }
                 break;
@@ -135,7 +150,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                     view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
-                    //gameOver();
+                    Score.setText("0");
                     wrong.start();
                 }
                 break;
@@ -145,9 +160,13 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                     view.startAnimation(AppConstants.getBubbleAnimation(getContext(), view));
                     onCorrectAnswer();
                 } else {
-                    //gameOver();
+                    Score.setText("0");
                     wrong.start();
                 }
+                break;
+
+            case R.id.home:
+                closeFragment.closeFragment();
                 break;
 
 
@@ -202,7 +221,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
 
         if(!shownDemo){
             new TapTargetSequence(getActivity()).targets(
-                    TapTarget.forView(timer, getString(R.string.app_walk1))
+                    TapTarget.forView(progressBar, getString(R.string.app_walk1))
                             .dimColor(android.R.color.black)
                             .outerCircleColor(R.color.PURPLE)
                             .targetCircleColor(R.color.buttonTextColor)
@@ -227,8 +246,10 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .textTypeface(Typeface.SANS_SERIF)
                             .transparentTarget(true)
                             .textColor(R.color.buttonTextColor)
-                            .targetRadius(120)
+                            .targetRadius(100)
+                            .descriptionTextSize(14)
                             .id(2)
+
             ).start();
             shownDemo=true;
         }

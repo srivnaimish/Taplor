@@ -10,22 +10,20 @@
     android:focusable="true"
     android:background="@drawable/gradient">
 
-    <com.riseapps.taplor.Widgets.AnimatedButton
-        android:id="@+id/timer"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/ic_bomb"
-        android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        android:padding="6dp"
-        android:text="5"
-        android:textColor="@color/MAROON"
-        android:textSize="25sp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:max="500"
+        android:progress="0"
+        android:progressDrawable="@drawable/circular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="16dp" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
+        android:padding="6dp"
+        android:layout_marginRight="16dp"/>
 
     <TextView
         android:id="@+id/score"
@@ -36,12 +34,12 @@
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/timer" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
     <ImageButton
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/home"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:foreground="?selectableItemBackgroundBorderless"
@@ -69,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timer">
+        app:layout_constraintTop_toBottomOf="@id/progressBar">
 
         <include layout="@layout/level1" />
     </LinearLayout>
@@ -83,7 +81,7 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timer"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
         >
 
         <include layout="@layout/level2" />
@@ -98,7 +96,7 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timer">
+        app:layout_constraintTop_toBottomOf="@id/progressBar">
 
         <include layout="@layout/level3" />
     </LinearLayout>
@@ -191,7 +189,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="@+id/timer"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toBottomOf="@+id/score"
         app:srcCompat="@drawable/ic_bubbles" />
 

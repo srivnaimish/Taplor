@@ -5,7 +5,6 @@ package com.riseapps.taplor.Executor;
  */
 
 public interface CloseGameFragment {
-    public void closeGame();
+    public void closeFragment();
 
-    public void restartGame(int level);
 }
