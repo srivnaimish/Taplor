@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +26,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.games.Games;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
@@ -43,7 +47,9 @@ import java.util.Collections;
 import java.util.Random;
 
 public class DemoFragment extends Fragment implements View.OnClickListener {
-
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     ConstraintLayout background;
     Button easyOne, easyTwo, easyThree,timer,freeze;
     String answer = "";
@@ -54,6 +60,8 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     private Animation floating;
     boolean shownDemo=false;
     ConstraintLayout game;
+    private AdView mAdView;
+    private SharedPreferenceSingelton sharedPreferenceSingelton=new SharedPreferenceSingelton();
 
     public DemoFragment() {
         // Required empty public constructor
@@ -89,6 +97,16 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         easyThree.startAnimation(floating);
 
         game=view.findViewById(R.id.easy_game);
+
+        mAdView = view.findViewById(R.id.adView);
+        /*if(!sharedPreferenceSingelton.getSavedBoolean(getActivity(),"Payment")) {
+            AdRequest adRequest = new AdRequest.Builder()
+                    //.addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }else {
+            mAdView.setVisibility(View.GONE);
+        }*/
         changeColors();
 
         correct = MediaPlayer.create(getContext(), R.raw.correct);

@@ -15,6 +15,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,9 @@ import java.util.Collections;
 import java.util.Random;
 
 public class GameFragment extends Fragment implements View.OnClickListener {
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     private static final String LEVEL = "LEVEL";
 
     LinearLayout easy_game, medium_game, hard_game;

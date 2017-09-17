@@ -5,9 +5,9 @@
     <string name="signin_failure">Unable to sign in</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="ad_app_id">ca-app-pub-6474186767554757~3148599990</string>
-    <string name="banner_ad_id">ca-app-pub-6474186767554757/4597413032</string>
-    <string name="interstitial_ad_id">ca-app-pub-6474186767554757/6472589723</string>
+    <string name="ad_app_id">ca-app-pub-7869316695770647~7587855107</string>
+    <string name="banner_ad_id">ca-app-pub-7869316695770647/6003310698</string>
+    <string name="interstitial_ad_id">ca-app-pub-7869316695770647/9475651841</string>
     <string name="native_ad_id">ca-app-pub-6474186767554757/3574608428</string>
 
     <!--About Game Popup-->
@@ -46,5 +46,7 @@
     <string name="score">Score</string>
     <string name="aborted">Transaction Aborted</string>
     <string name="thanks">Thanks for the purchase</string>
+    <string name="Version">v.1.0.0.4</string>
+    <string name="how_to_play">How to Play?</string>
 
 </resources>

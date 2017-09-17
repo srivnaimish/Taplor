@@ -2,6 +2,7 @@ package com.riseapps.taplor.View;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -24,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     Button easy, medium, hard;
     ImageButton rank, achievement, purchase, about;
     //TODO:ADS
+    private AdView mAdView;
     CardView premium, about_game;
 
     boolean mExplicitSignOut = false;
@@ -96,6 +100,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         premium = findViewById(R.id.premium_dialog);
         about_game = findViewById(R.id.about_game);
+
+        mAdView = findViewById(R.id.adView);
+        /*if(!sharedPreferenceSingelton.getSavedBoolean(this,"Payment")) {
+            AdRequest adRequest = new AdRequest.Builder()
+                    //.addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }else {
+            mAdView.setVisibility(View.GONE);
+        }*/
 
         mHelper = new IabHelper(this, AppConstants.KEY);
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -477,6 +491,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if (info.getSku().equalsIgnoreCase(AppConstants.products)) {
                 sharedPreferenceSingelton.saveAs(MainActivity.this,"Payment",true);
                 MyToast.showShort(MainActivity.this,getString(R.string.thanks));
+                mAdView.setVisibility(View.GONE);
             }
         }
     };
@@ -497,4 +512,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         }
     };
+
+
+    public void openColors(View view) {
+    }
 }

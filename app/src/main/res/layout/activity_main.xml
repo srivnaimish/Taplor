@@ -5,96 +5,87 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.riseapps.taplor.View.MainActivity"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    tools:context="com.riseapps.taplor.View.MainActivity">
 
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/font2"
         android:text="@string/app_name"
         android:textColor="@android:color/white"
         android:textSize="60sp"
-        android:fontFamily="@font/font2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.3">
+        app:layout_constraintBottom_toTopOf="@+id/how"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <Button
             android:id="@+id/easy"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/card_round"
+            android:fontFamily="@font/font1"
             android:foreground="?selectableItemBackgroundBorderless"
             android:onClick="launchEasyLevel"
             android:text="@string/easy"
-            android:fontFamily="@font/font1"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/medium"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/card_round"
+            android:fontFamily="@font/font1"
             android:foreground="?selectableItemBackgroundBorderless"
             android:onClick="launchMediumLevel"
             android:text="@string/medium"
-            android:fontFamily="@font/font1"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/hard"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/card_round"
+            android:fontFamily="@font/font1"
             android:foreground="?selectableItemBackgroundBorderless"
             android:onClick="launchHardLevel"
             android:text="@string/hard"
-            android:fontFamily="@font/font1"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
     </LinearLayout>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/premium_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:visibility="gone"
         card_view:cardBackgroundColor="#FFFFFF"
         card_view:cardCornerRadius="5dp"
         card_view:cardElevation="2dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="8dp"
-        android:visibility="gone">
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/premium_dialog" />
 
@@ -104,30 +95,42 @@
         android:id="@+id/about_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:visibility="gone"
         card_view:cardBackgroundColor="#FFFFFF"
         card_view:cardCornerRadius="5dp"
         card_view:cardElevation="2dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="16dp"
-        android:visibility="gone">
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/about_game" />
 
     </android.support.v7.widget.CardView>
 
     <ImageButton
+        android:id="@+id/colors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/imagebuttonbackground"
+        android:onClick="openColors"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_color_wheel" />
+
+    <ImageButton
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="13dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openRanking"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toStartOf="@+id/achievement"
         app:srcCompat="@drawable/ic_ranking" />
 
@@ -136,12 +139,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openAchievement"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/view2"
+        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintEnd_toStartOf="@+id/colors"
         app:srcCompat="@drawable/ic_achievement" />
 
     <ImageButton
@@ -149,12 +152,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openPremiumDialog"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintStart_toEndOf="@+id/colors"
         app:srcCompat="@drawable/ic_money_bag" />
 
     <ImageButton
@@ -162,13 +165,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openExportDialog"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/adView"
         app:layout_constraintStart_toEndOf="@+id/purchase"
-        app:srcCompat="@drawable/ic_export"
-        android:layout_marginLeft="16dp" />
+        app:srcCompat="@drawable/ic_export" />
 
 
     <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -179,8 +182,7 @@
         ads:adUnitId="@string/banner_ad_id"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone" />
+        ads:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/how"
@@ -190,13 +192,12 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="How to Play?"
-        android:textColor="@color/buttonTextColor"
         android:fontFamily="@font/font1"
-        app:layout_constraintBottom_toTopOf="@+id/purchase"
+        android:onClick="launchTutorial"
+        android:text="@string/how_to_play"
+        android:textColor="@color/buttonTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/achievement"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:onClick="launchTutorial" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
