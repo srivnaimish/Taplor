@@ -53,5 +53,11 @@
     <string name="time_freezers_4">Time Freezers : 4</string>
     <string name="time_freezers_6">Time Freezers : 6</string>
     <string name="color_guide">Color Guide</string>
+    <string name="note">Note : Purchase of plan will invalidate the current plan.</string>
+    <string name="premium_1">Premium 1</string>
+    <string name="_1_extra_freezer_available">1 extra Freezer available</string>
+    <string name="premium_2">Premium 2</string>
+    <string name="_2_extra_freezer_available">2 extra Freezer available</string>
+    <string name="premium_3">Premium 3</string>
 
 </resources>

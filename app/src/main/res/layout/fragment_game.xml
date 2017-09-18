@@ -6,8 +6,7 @@
     android:id="@+id/background"
     android:animateLayoutChanges="true"
     android:clickable="true"
-    android:focusable="true"
-    android:background="@drawable/gradient">
+    android:focusable="true">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -29,6 +28,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        android:shadowColor="@color/FIVE"
         android:textColor="@color/buttonTextColor"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"

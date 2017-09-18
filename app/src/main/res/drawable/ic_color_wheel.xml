@@ -4,7 +4,7 @@
     android:width="30dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path
-        android:fillColor="@color/PINK"
+        android:fillColor="@color/buttonTextColor"
         android:pathData="M75,75l59.1,59.1l67.7,67.7L256,256v-76.7V83.5V0C185.3,0 121.3,28.7 75,75z" />
     <path
         android:fillColor="@color/BLUE"
@@ -13,10 +13,10 @@
         android:fillColor="@color/YELLOW"
         android:pathData="M201.8,201.8l-67.7,-67.7L75,75C28.7,121.3 0,185.3 0,256h83.5h95.7H256L201.8,201.8z" />
     <path
-        android:fillColor="@color/GREY"
+        android:fillColor="@color/buttonTextColor"
         android:pathData="M179.3,256H83.5H0c0,70.7 28.7,134.7 75,181l59.1,-59.1l67.7,-67.7L256,256H179.3L179.3,256z" />
     <path
-        android:fillColor="@color/GREEN"
+        android:fillColor="@color/buttonTextColor"
         android:pathData="M377.9,377.9L310.3,310.3L256,256v76.7v95.7V512c70.7,0 134.7,-28.7 181,-75L377.9,377.9z" />
     <path
         android:fillColor="@color/RED"
@@ -25,7 +25,7 @@
         android:fillColor="@color/PURPLE"
         android:pathData="M428.5,256h-95.7H256l54.3,54.3l67.7,67.7l59.1,59.1C483.3,390.7 512,326.7 512,256L428.5,256L428.5,256z" />
     <path
-        android:fillColor="@color/PEACH"
+        android:fillColor="@color/buttonTextColor"
         android:pathData="M437,75l-59.1,59.1L310.3,201.8L256,256h76.7h95.7H512C512,185.3 483.3,121.3 437,75z" />
     <path
         android:fillAlpha="0.1"

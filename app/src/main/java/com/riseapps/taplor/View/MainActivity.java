@@ -318,9 +318,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
-                GradientDrawable drawable = new GradientDrawable(
+               /* GradientDrawable drawable = new GradientDrawable(
                         GradientDrawable.Orientation.BR_TL, new int[]{(int) animator.getAnimatedValue(), R.color.SIX});
-                background.setBackground(drawable);
+               */ background.setBackgroundColor((int) animator.getAnimatedValue());
                 colorFrom = colorTo1;
             }
 

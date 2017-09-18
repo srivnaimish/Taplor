@@ -27,12 +27,11 @@
     <color name="buttonTextColor">#FFFFFF</color>
 
     <!--MAINACTIVITY DARK COLORS-->
-    <color name="ONE">#C3272B</color>
-    <color name="THREE">#4e046d</color>
-    <color name="FIVER">#e67e22</color>
-    <color name="SIX">#E1B493</color>
-    <color name="SEVEN">#9a0038</color>
-    <color name="NINE">#f1c40f</color>
+    <color name="ONE">#40032C</color>
+    <color name="THREE">#532A79</color>
+    <color name="FIVER">#1F253D</color>
+    <color name="SEVEN">#0F705D</color>
+    <color name="NINE">#4169e1</color>
 
 
     <color name="FIVE">#D4AF61</color>

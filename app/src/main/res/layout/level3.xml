@@ -17,7 +17,9 @@
         app:layout_constraintEnd_toStartOf="@+id/hard_three"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="24dp"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        android:shadowColor="@color/FIVE"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center" />
 
@@ -32,7 +34,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/hard_three"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="24dp"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        android:shadowColor="@color/FIVE"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center" />
 
@@ -46,7 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="bottom|center" />
+        android:gravity="bottom|center"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        android:shadowColor="@color/FIVE"/>
 
     <Button
         android:id="@+id/hard_four"
@@ -60,7 +67,9 @@
         app:layout_constraintEnd_toStartOf="@+id/hard_three"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hard_three"
-        android:layout_marginLeft="24dp"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        android:shadowColor="@color/FIVE"
         android:gravity="bottom|center"
         android:layout_marginBottom="24dp" />
 
@@ -76,7 +85,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/hard_three"
         app:layout_constraintTop_toBottomOf="@+id/hard_three"
-        android:layout_marginRight="24dp"
+        android:shadowDy="5"
+        android:shadowRadius="4"
+        android:shadowColor="@color/FIVE"
         android:gravity="bottom|center"
         android:layout_marginBottom="24dp" />
 </android.support.constraint.ConstraintLayout>
