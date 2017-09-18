@@ -4,8 +4,8 @@
 
     <item android:drawable="@drawable/gradient" />
 
-    <item
+    <!--<item
         android:drawable="@drawable/ic_splatter"
-        android:gravity="center" />
+        android:gravity="center" />-->
 
 </layer-list>

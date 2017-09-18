@@ -109,14 +109,14 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         game=view.findViewById(R.id.easy_game);
         progressBar = view.findViewById(R.id.progressBar);
         mAdView = view.findViewById(R.id.adView);
-        /*if(!sharedPreferenceSingelton.getSavedBoolean(getActivity(),"Payment")) {
+        if (AppConstants.paid3 || AppConstants.paid4) {
+            mAdView.setVisibility(View.GONE);
+        } else {
             AdRequest adRequest = new AdRequest.Builder()
-                    //.addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                    .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
                     .build();
             mAdView.loadAd(adRequest);
-        }else {
-            mAdView.setVisibility(View.GONE);
-        }*/
+        }
         animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
         animation.setDuration (5000); //in milliseconds
         animation.setInterpolator (new AccelerateInterpolator());

@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -40,6 +41,7 @@ import com.riseapps.taplor.billing.Inventory;
 import com.riseapps.taplor.billing.Purchase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     TextView heading;
     Button easy, medium, hard;
     ImageButton rank, achievement, colors, purchase, about;
-    //TODO:ADS
     private AdView mAdView;
     CardView premium, about_game, game_colors;
 
@@ -101,14 +102,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         game_colors = findViewById(R.id.game_colors);
 
         mAdView = findViewById(R.id.adView);
-        /*if(!sharedPreferenceSingelton.getSavedBoolean(this,"Payment")) {
-            AdRequest adRequest = new AdRequest.Builder()
-                    //.addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
-                    .build();
-            mAdView.loadAd(adRequest);
-        }else {
-            mAdView.setVisibility(View.GONE);
-        }*/
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                .build();
 
         mHelper = new IabHelper(this, AppConstants.KEY);
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     billinSupported = true;
                     if (mHelper == null) return;
                     List<String> st = new ArrayList<String>();
-                    st.add(AppConstants.products);
+                    st.addAll(Arrays.asList(AppConstants.products));
                     try {
                         mHelper.queryInventoryAsync(true, st, mGotInventoryListener);
                     } catch (IabHelper.IabAsyncInProgressException e) {
@@ -132,11 +131,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .build();
+        if (AppConstants.paid3 || AppConstants.paid4) {
+            mAdView.setVisibility(View.GONE);
+        } else {
+            AdRequest adRequest = new AdRequest.Builder()
+                    .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                    .build();
+            mAdView.loadAd(adRequest);
+        }
 
 
         heading.setAnimation(AppConstants.generateFadeInAnimator(1000, 2000));
@@ -384,16 +386,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    public void paymentStart(View view) {
-        if (billinSupported) {
-            try {
-                mHelper.launchPurchaseFlow(MainActivity.this, AppConstants.products, 10001, mPurchaseFinishedListener, "mypurchaseToken");
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                e.printStackTrace();
-            }
-        } else
-            Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();
-    }
 
     public void openExportDialog(View view) {
         if (!dialogOpen) {
@@ -476,8 +468,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 MyToast.showShort(MainActivity.this, getString(R.string.aborted));
                 return;
             }
-            if (info.getSku().equalsIgnoreCase(AppConstants.products)) {
-                sharedPreferenceSingelton.saveAs(MainActivity.this, "Payment", true);
+            if (info.getSku().equalsIgnoreCase(AppConstants.products[0])) {
+                AppConstants.paid1 = true;
+                MyToast.showShort(MainActivity.this, getString(R.string.thanks));
+                mAdView.setVisibility(View.GONE);
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.products[1])) {
+                AppConstants.paid2 = true;
+                MyToast.showShort(MainActivity.this, getString(R.string.thanks));
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.products[2])) {
+                AppConstants.paid3 = true;
+                MyToast.showShort(MainActivity.this, getString(R.string.thanks));
+            } else if (info.getSku().equalsIgnoreCase(AppConstants.products[3])) {
+                AppConstants.paid4 = true;
                 MyToast.showShort(MainActivity.this, getString(R.string.thanks));
                 mAdView.setVisibility(View.GONE);
             }
@@ -493,8 +495,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 return;
             }
 
-            if (inventory.hasPurchase(AppConstants.products)) {
-                new SharedPreferenceSingelton().saveAs(MainActivity.this, "Payment", true);
+            if (inventory.hasPurchase(AppConstants.products[0])) {
+                AppConstants.paid1 = true;
+            }
+            if (inventory.hasPurchase(AppConstants.products[1])) {
+                AppConstants.paid2 = true;
+            }
+            if (inventory.hasPurchase(AppConstants.products[2])) {
+                AppConstants.paid3 = true;
+            }
+            if (inventory.hasPurchase(AppConstants.products[3])) {
+                AppConstants.paid4 = true;
             }
         }
     };
@@ -531,5 +542,44 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             dialogOpen = false;
         }
 
+    }
+
+    public void launchBronzePayment(View view) {
+        if (AppConstants.paid1 || AppConstants.paid2 || AppConstants.paid4) {
+            MyToast.showShort(this,"This plan or a higher plan has already been bought");
+        } else
+            paymentStart(AppConstants.products[0]);
+    }
+
+    public void launchSilverPayment(View view) {
+        if (AppConstants.paid2 || AppConstants.paid4) {
+            MyToast.showShort(this,"This plan or a higher plan has already been bought");
+        } else
+            paymentStart(AppConstants.products[1]);
+    }
+
+    public void launchGoldPayment(View view) {
+        if (AppConstants.paid3 || AppConstants.paid4) {
+            MyToast.showShort(this,"This plan or a higher plan has already been bought");
+        } else
+            paymentStart(AppConstants.products[2]);
+    }
+
+    public void launchPlatinumPayment(View view) {
+        if (AppConstants.paid4) {
+            MyToast.showShort(this,"This plan plan has already been bought");
+        } else
+            paymentStart(AppConstants.products[3]);
+    }
+
+    public void paymentStart(String productName) {
+        if (billinSupported) {
+            try {
+                mHelper.launchPurchaseFlow(MainActivity.this, productName, 10001, mPurchaseFinishedListener, "mypurchaseToken");
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                e.printStackTrace();
+            }
+        } else
+            Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();
     }
 }

@@ -69,7 +69,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
-    private int level,powerups;
+    private int level,powerups=3;
     private int ansPos;
     private Button freeze;
     boolean stopped = false;
@@ -649,13 +649,19 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     private void checkPayment() {
-        if (sharedPreferenceSingelton.getSavedBoolean(getContext(), "Payment")) {
+        if (AppConstants.paid1) {
+            powerups=4;
+            freeze.setText(getString(R.string.time_freezers_4));
+        }
+        if (AppConstants.paid2) {
             powerups=5;
             freeze.setText(getString(R.string.time_freezers_5));
-        }else {
-            powerups = 3;
-            freeze.setText(getString(R.string.time_freezers_3));
         }
+        if (AppConstants.paid4) {
+            powerups=6;
+            freeze.setText(getString(R.string.time_freezers_6));
+        }
+
     }
 
     public void viewLeaderboard() {
@@ -686,6 +692,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Score.setText("0");
         animation.setDuration(totalTime);
         animation.start();
+        powerups = 3;
+        freeze.setText(getString(R.string.time_freezers_3));
         checkPayment();
         changeColors();
     }

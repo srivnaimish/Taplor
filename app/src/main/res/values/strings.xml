@@ -29,7 +29,7 @@
     <string name="share_score">Share Score</string>
     <string name="remove_ads">Remove Ads</string>
     <string name="_5_sec_time_pause_freeze">2 Extra Time Freezers</string>
-    <string name="get_premium">GET PREMIUM</string>
+    <string name="get_premium">Upgrade Plans</string>
 
     <!--Game-->
     <string name="already_paused">Time Already Paused</string>
@@ -46,9 +46,12 @@
     <string name="score">Score</string>
     <string name="aborted">Transaction Aborted</string>
     <string name="thanks">Thanks for the purchase</string>
-    <string name="Version">v.1.0.0.4</string>
+    <string name="Version">v 1.0.0.5</string>
     <string name="how_to_play">How to Play?</string>
     <string name="time_freezers_5">Time Freezers : 5</string>
     <string name="correct_answer">Correct Answer :</string>
+    <string name="time_freezers_4">Time Freezers : 4</string>
+    <string name="time_freezers_6">Time Freezers : 6</string>
+    <string name="color_guide">Color Guide</string>
 
 </resources>

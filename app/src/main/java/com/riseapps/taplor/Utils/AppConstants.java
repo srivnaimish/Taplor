@@ -121,5 +121,10 @@ public class AppConstants {
         return animation;
     }
 
-    public static String products="premium";
+    public static String products[]={"premium1","premium2","premium3","premium4"};
+
+    public static boolean paid1 = true;
+    public static boolean paid2 = true;
+    public static boolean paid3 = true;
+    public static boolean paid4 = false;
 }
