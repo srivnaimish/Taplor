@@ -23,6 +23,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -201,7 +202,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         }
         animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
         animation.setDuration (totalTime); //in milliseconds
-        animation.setInterpolator (new AccelerateInterpolator());
+        animation.setInterpolator (new AccelerateDecelerateInterpolator());
         animation.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -529,10 +530,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
                 });
                 colorAnimation.start();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getActivity().getWindow().setNavigationBarColor(getResources().getColor(AppConstants.easyColorCodes[ansPos]));
-                }
-
                 break;
 
             case 1:
@@ -572,9 +569,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
                 });
                 colorAnimation1.start();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getActivity().getWindow().setNavigationBarColor(getResources().getColor(AppConstants.mediumColorCodes[ansPos]));
-                }
                 break;
 
             case 2:
@@ -616,9 +610,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
                 });
                 colorAnimation2.start();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getActivity().getWindow().setNavigationBarColor(getResources().getColor(AppConstants.hardColorCodes[ansPos]));
-                }
                 break;
         }
     }
