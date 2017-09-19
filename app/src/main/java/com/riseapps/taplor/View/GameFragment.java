@@ -64,9 +64,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     String answer = "";
     ImageButton home;
     ProgressBar progressBar;
+    MyCountDownTimer countDownTimer;
     int score = 0;
     int totalTime = 5000;
-    SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     CloseGameFragment closeGameFragment;
     long currentTimeLeft;
     private int level,powerups=3;
@@ -76,14 +76,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private MediaPlayer correct, wrong;
     private TextView Score,ans;
     private Handler handler = new Handler();
-
+    boolean gameOver=false;
     private int mBorderColor = Color.parseColor("#1AFFFFFF");
 
     private CardView game_over_dialog;
     private TextView dialog_score;
-    private Button leaderboard,try_again,share_score;
-    private ImageView close_dialog;
-    private ObjectAnimator animation;
 
     public GameFragment() {
         // Required empty public constructor
@@ -130,10 +127,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
         game_over_dialog=view.findViewById(R.id.game_over_dialog);
         dialog_score=view.findViewById(R.id.new_score);
-        leaderboard=view.findViewById(R.id.high_score);
-        try_again=view.findViewById(R.id.try_again);
-        share_score=view.findViewById(R.id.share);
-        close_dialog=view.findViewById(R.id.close_dialog);
+        Button leaderboard = view.findViewById(R.id.high_score);
+        Button try_again = view.findViewById(R.id.try_again);
+        Button share_score = view.findViewById(R.id.share);
+        ImageView close_dialog = view.findViewById(R.id.close_dialog);
         ans=view.findViewById(R.id.ans);
 
         WaveView waveView = view.findViewById(R.id.wave);
@@ -200,22 +197,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 hardFive.startAnimation(floating);
                 break;
         }
-        animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
+       /* animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
         animation.setDuration (totalTime); //in milliseconds
         animation.setInterpolator (new AccelerateDecelerateInterpolator());
-        animation.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationCancel(Animator animation) {
-                super.onAnimationCancel(animation);
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                gameOver();
-            }
-        });
-        animation.start ();
+        animation.start ();*/
+        countDownTimer = new MyCountDownTimer(totalTime , 500);
+        countDownTimer.start();
 
         changeColors();
 
@@ -476,18 +463,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     void pauseResumeTimer() {
         MyToast.showShort(getContext(), getString(R.string.timer_paused));
-        currentTimeLeft=animation.getCurrentPlayTime();
-        animation.pause();
+        countDownTimer.cancel();
         stopped = true;
         handler.postDelayed(runnable, 5000);
     }
 
     private void changeColors() {
-        if (!stopped) {
-            animation.pause();
-            animation.setDuration(totalTime);
-            animation.start();
-        }
         ArrayList<Integer> colorslist = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             colorslist.add(AppConstants.splashBackground[i]);
@@ -621,18 +602,19 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             handler.removeCallbacksAndMessages(null);
         }
         stopGame();
-
     }
 
     void stopGame() {
         progressBar.removeCallbacks(runnable);
-        animation.pause();
+        countDownTimer.cancel();
     }
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            animation.resume();
+            MyToast.showShort(getContext(),"Resumed "+ totalTime);
+            countDownTimer = new MyCountDownTimer(currentTimeLeft, 500);
+            countDownTimer.start();
             stopped = false;
         }
     };
@@ -644,6 +626,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
         }
         Score.setText("" + score);
+        countDownTimer.cancel();
+        if (!stopped) {
+            countDownTimer = new MyCountDownTimer(totalTime,    500);
+            countDownTimer.start();
+        }
         changeColors();
         correct.start();
     }
@@ -690,8 +677,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         score=0;
         stopped=false;
         Score.setText("0");
-        animation.setDuration(totalTime);
-        animation.start();
         powerups = 3;
         freeze.setText(getString(R.string.time_freezers_3));
         checkPayment();
@@ -705,6 +690,23 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
 
         startActivity(Intent.createChooser(share, "Share Score!"));
+    }
+
+    private class MyCountDownTimer extends CountDownTimer {
+        MyCountDownTimer(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void onTick(long l) {
+            currentTimeLeft = l;
+        }
+
+        @Override
+        public void onFinish() {
+            gameOver();
+        }
     }
 
 }
