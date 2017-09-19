@@ -38,9 +38,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"/>
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"/>
 
     <Button
         android:id="@+id/easy_two"
@@ -57,9 +57,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/easy_one"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"/>
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"/>
 
     <Button
         android:id="@+id/easy_three"
@@ -78,8 +78,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"/>
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"/>
 
 </android.support.constraint.ConstraintLayout>

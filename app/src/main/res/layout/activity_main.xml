@@ -16,8 +16,8 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/font2"
         android:text="@string/app_name"
-        android:shadowDy="5"
-        android:shadowRadius="5"
+        android:shadowDy="2"
+        android:shadowRadius="2"
         android:shadowColor="@color/FIVE"
         android:textColor="@android:color/white"
         android:textSize="60sp"
@@ -137,7 +137,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openColors"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_color_wheel" />
@@ -151,7 +151,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openRanking"
-        app:layout_constraintBottom_toTopOf="@+id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/achievement"
         app:srcCompat="@drawable/ic_ranking" />
 
@@ -164,7 +164,7 @@
         android:layout_marginRight="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openAchievement"
-        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/colors"
         app:srcCompat="@drawable/ic_achievement" />
 
@@ -177,7 +177,7 @@
         android:layout_marginStart="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openPremiumDialog"
-        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/colors"
         app:srcCompat="@drawable/ic_money_bag" />
 
@@ -190,12 +190,12 @@
         android:layout_marginStart="13dp"
         android:background="@drawable/imagebuttonbackground"
         android:onClick="openExportDialog"
-        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/purchase"
         app:srcCompat="@drawable/ic_export" />
 
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <!--<com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintStart_toStartOf="parent" />
-
+-->
     <Button
         android:id="@+id/how"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -221,38 +221,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/bubble"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
+    <com.gelitenight.waveview.library.WaveView
+        android:id="@+id/mainWave"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_bubbles" />
-
-    <ImageView
-        android:id="@+id/bubble1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout"
-        app:srcCompat="@drawable/ic_bubbles" />
-
-    <ImageView
-
-        android:id="@+id/bubble3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:srcCompat="@drawable/ic_bubbles" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
 </android.support.constraint.ConstraintLayout>

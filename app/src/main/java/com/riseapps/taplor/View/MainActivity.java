@@ -3,6 +3,7 @@ package com.riseapps.taplor.View;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -19,11 +20,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gelitenight.waveview.library.WaveView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
@@ -34,6 +37,7 @@ import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
 import com.riseapps.taplor.Utils.SharedPreferenceSingelton;
+import com.riseapps.taplor.Utils.WaveHelper;
 import com.riseapps.taplor.Widgets.MyToast;
 import com.riseapps.taplor.billing.IabHelper;
 import com.riseapps.taplor.billing.IabResult;
@@ -131,31 +135,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
 
-        if (AppConstants.paid3 || AppConstants.paid4) {
-            mAdView.setVisibility(View.GONE);
-        } else {
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
-                    .build();
-            mAdView.loadAd(adRequest);
-        }
-
-
         heading.setAnimation(AppConstants.generateFadeInAnimator(1000, 2000));
         easy.setAnimation(AppConstants.generateFadeInAnimator(0, 2000));
         medium.setAnimation(AppConstants.generateFadeInAnimator(0, 3000));
         hard.setAnimation(AppConstants.generateFadeInAnimator(0, 4000));
 
-        rank.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
-        achievement.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
-        purchase.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
-        about.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
-        colors.setAnimation(AppConstants.generateBottomUpFadeInAnimator());
+        rank.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
+        achievement.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
+        purchase.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
+        about.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
+        colors.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
 
         colorFrom = getResources().getColor(R.color.ONE);
         Drawable back = background.getBackground();
         if (back instanceof ColorDrawable)
             colorFrom = ((ColorDrawable) back).getColor();
+
+        WaveView waveView = findViewById(R.id.mainWave);
+        waveView.setBorder(0,Color.parseColor("#1AFFFFFF"));
+
+        WaveHelper mWaveHelper = new WaveHelper(waveView);
+        waveView.setShapeType(WaveView.ShapeType.SQUARE);
+        waveView.setWaveColor(
+                Color.parseColor("#0DFFFFFF"),
+                Color.parseColor("#0DFFFFFF"));
+        mWaveHelper.start();
     }
 
     public void launchEasyLevel(View v) {

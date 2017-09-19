@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
@@ -114,13 +115,12 @@
         android:id="@+id/close_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:tint="@color/FIVE"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close"
-        android:layout_marginLeft="24dp"
-        android:tint="@color/FIVE" />
+        app:srcCompat="@drawable/ic_close" />
 
     <TextView
         android:id="@+id/textView8"
@@ -131,7 +131,8 @@
         android:fontFamily="@font/font1"
         android:text="@string/correct_answer"
         app:layout_constraintStart_toStartOf="@+id/high_score"
-        app:layout_constraintTop_toBottomOf="@+id/ll" />
+        app:layout_constraintTop_toBottomOf="@+id/ll"
+        android:layout_marginLeft="8dp" />
 
     <TextView
         android:id="@+id/ans"
@@ -141,7 +142,8 @@
         android:layout_marginTop="0dp"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/textView8"
-        android:fontFamily="@font/font1" />
+        android:fontFamily="@font/font1"
+        android:layout_marginLeft="8dp" />
 
 
     <!-- <com.google.android.gms.ads.NativeExpressAdView xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -154,9 +156,6 @@
          app:layout_constraintBottom_toBottomOf="@+id/imageView2"
          app:layout_constraintEnd_toEndOf="parent"
          app:layout_constraintStart_toStartOf="parent" />-->
-
-
-    <!--TODO:ADD Ad here-->
 
 
 </android.support.constraint.ConstraintLayout>

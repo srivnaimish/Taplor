@@ -1,7 +1,11 @@
 package com.riseapps.taplor.Utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -18,7 +22,7 @@ public class AppConstants {
 
     /*Color Constants*/
 
-    public static final int[] splashBackground = {R.drawable.splash_one,R.drawable.splash_two,R.drawable.splash_three,R.drawable.splash_four,R.drawable.splash_five,R.drawable.splash_six,R.drawable.splash_seven,R.drawable.splash_eight,R.drawable.splash_nine,R.drawable.splash_ten };
+    public static final int[] splashBackground = {R.drawable.splash_one, R.drawable.splash_two, R.drawable.splash_three, R.drawable.splash_four, R.drawable.splash_five, R.drawable.splash_six, R.drawable.splash_seven, R.drawable.splash_eight, R.drawable.splash_nine, R.drawable.splash_ten};
 
     public static final String[] easyColorNames = {"Red", "Blue", "Green", "Yellow", "Black"};
 
@@ -37,7 +41,6 @@ public class AppConstants {
         AnimationSet set = new AnimationSet(true);
         Animation trAnimation = new TranslateAnimation(0, 0, -100, 0);
         trAnimation.setDuration(l1);
-
         trAnimation.setRepeatMode(Animation.REVERSE);
         set.addAnimation(trAnimation);
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
@@ -46,13 +49,15 @@ public class AppConstants {
         return set;
     }
 
-    public static AnimationSet generateBottomUpFadeInAnimator() {
+    public static AnimationSet generateBottomUpFadeInAnimator(Context context) {
         AnimationSet set = new AnimationSet(true);
         Animation trAnimation = new TranslateAnimation(0, 0, 100, 0);
         trAnimation.setDuration(2000);
-
         trAnimation.setRepeatMode(Animation.REVERSE);
         set.addAnimation(trAnimation);
+        Animation animation=AnimationUtils.loadAnimation(context, R.anim.floating2);;
+        set.addAnimation(animation);
+
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(2000);
         set.addAnimation(anim);
@@ -92,16 +97,16 @@ public class AppConstants {
 
     public static final String TWITTER_URL = "https://www.twitter.com";
 
-    public static Animation getFloatingAnimation(Context context){
-        return AnimationUtils.loadAnimation(context,R.anim.floating);
+    public static Animation getFloatingAnimation(Context context) {
+        return AnimationUtils.loadAnimation(context, R.anim.floating);
     }
 
-    public static Animation getFloatingAnimation2(Context context){
-        return AnimationUtils.loadAnimation(context,R.anim.floating2);
+    public static Animation getFloatingAnimation2(Context context) {
+        return AnimationUtils.loadAnimation(context, R.anim.floating2);
     }
 
-    public static Animation getBubbleAnimation(final Context context, final View view){
-        Animation animation=AnimationUtils.loadAnimation(context,R.anim.bubble);
+    public static Animation getBubbleAnimation(final Context context, final View view) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.bubble);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -121,7 +126,7 @@ public class AppConstants {
         return animation;
     }
 
-    public static String products[]={"premium1","premium2","premium3","premium4"};
+    public static String products[] = {"premium1", "premium2", "premium3", "premium4"};
 
     public static boolean paid1 = false;
     public static boolean paid2 = false;

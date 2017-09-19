@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/background"
     android:animateLayoutChanges="true"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:background="@color/BLACK">
 
-    <ProgressBar
+    <flepsik.github.com.progress_ring.ProgressRingView
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:max="500"
-        android:progress="0"
-        android:progressDrawable="@drawable/circular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:animated="true"
+        app:animation_duration="5000"
+        app:background_color="@android:color/transparent"
+        app:background_progress_color="@android:color/transparent"
+        app:corner_edges="true"
+        app:progress="1"
+        app:progress_color="@color/buttonTextColor"
+        app:progress_fill="true"
+        app:ring_width="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="32dp"
-        android:padding="6dp"
-        android:layout_marginRight="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:shadowColor="@color/FIVE"
         android:shadowDy="5"
         android:shadowRadius="5"
-        android:shadowColor="@color/FIVE"
+        android:text="0"
         android:textColor="@color/buttonTextColor"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,19 +47,20 @@
         android:id="@+id/home"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:foreground="?selectableItemBackgroundBorderless"
         app:layout_constraintBottom_toBottomOf="@+id/score"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/score"
-        app:srcCompat="@drawable/ic_home"
-        android:layout_marginLeft="16dp" />
+        app:srcCompat="@drawable/ic_home" />
 
     <com.gelitenight.waveview.library.WaveView
         android:id="@+id/wave"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +75,8 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar">
+        app:layout_constraintTop_toTopOf="@id/wave"
+        app:layout_constraintVertical_bias="0.65">
 
         <include layout="@layout/level1" />
     </LinearLayout>
@@ -82,7 +90,8 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar">
+        app:layout_constraintTop_toTopOf="@id/wave"
+        app:layout_constraintVertical_bias="0.6">
 
         <include layout="@layout/level2" />
     </LinearLayout>
@@ -96,7 +105,8 @@
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressBar">
+        app:layout_constraintTop_toTopOf="@id/wave"
+        app:layout_constraintVertical_bias="0.6">
 
         <include layout="@layout/level3" />
     </LinearLayout>
@@ -108,17 +118,17 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/card_round"
+        android:fontFamily="@font/font1"
         android:foreground="?selectableItemBackgroundBorderless"
-        android:textColor="@color/buttonTextColor"
-        android:text="@string/time_freezers_3"
         android:padding="8dp"
+        android:text="@string/time_freezers_3"
+        android:textColor="@color/buttonTextColor"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:fontFamily="@font/font1" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/bubble"
@@ -126,71 +136,43 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/game_over_dialog"
-        app:srcCompat="@drawable/ic_bubbles"
-        android:layout_marginRight="32dp" />
-
-    <ImageView
-        android:id="@+id/bubble1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/time_freezer"
-        app:layout_constraintEnd_toEndOf="@+id/time_freezer"
-        app:layout_constraintStart_toStartOf="@+id/time_freezer"
+        app:layout_constraintVertical_bias="0.8"
         app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
         android:id="@+id/bubble2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bubble1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bubble"
-        app:srcCompat="@drawable/ic_bubbles"
-        android:layout_marginLeft="32dp" />
+        app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
         android:id="@+id/bubble3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
-        app:layout_constraintStart_toEndOf="@+id/home"
+        app:layout_constraintBottom_toTopOf="@+id/game_over_dialog"
+        app:layout_constraintStart_toStartOf="@+id/home"
         app:layout_constraintTop_toTopOf="@+id/wave"
-        app:srcCompat="@drawable/ic_bubbles" />
-
-    <ImageView
-        android:id="@+id/bubble4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/game_over_dialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bubble3"
         app:srcCompat="@drawable/ic_bubbles" />
 
     <ImageView
         android:id="@+id/bubble5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintTop_toBottomOf="@+id/score"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/bubble3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_bubbles" />
 
 
@@ -198,15 +180,15 @@
         android:id="@+id/game_over_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:visibility="gone"
         card_view:cardBackgroundColor="#FFFFFF"
         card_view:cardCornerRadius="5dp"
         card_view:cardElevation="2dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
-        card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintEnd_toEndOf="parent"
-        card_view:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="8dp"
-        android:visibility="gone">
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/game_over" />
 

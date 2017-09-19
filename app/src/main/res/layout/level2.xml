@@ -17,12 +17,12 @@
         app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center"
-        />
+        android:layout_marginLeft="24dp" />
 
     <Button
         android:id="@+id/medium_two"
@@ -35,9 +35,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center"
         />
@@ -67,12 +67,13 @@
         app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"
         android:gravity="bottom|center"
 
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="24dp" />
 
     <Button
         android:id="@+id/medium_four"
@@ -86,10 +87,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/view"
-        android:shadowDy="5"
-        android:shadowRadius="4"
-        android:shadowColor="@color/FIVE"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:shadowColor="@color/BLACK"
         android:gravity="bottom|center"
 
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp" />
 </android.support.constraint.ConstraintLayout>

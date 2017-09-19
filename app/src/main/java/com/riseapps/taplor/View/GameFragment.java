@@ -50,6 +50,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
+import flepsik.github.com.progress_ring.ProgressRingView;
+
 public class GameFragment extends Fragment implements View.OnClickListener {
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -63,7 +65,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Button hardOne, hardTwo, hardThree, hardFour, hardFive;
     String answer = "";
     ImageButton home;
-    ProgressBar progressBar;
+    ProgressRingView progressBar;
     MyCountDownTimer countDownTimer;
     int score = 0;
     int totalTime = 5000;
@@ -139,8 +141,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         WaveHelper mWaveHelper = new WaveHelper(waveView);
         waveView.setShapeType(WaveView.ShapeType.SQUARE);
         waveView.setWaveColor(
-                Color.parseColor("#0DFAFAFA"),
-                Color.parseColor("#0DFAFAFA"));
+                Color.parseColor("#0DFFFFFF"),
+                Color.parseColor("#0DFFFFFF"));
         mWaveHelper.start();
         correct = MediaPlayer.create(getContext(), R.raw.correct);
         wrong = MediaPlayer.create(getContext(), R.raw.wrong);
@@ -197,10 +199,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 hardFive.startAnimation(floating);
                 break;
         }
-       /* animation = ObjectAnimator.ofInt (progressBar, "progress", 0, 500); // see this max value coming back here, we animale towards that value
-        animation.setDuration (totalTime); //in milliseconds
-        animation.setInterpolator (new AccelerateDecelerateInterpolator());
-        animation.start ();*/
+
         countDownTimer = new MyCountDownTimer(totalTime , 500);
         countDownTimer.start();
 
@@ -209,14 +208,15 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.bubble).startAnimation(floating2);
         view.findViewById(R.id.bubble2).startAnimation(floating2);
         view.findViewById(R.id.bubble3).startAnimation(floating2);
-        view.findViewById(R.id.bubble4).startAnimation(floating2);
         view.findViewById(R.id.bubble5).startAnimation(floating2);
-
+        freeze.startAnimation(floating);
         return view;
     }
 
     private void gameOver() {
         stopGame();
+        progressBar.setAnimationDuration(1000);
+        progressBar.setProgress(0);
         wrong.start();
         game_over_dialog.setAnimation(AppConstants.dialogEnter());
         game_over_dialog.setVisibility(View.VISIBLE);
@@ -465,6 +465,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         MyToast.showShort(getContext(), getString(R.string.timer_paused));
         countDownTimer.cancel();
         stopped = true;
+        progressBar.setAnimationDuration(0);
+        progressBar.setProgress(0);
         handler.postDelayed(runnable, 5000);
     }
 
@@ -598,23 +600,25 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (stopped) {
-            handler.removeCallbacksAndMessages(null);
-        }
+
         stopGame();
     }
 
     void stopGame() {
-        progressBar.removeCallbacks(runnable);
+        if (stopped) {
+            handler.removeCallbacksAndMessages(null);
+        }
         countDownTimer.cancel();
     }
 
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            MyToast.showShort(getContext(),"Resumed "+ totalTime);
             countDownTimer = new MyCountDownTimer(currentTimeLeft, 500);
             countDownTimer.start();
+            progressBar.setAnimationDuration((int)currentTimeLeft);
+            progressBar.setProgress(1);
+
             stopped = false;
         }
     };
@@ -630,9 +634,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         if (!stopped) {
             countDownTimer = new MyCountDownTimer(totalTime,    500);
             countDownTimer.start();
+            progressBar.setAnimationDuration(0);
+            progressBar.setProgress(0);
+            progressBar.setAnimationDuration(totalTime);
+            progressBar.setProgress(1);
         }
         changeColors();
         correct.start();
+
     }
 
     private void checkPayment() {
@@ -679,6 +688,10 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Score.setText("0");
         powerups = 3;
         freeze.setText(getString(R.string.time_freezers_3));
+        progressBar.setAnimationDuration(0);
+        progressBar.setProgress(0);
+        progressBar.setAnimationDuration(totalTime);
+        progressBar.setProgress(1);
         checkPayment();
         changeColors();
     }

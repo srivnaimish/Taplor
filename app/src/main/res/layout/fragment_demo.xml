@@ -22,21 +22,25 @@
         app:layout_constraintStart_toStartOf="@+id/easy_game"
         app:layout_constraintTop_toBottomOf="parent" />
 
-    <ProgressBar
+    <flepsik.github.com.progress_ring.ProgressRingView
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:max="500"
-        android:progress="0"
-        android:progressDrawable="@drawable/circular"
+        app:animated="true"
+        app:animation_duration="5000"
+        app:background_color="@android:color/transparent"
+        app:background_progress_color="@android:color/transparent"
+        app:corner_edges="true"
+        app:progress="1"
+        app:progress_color="@color/buttonTextColor"
+        app:progress_fill="true"
+        app:ring_width="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="32dp"
         android:padding="6dp"
-        android:layout_marginRight="16dp" />
-
+        android:layout_marginRight="16dp"/>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/easy_game"
@@ -169,6 +173,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/score"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/score"
-        app:srcCompat="@drawable/ic_home" />
+        app:srcCompat="@drawable/ic_home"
+        android:layout_marginLeft="16dp" />
 
 </android.support.constraint.ConstraintLayout>
