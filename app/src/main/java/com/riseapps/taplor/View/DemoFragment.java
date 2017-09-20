@@ -222,7 +222,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .textColor(R.color.buttonTextColor)
                             .targetRadius(110)
                             .id(2),
-                    TapTarget.forView(game, getString(R.string.app_walk3) + " " + answer + ". " + getString(R.string.app_walk4))
+                    TapTarget.forView(game, getString(R.string.app_walk3) + " " + answer + ". ")
                             .dimColor(android.R.color.black)
                             .descriptionTextSize(13)
                             .outerCircleColor(R.color.BLACK)

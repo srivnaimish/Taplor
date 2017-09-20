@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     Button easy, medium, hard;
     ImageButton rank, achievement, colors, purchase, about;
     private AdView mAdView;
-    CardView premium, about_game, game_colors;
+    CardView premium, about_game, game_colors,credits;
 
     boolean mExplicitSignOut = false;
     boolean mInSignInFlow = false;
@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         premium = findViewById(R.id.premium_dialog);
         about_game = findViewById(R.id.about_game);
         game_colors = findViewById(R.id.game_colors);
+        credits = findViewById(R.id.credits);
 
         mAdView = findViewById(R.id.adView);
 
@@ -347,6 +348,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
+    public void launchTutorial(View view) {
+        DemoFragment demoFragment = new DemoFragment();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.replace(R.id.container, demoFragment);
+        ft.addToBackStack("DemoFragment");
+        ft.commit();
+    }
+
     public void openRanking(View view) {
         startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(mGoogleApiClient), REQUEST_LEADERBOARD);
     }
@@ -358,9 +369,42 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         );
     }
 
+    public void openColors(View view) {
+        if (!dialogOpen) {
+            game_colors.setAnimation(AppConstants.dialogEnter(700,700));
+            game_colors.setVisibility(View.VISIBLE);
+            dialogOpen = true;
+        }
+    }
+
+    public void closeColorsDialog(View view) {
+        if (dialogOpen) {
+            AnimationSet animationSet = AppConstants.dialogExit();
+            animationSet.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    game_colors.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            game_colors.setAnimation(animationSet);
+            dialogOpen = false;
+        }
+
+    }
+
     public void openPremiumDialog(View view) {
         if (!dialogOpen) {
-            premium.setAnimation(AppConstants.dialogEnter());
+            premium.setAnimation(AppConstants.dialogEnter(700,700));
             premium.setVisibility(View.VISIBLE);
             dialogOpen = true;
         }
@@ -390,10 +434,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-
     public void openExportDialog(View view) {
         if (!dialogOpen) {
-            about_game.setAnimation(AppConstants.dialogEnter());
+            about_game.setAnimation(AppConstants.dialogEnter(700,700));
             about_game.setVisibility(View.VISIBLE);
             dialogOpen = true;
         }
@@ -424,6 +467,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     }
 
+    public void seeCredits(View view) {
+        credits.setAnimation(AppConstants.dialogEnter(700,700));
+        credits.setVisibility(View.VISIBLE);
+    }
+
+    public void closeCreditDialog(View view) {
+        AnimationSet animationSet = AppConstants.dialogExit();
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                credits.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        credits.setAnimation(animationSet);
+    }
 
     public void shareApp(View view) {
         String message = "Checkout this awesome game, Taplor on Play Store\n\n https://play.google.com/store/apps/details?id=com.riseapps.taplor";
@@ -441,28 +509,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     }
 
-    public void seeCredits(View view) {
-        Toast.makeText(this, "See Credits", Toast.LENGTH_SHORT).show(); //TODO :CREDITS
-    }
-
     public void launchFBPage(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.FB_URL));
         startActivity(browserIntent);
-    }   //TODO:Replace URL with correct
+    }
 
     public void launchTwitterPage(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(AppConstants.TWITTER_URL));
         startActivity(browserIntent);
-    }   //TODO:Replace URL with correct
-
-    public void launchTutorial(View view) {
-        DemoFragment demoFragment = new DemoFragment();
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out);
-        ft.replace(R.id.container, demoFragment);
-        ft.addToBackStack("DemoFragment");
-        ft.commit();
     }
 
     IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
@@ -514,40 +568,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         }
     };
 
-
-    public void openColors(View view) {
-        if (!dialogOpen) {
-            game_colors.setAnimation(AppConstants.dialogEnter());
-            game_colors.setVisibility(View.VISIBLE);
-            dialogOpen = true;
-        }
-    }
-
-    public void closeColorsDialog(View view) {
-        if (dialogOpen) {
-            AnimationSet animationSet = AppConstants.dialogExit();
-            animationSet.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    game_colors.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
-            game_colors.setAnimation(animationSet);
-            dialogOpen = false;
-        }
-
-    }
-
     public void launchBronzePayment(View view) {
         if (AppConstants.paid1 || AppConstants.paid2 || AppConstants.paid4) {
             MyToast.showShort(this,"This plan or a higher plan has already been bought");
@@ -586,4 +606,5 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         } else
             Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();
     }
+
 }

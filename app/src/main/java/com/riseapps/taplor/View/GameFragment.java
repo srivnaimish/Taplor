@@ -218,7 +218,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         progressBar.setAnimationDuration(1000);
         progressBar.setProgress(0);
         wrong.start();
-        game_over_dialog.setAnimation(AppConstants.dialogEnter());
+        game_over_dialog.setAnimation(AppConstants.dialogEnter(300,400));
         game_over_dialog.setVisibility(View.VISIBLE);
         dialog_score.setText("" + score);
         ans.setText(answer);

@@ -19,7 +19,8 @@
         android:tint="@color/FIVE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close" />
+        app:srcCompat="@drawable/ic_close"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/app_name"

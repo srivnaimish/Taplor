@@ -64,22 +64,22 @@ public class AppConstants {
         return set;
     }
 
-    public static AnimationSet dialogEnter() {
+    public static AnimationSet dialogEnter(int t,int a) {
         AnimationSet set = new AnimationSet(true);
-        Animation trAnimation = new TranslateAnimation(0, 0, 500, 0);
-        trAnimation.setDuration(700);
+        Animation trAnimation = new TranslateAnimation(0, 0, 800, 0);
+        trAnimation.setDuration(t);
 
         trAnimation.setRepeatMode(Animation.REVERSE);
         set.addAnimation(trAnimation);
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(1000);
+        anim.setDuration(a);
         set.addAnimation(anim);
         return set;
     }
 
     public static AnimationSet dialogExit() {
         AnimationSet set = new AnimationSet(true);
-        Animation trAnimation = new TranslateAnimation(0, 0, 0, 500);
+        Animation trAnimation = new TranslateAnimation(0, 0, 0, 800);
         trAnimation.setDuration(700);
 
         trAnimation.setRepeatMode(Animation.REVERSE);
@@ -93,9 +93,9 @@ public class AppConstants {
 
     public static final int[] GradientPrimaryColors = {R.color.ONE, R.color.THREE, R.color.FIVER, R.color.SEVEN, R.color.NINE};
 
-    public static final String FB_URL = "https://www.facebook.com";
+    public static final String FB_URL = "https://www.facebook.com/taplorgame";
 
-    public static final String TWITTER_URL = "https://www.twitter.com";
+    public static final String TWITTER_URL = "https://twitter.com/riseandroidapps";
 
     public static Animation getFloatingAnimation(Context context) {
         return AnimationUtils.loadAnimation(context, R.anim.floating);
