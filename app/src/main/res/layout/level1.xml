@@ -29,8 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        android:paddingBottom="20dp"
+        android:gravity="center"
         android:textColor="@color/buttonTextColor"
         android:textSize="17sp"
         app:layout_constraintBottom_toTopOf="@+id/view"
@@ -40,7 +39,7 @@
         app:layout_constraintVertical_bias="0.5"
         android:shadowDy="1"
         android:shadowRadius="1"
-        android:shadowColor="@color/BLACK"/>
+        android:shadowColor="@color/BLACK" />
 
     <Button
         android:id="@+id/easy_two"
@@ -49,8 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="0dp"
-        android:gravity="bottom|center"
-        android:paddingBottom="20dp"
+        android:gravity="center"
         android:fontFamily="@font/font1"
         android:textColor="@color/buttonTextColor"
         android:textSize="17sp"
@@ -59,7 +57,7 @@
         app:layout_constraintTop_toTopOf="@+id/easy_one"
         android:shadowDy="1"
         android:shadowRadius="1"
-        android:shadowColor="@color/BLACK"/>
+        android:shadowColor="@color/BLACK" />
 
     <Button
         android:id="@+id/easy_three"
@@ -70,8 +68,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        android:paddingBottom="20dp"
+        android:gravity="center"
         android:textColor="@color/buttonTextColor"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,6 +77,6 @@
         app:layout_constraintTop_toBottomOf="@+id/view"
         android:shadowDy="1"
         android:shadowRadius="1"
-        android:shadowColor="@color/BLACK"/>
+        android:shadowColor="@color/BLACK" />
 
 </android.support.constraint.ConstraintLayout>

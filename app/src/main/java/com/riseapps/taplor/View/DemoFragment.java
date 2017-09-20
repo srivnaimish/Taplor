@@ -56,6 +56,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     private SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     private CloseGameFragment closeFragment;
     private ProgressRingView progressBar;
+    private TapTargetSequence tapTargetSequence;
 
     public DemoFragment() {
         // Required empty public constructor
@@ -199,7 +200,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
         }
 
         if (!shownDemo) {
-            new TapTargetSequence(getActivity()).targets(
+            tapTargetSequence=new TapTargetSequence(getActivity()).targets(
                     TapTarget.forView(progressBar, getString(R.string.app_walk1))
                             .dimColor(android.R.color.black)
                             .descriptionTextSize(13)
@@ -232,9 +233,8 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
                             .textColor(R.color.buttonTextColor)
                             .targetRadius(150)
                             .descriptionTextSize(14)
-                            .id(3)
-
-            ).start();
+                            .id(3));
+            tapTargetSequence.start();
             shownDemo = true;
         }
     }
@@ -242,8 +242,6 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-
     }
 
     private void onCorrectAnswer() {

@@ -15,14 +15,14 @@ public class Splash2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash2);
         onWindowFocusChanged(true);
-       /* new Handler().postDelayed(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(Splash2Activity.this, MainActivity.class));
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
-        }, 2000);*/
+        }, 2000);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

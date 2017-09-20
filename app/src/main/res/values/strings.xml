@@ -43,7 +43,7 @@
     <!--Demo-->
     <string name="app_walk1">You get 5 seconds to answer correctly.\n\n This time reduces as you proceed to score higher.</string>
     <string name="app_walk2">Freeze the clock.\n\n Each of these freezers lets you pause the timer for 5 seconds.\n\n Use it wisely to score higher as you only get 3 freezers for a single game.</string>
-    <string name="app_walk3">Objective : Tap the flame bearing the "NAME" of the background color.For example in this case,background color name is - </string>
+    <string name="app_walk3">Objective : Tap the box bearing the "NAME" of the background color.For example in this case,background color name is - </string>
     <string name="this_is_only_the_demo_feel_free_to_practise_here_anytime">Scores made here are just for practise and would not reflect on the Leaderboards.</string>
     <!--Game-->
     <string name="already_paused">Time Already Paused</string>

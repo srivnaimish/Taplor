@@ -21,7 +21,7 @@
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
+        android:gravity="center"
         android:layout_marginLeft="24dp" />
 
     <Button
@@ -39,8 +39,8 @@
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
-        android:gravity="bottom|center"
-        />
+        android:gravity="center"
+        android:layout_marginRight="24dp" />
 
     <View
         android:id="@+id/view"
@@ -52,8 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="bottom|center"
-        />
+        android:gravity="center" />
 
     <Button
         android:id="@+id/medium_three"
@@ -70,7 +69,7 @@
         android:shadowDy="1"
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
-        android:gravity="bottom|center"
+        android:gravity="center"
 
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="24dp" />
@@ -90,7 +89,7 @@
         android:shadowDy="1"
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
-        android:gravity="bottom|center"
+        android:gravity="center"
 
         android:layout_marginBottom="24dp"
         android:layout_marginRight="24dp" />
