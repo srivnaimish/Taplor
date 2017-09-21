@@ -223,22 +223,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         ans.setText(answer);
         switch (level) {
             case 0:
-                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_easy), score);
+                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_beginners), score);
 
-                if (score >= 10) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_10));
-                }
                 if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_20));
                 }
-                if (score >= 50) {
+                if (score >= 40) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_50));
+                                    getString(R.string.achievement_easy_40));
+                }
+                if (score >= 60) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_easy_60));
                 }
                 if (score >= 80) {
                     Games.Achievements
@@ -253,22 +253,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
             case 1:
 
-                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_medium), score);
+                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_intermediates), score);
 
-                if (score >= 10) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_10));
-                }
                 if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_20));
                 }
-                if (score >= 50) {
+                if (score >= 40) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_50));
+                                    getString(R.string.achievement_medium_40));
+                }
+                if (score >= 60) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_medium_60));
                 }
                 if (score >= 80) {
                     Games.Achievements
@@ -283,22 +283,22 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
             case 2:
 
-                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_hard), score);
+                Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_advanced), score);
 
-                if (score >= 10) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_10));
-                }
                 if (score >= 20) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_20));
                 }
-                if (score >= 50) {
+                if (score >= 40) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_50));
+                                    getString(R.string.achievement_hard_40));
+                }
+                if (score >= 60) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_hard_60));
                 }
                 if (score >= 80) {
                     Games.Achievements
@@ -624,7 +624,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void onCorrectAnswer() {
         score++;
-        if (score == 15 || score == 30 || score == 45 || score == 60 || score == 75|| score == 90|| score == 105) {
+        if (score == 15 || score == 30 || score == 45 || score == 60 || score == 90|| score == 110|| score == 130) {
             totalTime=totalTime-500;
             MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
         }
@@ -664,17 +664,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             case 0:
                 startActivityForResult(
                         Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                getString(R.string.leaderboard_easy)), 0);
+                                getString(R.string.leaderboard_beginners)), 0);
                 break;
             case 1:
                 startActivityForResult(
                         Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                getString(R.string.leaderboard_medium)), 0);
+                                getString(R.string.leaderboard_intermediates)), 0);
                 break;
             case 2:
                 startActivityForResult(
                         Games.Leaderboards.getLeaderboardIntent(((MainActivity) getActivity()).mGoogleApiClient,
-                                getString(R.string.leaderboard_hard)), 0);
+                                getString(R.string.leaderboard_advanced)), 0);
                 break;
         }
     }
@@ -699,7 +699,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        share.putExtra(Intent.EXTRA_TEXT, "Can you beat my score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
+        if(level==0)
+            share.putExtra(Intent.EXTRA_TEXT, "Do you have the concentration power to beat my BEGINNER score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
+        else if(level==1)
+            share.putExtra(Intent.EXTRA_TEXT, "Do you have the concentration power to beat my INTERMEDIATE score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
+        else
+            share.putExtra(Intent.EXTRA_TEXT, "Do you have the concentration power to beat my ADVANCED score of " + score + " on Taplor?\n\nDownload the app now-\nhttps://play.google.com/store/apps/details?id=com.riseapps.taplor");
 
         startActivity(Intent.createChooser(share, "Share Score!"));
     }

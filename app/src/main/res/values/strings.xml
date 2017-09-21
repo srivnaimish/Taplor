@@ -9,9 +9,9 @@
     <string name="interstitial_ad_id" translatable="false">ca-app-pub-7869316695770647/9475651841</string>
     <string name="native_ad_id" translatable="false">ca-app-pub-6474186767554757/3574608428</string>
     <!--Home Screen-->
-    <string name="easy">Easy</string>
-    <string name="medium">Medium</string>
-    <string name="hard">Hard</string>
+    <string name="easy">Beginner</string>
+    <string name="medium">Intermediate</string>
+    <string name="hard">Advanced</string>
     <string name="how_to_play">How to Play?</string>
     <!--Colors Popup-->
     <string name="color_guide">Color Guide</string>
