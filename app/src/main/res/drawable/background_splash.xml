@@ -3,7 +3,7 @@
     android:opacity="opaque">
 
     <item
-        android:drawable="@color/colorAccent"/>
+        android:drawable="@color/BLACK"/>
 <!--
     <item android:drawable="@drawable/gradient" />-->
 

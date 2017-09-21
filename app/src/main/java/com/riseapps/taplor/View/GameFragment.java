@@ -78,7 +78,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private MediaPlayer correct, wrong;
     private TextView Score,ans;
     private Handler handler = new Handler();
-    boolean gameOver=false;
     private int mBorderColor = Color.parseColor("#1AFFFFFF");
 
     private CardView game_over_dialog;
@@ -209,7 +208,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.bubble2).startAnimation(floating2);
         view.findViewById(R.id.bubble3).startAnimation(floating2);
         view.findViewById(R.id.bubble5).startAnimation(floating2);
-        freeze.startAnimation(floating);
+        freeze.startAnimation(floating2);
         return view;
     }
 
@@ -465,7 +464,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         MyToast.showShort(getContext(), getString(R.string.timer_paused));
         countDownTimer.cancel();
         stopped = true;
-        progressBar.setAnimationDuration(0);
+        progressBar.setAnimationDuration(5000);
         progressBar.setProgress(0);
         handler.postDelayed(runnable, 5000);
     }
@@ -614,9 +613,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            countDownTimer = new MyCountDownTimer(currentTimeLeft, 500);
+            countDownTimer = new MyCountDownTimer(totalTime, 500);
             countDownTimer.start();
-            progressBar.setAnimationDuration((int)currentTimeLeft);
+            progressBar.setAnimationDuration(totalTime);
             progressBar.setProgress(1);
 
             stopped = false;
@@ -713,7 +712,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long l) {
-            currentTimeLeft = l;
         }
 
         @Override

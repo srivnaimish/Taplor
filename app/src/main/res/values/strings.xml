@@ -20,13 +20,13 @@
     <string name="thanks">Thanks for the purchase</string>
     <string name="get_premium">Upgrade Plans</string>
     <string name="premium_1">Premium 1</string>
-    <string name="_1_extra_freezer_available">1 extra Freezer available</string>
+    <string name="_1_extra_freezer_available">1 extra Timeout available</string>
     <string name="premium_2">Premium 2</string>
-    <string name="_2_extra_freezer_available">2 extra Freezer available</string>
+    <string name="_2_extra_freezer_available">2 extra Timeouts available</string>
     <string name="premium_3">Premium 3</string>
     <string name="remove_ads">Remove Ads</string>
     <string name="grand_plan">Grand Plan</string>
-    <string name="remove_ads_3_extra_freezer_available">Remove ADs + 3 extra Freezer available</string>
+    <string name="remove_ads_3_extra_freezer_available">Remove ADs + 3 extra Timeouts available</string>
     <string name="note">Note : Purchase of plan will invalidate the current plan.</string>
     <!--About Game Popup-->
     <string name="developer_details">By\nRiseApps\n@riseandroidapps</string>
@@ -42,20 +42,20 @@
     <string name="share_score">Share Score</string>
     <!--Demo-->
     <string name="app_walk1">You get 5 seconds to answer correctly.\n\n This time reduces as you proceed to score higher.</string>
-    <string name="app_walk2">Freeze the clock.\n\n Each of these freezers lets you pause the timer for 5 seconds.\n\n Use it wisely to score higher as you only get 3 freezers for a single game.</string>
-    <string name="app_walk3">Objective : Tap the box bearing the "NAME" of the background color.For example in this case,background color name is - </string>
+    <string name="app_walk2">Take a Timeout of 5 seconds each.\n You can score or rest during a timeout without worrying about running out.</string>
+    <string name="app_walk3">Objective : Tap the star containing the name of the background color.For example in this case,background color name is </string>
     <string name="this_is_only_the_demo_feel_free_to_practise_here_anytime">Scores made here are just for practise and would not reflect on the Leaderboards.</string>
     <!--Game-->
-    <string name="already_paused">Time Already Paused</string>
-    <string name="no_freezers_left">No Freezers Left</string>
-    <string name="timer_paused">Timer paused for 5 seconds</string>
-    <string name="time_freezers">Time Freezers :</string>
-    <string name="time_freezers_3">Time Freezers : 3</string>
+    <string name="already_paused">Already in a Timeout</string>
+    <string name="no_freezers_left">No Timeouts</string>
+    <string name="timer_paused">5 seconds timeout</string>
+    <string name="time_freezers">Timeouts :</string>
+    <string name="time_freezers_3">Timeouts : 3</string>
     <string name="timer_reduced">Timer Reduced to </string>
     <string name="score">Score</string>
-    <string name="time_freezers_5">Time Freezers : 5</string>
+    <string name="time_freezers_5">Timeouts : 5</string>
     <string name="correct_answer">Correct Answer :</string>
-    <string name="time_freezers_4">Time Freezers : 4</string>
-    <string name="time_freezers_6">Time Freezers : 6</string>
+    <string name="time_freezers_4">Timeouts : 4</string>
+    <string name="time_freezers_6">Timeouts : 6</string>
     <string name="translation_help_sub">Help us translate the app to your language and get your name featured here.</string>
 </resources>
