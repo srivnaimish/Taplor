@@ -132,4 +132,6 @@ public class AppConstants {
     public static boolean paid2 = false;
     public static boolean paid3 = false;
     public static boolean paid4 = false;
+
+    public static int retrials=0;
 }

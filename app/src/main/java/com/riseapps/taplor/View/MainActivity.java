@@ -529,7 +529,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             if (info.getSku().equalsIgnoreCase(AppConstants.products[0])) {
                 AppConstants.paid1 = true;
                 MyToast.showShort(MainActivity.this, getString(R.string.thanks));
-                mAdView.setVisibility(View.GONE);
             } else if (info.getSku().equalsIgnoreCase(AppConstants.products[1])) {
                 AppConstants.paid2 = true;
                 MyToast.showShort(MainActivity.this, getString(R.string.thanks));
@@ -539,7 +538,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             } else if (info.getSku().equalsIgnoreCase(AppConstants.products[3])) {
                 AppConstants.paid4 = true;
                 MyToast.showShort(MainActivity.this, getString(R.string.thanks));
-                mAdView.setVisibility(View.GONE);
             }
         }
     };

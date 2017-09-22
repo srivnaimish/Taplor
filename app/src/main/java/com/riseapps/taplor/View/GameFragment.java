@@ -20,6 +20,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.gelitenight.waveview.library.WaveView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.games.Games;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
@@ -82,6 +85,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private CardView game_over_dialog;
     private TextView dialog_score;
+    private InterstitialAd mInterstitialAd;
+
 
     public GameFragment() {
         // Required empty public constructor
@@ -209,6 +214,14 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.bubble3).startAnimation(floating2);
         view.findViewById(R.id.bubble5).startAnimation(floating2);
         freeze.startAnimation(floating2);
+
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                .build();
+        mInterstitialAd.loadAd(adRequest);
+
         return view;
     }
 
@@ -312,6 +325,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
         }
+        if (!AppConstants.paid3 && !AppConstants.paid4) {
+            AppConstants.retrials++;
+            if(AppConstants.retrials==2){
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Log.d("TAG", "The interstitial wasn't loaded yet.");
+                }
+            }
+        }
+
     }
 
     @Override
