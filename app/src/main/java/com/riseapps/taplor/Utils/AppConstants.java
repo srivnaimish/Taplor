@@ -22,7 +22,7 @@ public class AppConstants {
 
     /*Color Constants*/
 
-    public static final int[] splashBackground = {R.drawable.splash_one, R.drawable.splash_two, R.drawable.splash_three, R.drawable.splash_four, R.drawable.splash_five, R.drawable.splash_six, R.drawable.splash_seven, R.drawable.splash_eight, R.drawable.splash_nine, R.drawable.splash_ten};
+    public static final int[] starFish = {R.drawable.starfish1,R.drawable.starfish2,R.drawable.starfish3,R.drawable.starfish4,R.drawable.starfish5,R.drawable.starfish6,R.drawable.starfish7,R.drawable.starfish8};
 
     public static final String[] easyColorNames = {"Red", "Blue", "Green", "Yellow", "Black"};
 
@@ -133,5 +133,4 @@ public class AppConstants {
     public static boolean paid3 = false;
     public static boolean paid4 = false;
 
-    public static int retrials=0;
 }

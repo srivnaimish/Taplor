@@ -155,21 +155,11 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
 
     private void changeColors() {
 
-        ArrayList<Integer> colorslist = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            colorslist.add(AppConstants.splashBackground[i]);
-        }
-        Collections.shuffle(colorslist);
-
         ArrayList<String> namelist = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             namelist.add(AppConstants.easyColorNames[i]);
         }
         Collections.shuffle(namelist);
-
-        easyOne.setBackgroundResource(colorslist.get(0));
-        easyTwo.setBackgroundResource(colorslist.get(1));
-        easyThree.setBackgroundResource(colorslist.get(2));
 
         easyOne.setText(namelist.get(0));
         easyTwo.setText(namelist.get(1));
@@ -195,9 +185,7 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
 
         });
         colorAnimation.start();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().setNavigationBarColor(getResources().getColor(AppConstants.easyColorCodes[ansPos]));
-        }
+
 
         if (!shownDemo) {
             tapTargetSequence=new TapTargetSequence(getActivity()).targets(

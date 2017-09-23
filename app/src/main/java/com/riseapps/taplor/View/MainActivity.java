@@ -27,8 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gelitenight.waveview.library.WaveView;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+    int fragmentsClosedBeforeAd=0;
 
     ConstraintLayout background;
     TextView heading;
@@ -83,12 +86,27 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     IabHelper mHelper;
     private boolean billinSupported;
+    private InterstitialAd mInterstitialAd;
+    private AdRequest adRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onWindowFocusChanged(true);
         setContentView(R.layout.activity_main);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
+        adRequest = new AdRequest.Builder()
+                .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
+                .build();
+        mInterstitialAd.setAdListener(new AdListener(){
+            @Override
+            public void onAdLoaded() {
+                super.onAdLoaded();
+                mInterstitialAd.show();
+            }
+        });
 
         background = findViewById(R.id.container);
         heading = findViewById(R.id.textView);
@@ -312,6 +330,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void closeFragment() {
         getSupportFragmentManager().popBackStackImmediate();
+        fragmentsClosedBeforeAd++;
+        if(fragmentsClosedBeforeAd==2) {
+            mInterstitialAd.loadAd(adRequest);
+            fragmentsClosedBeforeAd=0;
+        }
     }
 
 

@@ -85,7 +85,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private CardView game_over_dialog;
     private TextView dialog_score;
-    private InterstitialAd mInterstitialAd;
+    private int x=0;
 
 
     public GameFragment() {
@@ -215,12 +215,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.bubble5).startAnimation(floating2);
         freeze.startAnimation(floating2);
 
-        mInterstitialAd = new InterstitialAd(getContext());
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
-                .build();
-        mInterstitialAd.loadAd(adRequest);
 
         return view;
     }
@@ -326,14 +320,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         if (!AppConstants.paid3 && !AppConstants.paid4) {
-            AppConstants.retrials++;
-            if(AppConstants.retrials==2){
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    Log.d("TAG", "The interstitial wasn't loaded yet.");
-                }
-            }
+
         }
 
     }
@@ -494,23 +481,17 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     private void changeColors() {
-        ArrayList<Integer> colorslist = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            colorslist.add(AppConstants.splashBackground[i]);
-        }
-        Collections.shuffle(colorslist);
         switch (level) {
             case 0:
-
                 ArrayList<String> namelist = new ArrayList<>();
                 for (int i = 0; i < 5; i++) {
                     namelist.add(AppConstants.easyColorNames[i]);
                 }
                 Collections.shuffle(namelist);
 
-                easyOne.setBackgroundResource(colorslist.get(0));
-                easyTwo.setBackgroundResource(colorslist.get(1));
-                easyThree.setBackgroundResource(colorslist.get(2));
+                easyOne.setBackgroundResource(AppConstants.starFish[x]);
+                easyTwo.setBackgroundResource(AppConstants.starFish[x]);
+                easyThree.setBackgroundResource(AppConstants.starFish[x]);
 
                 easyOne.setText(namelist.get(0));
                 easyTwo.setText(namelist.get(1));
@@ -545,15 +526,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 Collections.shuffle(mediumNamelist);
 
-                mediumOne.setBackgroundResource(colorslist.get(0));
-                mediumTwo.setBackgroundResource(colorslist.get(1));
-                mediumThree.setBackgroundResource(colorslist.get(2));
-                mediumFour.setBackgroundResource(colorslist.get(3));
-
                 mediumOne.setText(mediumNamelist.get(0));
                 mediumTwo.setText(mediumNamelist.get(1));
                 mediumThree.setText(mediumNamelist.get(2));
                 mediumFour.setText(mediumNamelist.get(3));
+
+                mediumOne.setBackgroundResource(AppConstants.starFish[x]);
+                mediumTwo.setBackgroundResource(AppConstants.starFish[x]);
+                mediumThree.setBackgroundResource(AppConstants.starFish[x]);
+                mediumFour.setBackgroundResource(AppConstants.starFish[x]);
+
 
                 Random random1 = new Random();
                 answer = mediumNamelist.get(random1.nextInt(4));
@@ -584,11 +566,11 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                 }
                 Collections.shuffle(hardNamelist);
 
-                hardOne.setBackgroundResource(colorslist.get(0));
-                hardTwo.setBackgroundResource(colorslist.get(1));
-                hardThree.setBackgroundResource(colorslist.get(2));
-                hardFour.setBackgroundResource(colorslist.get(3));
-                hardFive.setBackgroundResource(colorslist.get(4));
+                hardOne.setBackgroundResource(AppConstants.starFish[x]);
+                hardTwo.setBackgroundResource(AppConstants.starFish[x]);
+                hardThree.setBackgroundResource(AppConstants.starFish[x]);
+                hardFour.setBackgroundResource(AppConstants.starFish[x]);
+                hardFive.setBackgroundResource(AppConstants.starFish[x]);
 
                 hardOne.setText(hardNamelist.get(0));
                 hardTwo.setText(hardNamelist.get(1));
@@ -650,6 +632,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         score++;
         if (score == 15 || score == 30 || score == 45 || score == 60 || score == 90|| score == 110|| score == 130) {
             totalTime=totalTime-500;
+            x++;
             MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
         }
         Score.setText("" + score);
@@ -704,6 +687,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     public void tryAgain() {
+        x=0;
         game_over_dialog.setVisibility(View.GONE);
         totalTime=5000;
         score=0;
