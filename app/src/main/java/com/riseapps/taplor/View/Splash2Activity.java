@@ -22,7 +22,7 @@ public class Splash2Activity extends AppCompatActivity {
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
-        }, 3000);
+        }, 2500);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

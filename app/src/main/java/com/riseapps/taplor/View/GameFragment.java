@@ -605,9 +605,9 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         stopGame();
     }
+
 
     void stopGame() {
         if (stopped) {
