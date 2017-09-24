@@ -86,6 +86,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     private CardView game_over_dialog;
     private TextView dialog_score;
     private int x=0;
+    private SharedPreferenceSingelton sharedPreference=new SharedPreferenceSingelton();
 
 
     public GameFragment() {
@@ -223,7 +224,8 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         stopGame();
         progressBar.setAnimationDuration(1000);
         progressBar.setProgress(0);
-        wrong.start();
+        if(sharedPreference.getSavedBoolean(getContext(),"Sound"))
+            wrong.start();
         game_over_dialog.setAnimation(AppConstants.dialogEnter(300,400));
         game_over_dialog.setVisibility(View.VISIBLE);
         dialog_score.setText("" + score);
@@ -646,6 +648,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
             progressBar.setProgress(1);
         }
         changeColors();
+        if(sharedPreference.getSavedBoolean(getContext(),"Sound"))
         correct.start();
 
     }

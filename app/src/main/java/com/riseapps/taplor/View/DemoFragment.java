@@ -97,7 +97,6 @@ public class DemoFragment extends Fragment implements View.OnClickListener {
             mAdView.setVisibility(View.GONE);
         } else {
             AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
                     .build();
             mAdView.loadAd(adRequest);
         }

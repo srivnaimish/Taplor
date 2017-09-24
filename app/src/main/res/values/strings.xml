@@ -33,10 +33,10 @@
     <string name="credits">Credits</string>
     <string name="share">Share</string>
     <string name="review">Review</string>
-    <string name="Version">v 1.0.0.5</string>
+    <string name="Version">v 1.0.0.6</string>
     <!--Game Over PopUp-->
     <string name="game_over">GAME OVER</string>
-    <string name="your_score">Your Score</string>
+    <string name="your_score">Your Concentration Score</string>
     <string name="see_leaderboard">See Leaderboard</string>
     <string name="try_again">Try Again</string>
     <string name="share_score">Share Score</string>
@@ -58,4 +58,5 @@
     <string name="time_freezers_4">Timeouts : 4</string>
     <string name="time_freezers_6">Timeouts : 6</string>
     <string name="translation_help_sub">Help us translate the app to your language and get your name featured here.</string>
+    <string name="warning">Not connected to Internet.\nYour High score won\'t be saved</string>
 </resources>

@@ -2,10 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
 
-    <item
-        android:drawable="@color/BLACK"/>
-<!--
-    <item android:drawable="@drawable/gradient" />-->
+    <item android:drawable="@color/BLACK" />
+    <!--
+        <item android:drawable="@drawable/gradient" />-->
 
     <!--<item
         android:drawable="@drawable/ic_splatter"

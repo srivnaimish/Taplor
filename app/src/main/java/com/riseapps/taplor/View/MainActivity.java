@@ -23,6 +23,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     TextView heading;
     Button easy, medium, hard;
     ImageButton rank, achievement, colors, purchase, about;
-    private AdView mAdView;
     CardView premium, about_game, game_colors,credits;
 
     boolean mExplicitSignOut = false;
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private boolean billinSupported;
     private InterstitialAd mInterstitialAd;
     private AdRequest adRequest;
+    private Button how;
+    ImageButton sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
         adRequest = new AdRequest.Builder()
-                .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
                 .build();
         mInterstitialAd.setAdListener(new AdListener(){
             @Override
@@ -118,13 +119,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         purchase = findViewById(R.id.purchase);
         about = findViewById(R.id.about);
         colors = findViewById(R.id.colors);
-
+        sound =findViewById(R.id.sound);
+        how = findViewById(R.id.how);
         premium = findViewById(R.id.premium_dialog);
         about_game = findViewById(R.id.about_game);
         game_colors = findViewById(R.id.game_colors);
         credits = findViewById(R.id.credits);
-
-        mAdView = findViewById(R.id.adView);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -154,11 +154,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
 
+        if (!sharedPreferenceSingelton.getSavedBoolean(this,"Sound")){
+            sound.setImageResource(R.drawable.ic_mute);
+        }
+
         heading.setAnimation(AppConstants.generateFadeInAnimator(1000, 2000));
         easy.setAnimation(AppConstants.generateFadeInAnimator(0, 2000));
         medium.setAnimation(AppConstants.generateFadeInAnimator(0, 3000));
         hard.setAnimation(AppConstants.generateFadeInAnimator(0, 4000));
 
+        how.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
         rank.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
         achievement.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
         purchase.setAnimation(AppConstants.generateBottomUpFadeInAnimator(this));
@@ -629,4 +634,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             Toast.makeText(MainActivity.this, "Billing Not Supported on Your Device", Toast.LENGTH_SHORT).show();
     }
 
+    public void toggleSound(View view) {
+        if(sharedPreferenceSingelton.getSavedBoolean(this,"Sound")){
+            sharedPreferenceSingelton.saveAs(this,"Sound",false);
+            ImageButton sound= (ImageButton) view;
+            sound.setImageResource(R.drawable.ic_mute);
+            MyToast.showShort(this,"Sounds Off");
+        }else {
+            sharedPreferenceSingelton.saveAs(this,"Sound",true);
+            ImageButton sound= (ImageButton) view;
+            sound.setImageResource(R.drawable.ic_sound);
+            MyToast.showShort(this,"Sounds On");
+        }
+    }
 }
