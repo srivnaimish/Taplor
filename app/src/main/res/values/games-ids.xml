@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 Google Play game services IDs.
 Save this file as res/values/games-ids.xml in your project.
 -->
@@ -11,32 +12,50 @@ Save this file as res/values/games-ids.xml in your project.
     <string name="achievement_easy_20" translatable="false">CgkItq6Mg9wPEAIQBA</string>
     <!-- achievement Easy 40 -->
     <string name="achievement_easy_40" translatable="false">CgkItq6Mg9wPEAIQBQ</string>
-    <!-- achievement Easy 60 -->
-    <string name="achievement_easy_60" translatable="false">CgkItq6Mg9wPEAIQBg</string>
-    <!-- achievement Easy 80 -->
-    <string name="achievement_easy_80" translatable="false">CgkItq6Mg9wPEAIQBw</string>
+    <!-- achievement Easy 70 -->
+    <string name="achievement_easy_70" translatable="false">CgkItq6Mg9wPEAIQBg</string>
     <!-- achievement Easy 100 -->
-    <string name="achievement_easy_100" translatable="false">CgkItq6Mg9wPEAIQCA</string>
+    <string name="achievement_easy_100" translatable="false">CgkItq6Mg9wPEAIQBw</string>
+    <!-- achievement Easy 140 -->
+    <string name="achievement_easy_140" translatable="false">CgkItq6Mg9wPEAIQCA</string>
+    <!-- achievement Easy 170 -->
+    <string name="achievement_easy_170" translatable="false">CgkItq6Mg9wPEAIQEw</string>
+    <!-- achievement Easy 210 -->
+    <string name="achievement_easy_210" translatable="false">CgkItq6Mg9wPEAIQFA</string>
+    <!-- achievement Easy Conquerer -->
+    <string name="achievement_easy_conquerer" translatable="false">CgkItq6Mg9wPEAIQFQ</string>
     <!-- achievement Medium 20 -->
     <string name="achievement_medium_20" translatable="false">CgkItq6Mg9wPEAIQCQ</string>
     <!-- achievement Medium 40 -->
     <string name="achievement_medium_40" translatable="false">CgkItq6Mg9wPEAIQCg</string>
-    <!-- achievement Medium 60 -->
-    <string name="achievement_medium_60" translatable="false">CgkItq6Mg9wPEAIQCw</string>
-    <!-- achievement Medium 80 -->
-    <string name="achievement_medium_80" translatable="false">CgkItq6Mg9wPEAIQDA</string>
+    <!-- achievement Medium 70 -->
+    <string name="achievement_medium_70" translatable="false">CgkItq6Mg9wPEAIQCw</string>
     <!-- achievement Medium 100 -->
-    <string name="achievement_medium_100" translatable="false">CgkItq6Mg9wPEAIQDQ</string>
+    <string name="achievement_medium_100" translatable="false">CgkItq6Mg9wPEAIQDA</string>
+    <!-- achievement Medium 140 -->
+    <string name="achievement_medium_140" translatable="false">CgkItq6Mg9wPEAIQDQ</string>
+    <!-- achievement Medium 170 -->
+    <string name="achievement_medium_170" translatable="false">CgkItq6Mg9wPEAIQFg</string>
+    <!-- achievement Medium 210 -->
+    <string name="achievement_medium_210" translatable="false">CgkItq6Mg9wPEAIQFw</string>
+    <!-- achievement Medium Conquerer -->
+    <string name="achievement_medium_conquerer" translatable="false">CgkItq6Mg9wPEAIQGA</string>
     <!-- achievement Hard 20 -->
     <string name="achievement_hard_20" translatable="false">CgkItq6Mg9wPEAIQDg</string>
     <!-- achievement Hard 40 -->
     <string name="achievement_hard_40" translatable="false">CgkItq6Mg9wPEAIQDw</string>
-    <!-- achievement Hard 60 -->
-    <string name="achievement_hard_60" translatable="false">CgkItq6Mg9wPEAIQEA</string>
-    <!-- achievement Hard 80 -->
-    <string name="achievement_hard_80" translatable="false">CgkItq6Mg9wPEAIQEQ</string>
+    <!-- achievement Hard 70 -->
+    <string name="achievement_hard_70" translatable="false">CgkItq6Mg9wPEAIQEA</string>
     <!-- achievement Hard 100 -->
-    <string name="achievement_hard_100" translatable="false">CgkItq6Mg9wPEAIQEg</string>
+    <string name="achievement_hard_100" translatable="false">CgkItq6Mg9wPEAIQEQ</string>
+    <!-- achievement Hard 140 -->
+    <string name="achievement_hard_140" translatable="false">CgkItq6Mg9wPEAIQEg</string>
+    <!-- achievement Hard 170 -->
+    <string name="achievement_hard_170" translatable="false">CgkItq6Mg9wPEAIQGQ</string>
+    <!-- achievement Hard 210 -->
+    <string name="achievement_hard_210" translatable="false">CgkItq6Mg9wPEAIQGg</string>
+    <!-- achievement Taplor Conquerer -->
+    <string name="achievement_taplor_conquerer" translatable="false">CgkItq6Mg9wPEAIQGw</string>
     <!-- leaderboard Beginners -->
     <string name="leaderboard_beginners" translatable="false">CgkItq6Mg9wPEAIQAQ</string>
     <!-- leaderboard Intermediates -->

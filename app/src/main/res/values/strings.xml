@@ -7,7 +7,7 @@
     <string name="ad_app_id" translatable="false">ca-app-pub-7869316695770647~7587855107</string>
     <string name="banner_ad_id" translatable="false">ca-app-pub-7869316695770647/6003310698</string>
     <string name="interstitial_ad_id" translatable="false">ca-app-pub-7869316695770647/9475651841</string>
-    <string name="native_ad_id" translatable="false">ca-app-pub-7869316695770647/6835209898</string>
+    <string name="banner2_ad_id" translatable="false">ca-app-pub-7869316695770647/8809995910</string>
     <!--Home Screen-->
     <string name="easy">Beginner</string>
     <string name="medium">Intermediate</string>
@@ -33,7 +33,7 @@
     <string name="credits">Credits</string>
     <string name="share">Share</string>
     <string name="review">Review</string>
-    <string name="Version">v 1.0.0.6</string>
+    <string name="Version">v 1.0.0.7</string>
     <!--Game Over PopUp-->
     <string name="game_over">GAME OVER</string>
     <string name="your_score">Your Concentration Score</string>
@@ -41,9 +41,9 @@
     <string name="try_again">Try Again</string>
     <string name="share_score">Share Score</string>
     <!--Demo-->
-    <string name="app_walk1">You get 5 seconds to answer correctly.\n\n This time reduces as you proceed to score higher.</string>
-    <string name="app_walk2">Take a Timeout of 5 seconds each.\n You can score or rest during a timeout without worrying about running out.</string>
-    <string name="app_walk3">Objective : Tap the star containing the name of the background color.For example in this case,background color name is </string>
+    <string name="app_walk2">You get 5 seconds to answer correctly.\n\n This time reduces as you proceed to score higher.</string>
+    <string name="app_walk3">Take a Timeout of 5 seconds each.\n You can score or rest during a timeout without worrying about running out.</string>
+    <string name="app_walk1">Tap the star with the name of background color to score.</string>
     <string name="this_is_only_the_demo_feel_free_to_practise_here_anytime">Scores made here are just for practise and would not reflect on the Leaderboards.</string>
     <!--Game-->
     <string name="already_paused">Already in a Timeout</string>
@@ -59,4 +59,5 @@
     <string name="time_freezers_6">Timeouts : 6</string>
     <string name="translation_help_sub">Help us translate the app to your language and get your name featured here.</string>
     <string name="warning">Not connected to Internet.\nYour High score won\'t be saved</string>
+    <string name="ranking">Rankings</string>
 </resources>

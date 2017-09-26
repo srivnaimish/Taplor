@@ -244,20 +244,35 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_40));
                 }
-                if (score >= 60) {
+                if (score >= 70) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_60));
-                }
-                if (score >= 80) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_easy_80));
+                                    getString(R.string.achievement_easy_70));
                 }
                 if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_easy_100));
+                }
+                if (score >= 140) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_easy_140));
+                }
+                if (score >= 170) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_easy_170));
+                }
+                if (score >= 210) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_easy_210));
+                }
+                if (score >= 260) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_easy_conquerer));
                 }
                 break;
             case 1:
@@ -274,20 +289,35 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_40));
                 }
-                if (score >= 60) {
+                if (score >= 70) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_60));
-                }
-                if (score >= 80) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_medium_80));
+                                    getString(R.string.achievement_medium_70));
                 }
                 if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_medium_100));
+                }
+                if (score >= 140) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_medium_140));
+                }
+                if (score >= 170) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_medium_170));
+                }
+                if (score >= 210) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_medium_210));
+                }
+                if (score >= 260) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_medium_conquerer));
                 }
                 break;
             case 2:
@@ -304,20 +334,35 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_40));
                 }
-                if (score >= 60) {
+                if (score >= 70) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_60));
-                }
-                if (score >= 80) {
-                    Games.Achievements
-                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
-                                    getString(R.string.achievement_hard_80));
+                                    getString(R.string.achievement_hard_70));
                 }
                 if (score >= 100) {
                     Games.Achievements
                             .unlock(((MainActivity) getActivity()).mGoogleApiClient,
                                     getString(R.string.achievement_hard_100));
+                }
+                if (score >= 140) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_hard_140));
+                }
+                if (score >= 170) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_hard_170));
+                }
+                if (score >= 210) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_hard_210));
+                }
+                if (score >= 260) {
+                    Games.Achievements
+                            .unlock(((MainActivity) getActivity()).mGoogleApiClient,
+                                    getString(R.string.achievement_taplor_conquerer));
                 }
                 break;
         }
@@ -632,8 +677,12 @@ public class GameFragment extends Fragment implements View.OnClickListener {
 
     private void onCorrectAnswer() {
         score++;
-        if (score == 15 || score == 30 || score == 45 || score == 60 || score == 90|| score == 110|| score == 130) {
-            totalTime=totalTime-500;
+        if (score % 15 == 0 && score<=180) {
+            totalTime=totalTime-250;
+            x++;
+            MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
+        }else if(score % 15 == 0 && score>180 && score <= 255){
+            totalTime=totalTime-100;
             x++;
             MyToast.showShort(getContext(), getString(R.string.timer_reduced)+" "+(float)totalTime/1000);
         }

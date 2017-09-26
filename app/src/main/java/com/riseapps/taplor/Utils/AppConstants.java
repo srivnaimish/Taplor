@@ -22,7 +22,7 @@ public class AppConstants {
 
     /*Color Constants*/
 
-    public static final int[] starFish = {R.drawable.starfish1,R.drawable.starfish2,R.drawable.starfish3,R.drawable.starfish4,R.drawable.starfish5,R.drawable.starfish6,R.drawable.starfish7,R.drawable.starfish8};
+    public static final int[] starFish = {R.drawable.starfish1,R.drawable.starfish2,R.drawable.starfish3,R.drawable.starfish4,R.drawable.starfish5,R.drawable.starfish6,R.drawable.starfish7,R.drawable.starfish8,R.drawable.starfish9,R.drawable.starfish10,R.drawable.starfish11,R.drawable.starfish12,R.drawable.starfish13,R.drawable.starfish14,R.drawable.starfish15,R.drawable.starfish16,R.drawable.starfish17,R.drawable.starfish18};
 
     public static final String[] easyColorNames = {"Red", "Blue", "Green", "Yellow", "Black"};
 
@@ -132,5 +132,8 @@ public class AppConstants {
     public static boolean paid2 = false;
     public static boolean paid3 = false;
     public static boolean paid4 = false;
+
+    public static final int[] rankImages = {R.drawable.ic_1,R.drawable.ic_2,R.drawable.ic_3,R.drawable.ic_4,R.drawable.ic_5,R.drawable.ic_6,R.drawable.ic_7,R.drawable.ic_8,R.drawable.ic_9,R.drawable.ic_10};
+
 
 }

@@ -36,6 +36,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.BaseGameUtils;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.riseapps.taplor.Executor.CloseGameFragment;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     SharedPreferenceSingelton sharedPreferenceSingelton = new SharedPreferenceSingelton();
     IabHelper mHelper;
     private boolean billinSupported;
-    private InterstitialAd mInterstitialAd;
+   // private InterstitialAd mInterstitialAd;
     private AdRequest adRequest;
     private Button how;
     ImageButton sound;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         onWindowFocusChanged(true);
         setContentView(R.layout.activity_main);
 
-        mInterstitialAd = new InterstitialAd(this);
+        /*mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
         adRequest = new AdRequest.Builder()
                 .build();
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 super.onAdLoaded();
                 mInterstitialAd.show();
             }
-        });
+        });*/
 
         background = findViewById(R.id.container);
         heading = findViewById(R.id.textView);
@@ -292,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             // auto sign in
             mGoogleApiClient.connect();
         }
-
+        FirebaseMessaging.getInstance().subscribeToTopic("Statistics");
     }
 
     @Override
@@ -336,11 +337,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     public void closeFragment() {
         getSupportFragmentManager().popBackStackImmediate();
-        fragmentsClosedBeforeAd++;
+        /*fragmentsClosedBeforeAd++;
         if(fragmentsClosedBeforeAd==2) {
             mInterstitialAd.loadAd(adRequest);
             fragmentsClosedBeforeAd=0;
-        }
+        }*/
     }
 
 
@@ -378,13 +379,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void launchTutorial(View view) {
-        DemoFragment demoFragment = new DemoFragment();
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, android.R.animator.fade_in, android.R.animator.fade_out);
-        ft.replace(R.id.container, demoFragment);
-        ft.addToBackStack("DemoFragment");
-        ft.commit();
+        startActivity(new Intent(this, DemoActivity.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
     public void openRanking(View view) {
