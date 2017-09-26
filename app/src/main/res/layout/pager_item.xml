@@ -34,28 +34,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/font1"
+                android:fontFamily="@font/font2"
                 android:text="Name"
-                android:shadowColor="@color/BLUE"
+                android:shadowColor="@color/BLACK"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:textColor="@color/BLUE"
-                android:textSize="22sp" />
+                android:textColor="@color/BLACK"
+                android:textSize="21sp"
+                />
 
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/font1"
+                android:fontFamily="@font/font2"
                 android:text="Score"
-                android:shadowColor="@color/BLUE"
+                android:shadowColor="@color/BLACK"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/BLUE"
+                android:textColor="@color/BLACK"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:layout_marginBottom="8dp"/>
         </LinearLayout>
 

@@ -179,6 +179,14 @@
                 android:text="Roundicons"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/font2"
+                android:text="Trinh Ho"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="220dp"

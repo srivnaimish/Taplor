@@ -1,13 +1,16 @@
 package com.riseapps.taplor.View;
 
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -20,26 +23,30 @@ import com.riseapps.taplor.Executor.RecyclerViewAdapter;
 import com.riseapps.taplor.Model.Player;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
 public class Main2Activity extends AppCompatActivity {
 
-    ArrayList<Player> easyPlayers=new ArrayList<>();
-    ArrayList<Player> mediumPlayers=new ArrayList<>();
-    ArrayList<Player> hardPlayers=new ArrayList<>();
-    RecyclerView easyView,mediumView,hardView;
+    ArrayList<Player> easyPlayers = new ArrayList<>();
+    ArrayList<Player> mediumPlayers = new ArrayList<>();
+    ArrayList<Player> hardPlayers = new ArrayList<>();
+    RecyclerView easyView, mediumView, hardView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private AdView mAdView;
+    private ConstraintLayout background;
+    private NestedScrollView nestedScrollView;
+    private AVLoadingIndicatorView avLoadingIndicatorView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         onWindowFocusChanged(true);
-        easyView=findViewById(R.id.easy_recycler);
-        mediumView=findViewById(R.id.medium_recycler);
-        hardView=findViewById(R.id.hard_recycler);
+        easyView = findViewById(R.id.easy_recycler);
+        mediumView = findViewById(R.id.medium_recycler);
+        hardView = findViewById(R.id.hard_recycler);
         easyView.setHasFixedSize(true);
         easyView.setNestedScrollingEnabled(false);
         mediumView.setHasFixedSize(true);
@@ -47,15 +54,11 @@ public class Main2Activity extends AppCompatActivity {
         hardView.setHasFixedSize(true);
         hardView.setNestedScrollingEnabled(false);
         mAdView = findViewById(R.id.adView);
-        if (AppConstants.paid3 || AppConstants.paid4) {
-            mAdView.setVisibility(View.GONE);
-        } else {
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addTestDevice("1BB6AD3C4E832E63122601E2E4752AF4")
-                    .build();
-            mAdView.loadAd(adRequest);
-        }
 
+        background = findViewById(R.id.background);
+        nestedScrollView = findViewById(R.id.nested);
+        avLoadingIndicatorView = findViewById(R.id.loader);
+        avLoadingIndicatorView.smoothToShow();
 
         easyView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mediumView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -65,8 +68,8 @@ public class Main2Activity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    Player player=ds.getValue(Player.class);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Player player = ds.getValue(Player.class);
                     easyPlayers.add(player);
                 }
                 recyclerViewAdapter = new RecyclerViewAdapter(Main2Activity.this, easyView, easyPlayers);
@@ -83,8 +86,8 @@ public class Main2Activity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    Player player=ds.getValue(Player.class);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Player player = ds.getValue(Player.class);
                     mediumPlayers.add(player);
                 }
                 recyclerViewAdapter = new RecyclerViewAdapter(Main2Activity.this, mediumView, mediumPlayers);
@@ -102,8 +105,8 @@ public class Main2Activity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    Player player=ds.getValue(Player.class);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Player player = ds.getValue(Player.class);
                     hardPlayers.add(player);
                 }
                 recyclerViewAdapter = new RecyclerViewAdapter(Main2Activity.this, hardView, hardPlayers);
@@ -116,6 +119,43 @@ public class Main2Activity extends AppCompatActivity {
                 //Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int colorFrom= Color.parseColor("#D32F2F");
+                int colorTo=Color.parseColor("#000000");
+                ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                colorAnimation.setDuration(500); // milliseconds
+                colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animator) {
+                background.setBackgroundColor((int) animator.getAnimatedValue());
+                    }
+
+                });
+                colorAnimation.start();
+                avLoadingIndicatorView.smoothToHide();
+                nestedScrollView.setAnimation(AppConstants.generateFadeInAnimator(0, 2000));
+                nestedScrollView.setVisibility(View.VISIBLE);
+            }
+        }, 3000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (AppConstants.paid3 || AppConstants.paid4) {
+                    mAdView.setVisibility(View.GONE);
+                } else {
+                    AdRequest adRequest = new AdRequest.Builder()
+                            .build();
+                    mAdView.loadAd(adRequest);
+                }
+
+            }
+        }, 4000);
 
 
     }

@@ -199,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
+        }else {
+            MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
         }
     }
 
@@ -214,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
+        }else {
+            MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
         }
     }
 
@@ -229,6 +233,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
+        }else {
+            MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
         }
     }
 
