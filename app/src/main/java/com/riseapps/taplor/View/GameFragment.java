@@ -18,6 +18,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -535,7 +536,6 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                     namelist.add(AppConstants.easyColorNames[i]);
                 }
                 Collections.shuffle(namelist);
-
                 easyOne.setBackgroundResource(AppConstants.starFish[x]);
                 easyTwo.setBackgroundResource(AppConstants.starFish[x]);
                 easyThree.setBackgroundResource(AppConstants.starFish[x]);

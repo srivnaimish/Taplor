@@ -232,8 +232,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
-                        android:background="@color/CHOCOLATE"
-                        android:text="Chocolate"
+                        android:background="@color/TEAL"
+                        android:text="TEAL"
                         android:textColor="@color/buttonTextColor"
                         android:textSize="16sp"
                         android:fontFamily="@font/font1" />

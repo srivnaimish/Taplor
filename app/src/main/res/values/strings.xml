@@ -4,10 +4,9 @@
         // an issue with sign-in, please try again later.</string>
     <string name="signin_failure">Unable to sign in</string>
 
-    <string name="ad_app_id" translatable="false">ca-app-pub-7869316695770647~7587855107</string>
-    <string name="banner_ad_id" translatable="false">ca-app-pub-7869316695770647/6003310698</string>
-    <string name="interstitial_ad_id" translatable="false">ca-app-pub-7869316695770647/9475651841</string>
-    <string name="banner2_ad_id" translatable="false">ca-app-pub-7869316695770647/8809995910</string>
+    <string name="ad_app_id" translatable="false">ca-app-pub-6347670393184607~3659000768</string>
+    <string name="banner_ad_id" translatable="false">ca-app-pub-6347670393184607/8528184060</string>
+    <string name="banner2_ad_id" translatable="false">ca-app-pub-6347670393184607/4351590742</string>
     <!--Home Screen-->
     <string name="easy">Beginner</string>
     <string name="medium">Intermediate</string>
@@ -33,7 +32,7 @@
     <string name="credits">Credits</string>
     <string name="share">Share</string>
     <string name="review">Review</string>
-    <string name="Version">v 1.0.0.8</string>
+    <string name="Version">v 1.0.0.9</string>
     <!--Game Over PopUp-->
     <string name="game_over">GAME OVER</string>
     <string name="your_score">Your Concentration Score</string>

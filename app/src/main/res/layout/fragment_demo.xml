@@ -90,8 +90,7 @@
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            android:background="@drawable/starfish1" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <Button
             android:id="@+id/easy_two"
@@ -105,8 +104,7 @@
             android:textColor="@color/buttonTextColor"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/view"
-            app:layout_constraintTop_toTopOf="@+id/easy_one"
-            android:background="@drawable/starfish1" />
+            app:layout_constraintTop_toTopOf="@+id/easy_one" />
 
         <Button
             android:id="@+id/easy_three"
@@ -121,8 +119,7 @@
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            android:background="@drawable/starfish1" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
     </android.support.constraint.ConstraintLayout>
 
