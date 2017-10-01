@@ -22,3 +22,4 @@
 
 -keep class com.wang.avi.** { *; }
 -keep class com.wang.avi.indicators.** { *; }
+-keepclassmembers class com.riseapps.taplor.Model.** { *; }

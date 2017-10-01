@@ -1,12 +1,14 @@
 package com.riseapps.taplor.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by naimish on 26/9/17.
  */
 
 public class Player {
-    private String Name;
-    private long Score;
+    public String Name;
+    public long Score;
 
 
     public Player(){}

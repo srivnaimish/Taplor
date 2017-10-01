@@ -95,13 +95,13 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
         easyTwo.setBackgroundResource(R.drawable.starfish1);
         easyThree.setBackgroundResource(R.drawable.starfish1);
 
-        if (AppConstants.paid3 || AppConstants.paid4) {
+       /* if (AppConstants.paid3 || AppConstants.paid4) {
             mAdView.setVisibility(View.GONE);
         } else {
             AdRequest adRequest = new AdRequest.Builder()
                     .build();
             mAdView.loadAd(adRequest);
-        }
+        }*/
 
         correct = MediaPlayer.create(this,R.raw.correct);
         wrong = MediaPlayer.create(this, R.raw.wrong);
@@ -123,7 +123,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 })
                 .titleGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
-                .titleSize(22, 1)
+                .titleSize((int) getResources().getDimension(R.dimen.size13sp), 1)
                 .backgroundColor(Color.parseColor("#F221242B"))
                 .build();
 
@@ -142,7 +142,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                 })
-                .titleSize(22, 1)
+                .titleSize((int) getResources().getDimension(R.dimen.size13sp), 1)
                 .backgroundColor(Color.parseColor("#F221242B"))
                 .titleGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
                 .build();
@@ -163,7 +163,7 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 })
                 .backgroundColor(Color.parseColor("#F221242B"))
-                .titleSize(22, 1)
+                .titleSize((int) getResources().getDimension(R.dimen.size13sp), 1)
                 .titleGravity(Gravity.CENTER)
                 .build();
         new Handler().postDelayed(new Runnable() {

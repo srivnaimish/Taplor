@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/size70dp"
+        android:layout_height="@dimen/size70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
@@ -42,15 +42,15 @@
                 android:textColor="@color/FIVE"
                 android:text="Easy Colors"
                 android:fontFamily="@font/font1"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/size8dp"
+                android:layout_marginTop="@dimen/size8dp"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="@dimen/size18sp" />
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/size8dp"
                 card_view:cardBackgroundColor="#FFFFFF"
                 card_view:cardCornerRadius="2dp"
                 card_view:cardElevation="8dp">
@@ -62,47 +62,47 @@
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/RED"
                         android:text="Red"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/BLUE"
                         android:text="Blue"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/YELLOW"
                         android:text="Yellow"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/GREEN"
                         android:text="Green"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/BLACK"
                         android:text="Black"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -113,10 +113,10 @@
                 android:textColor="@color/FIVE"
                 android:text="Medium Colors"
                 android:fontFamily="@font/font1"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/size8dp"
+                android:layout_marginTop="@dimen/size8dp"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="@dimen/size18sp" />
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
@@ -133,47 +133,47 @@
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/ORANGE"
                         android:text="Orange"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/BROWN"
                         android:text="Brown"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/INDIGO"
                         android:text="Indigo"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/PINK"
                         android:text="Pink"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/PURPLE"
                         android:text="Purple"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -184,15 +184,15 @@
                 android:textColor="@color/FIVE"
                 android:text="Hard Colors"
                 android:fontFamily="@font/font1"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="@dimen/size8dp"
+                android:layout_marginTop="@dimen/size8dp"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
+                android:textSize="@dimen/size18sp" />
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/size8dp"
                 card_view:cardBackgroundColor="#FFFFFF"
                 card_view:cardCornerRadius="2dp"
                 card_view:cardElevation="8dp">
@@ -204,47 +204,47 @@
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/GREY"
                         android:text="Grey"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/OLIVE"
                         android:text="Olive"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/PEACH"
                         android:text="Peach"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/TEAL"
                         android:text="TEAL"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
 
                     <Button
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="@dimen/size70dp"
                         android:background="@color/MAROON"
                         android:text="Maroon"
                         android:textColor="@color/buttonTextColor"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/size16sp"
                         android:fontFamily="@font/font1" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -264,7 +264,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageButton"
         android:textColor="@color/FIVE"
-        android:textSize="22sp"
+        android:textSize="@dimen/size22sp"
         android:fontFamily="@font/font1" />
 
 

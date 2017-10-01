@@ -15,25 +15,25 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/size32dp"
         android:text="0"
         android:textColor="@color/buttonTextColor"
-        android:textSize="70sp"
+        android:textSize="@dimen/size70sp"
         app:layout_constraintEnd_toEndOf="@+id/easy_game"
         app:layout_constraintStart_toStartOf="@+id/easy_game"
         app:layout_constraintTop_toBottomOf="parent" />
 
     <View
         android:id="@+id/content1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp" />
     <flepsik.github.com.progress_ring.ProgressRingView
         android:id="@+id/progressBar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/size70dp"
+        android:layout_height="@dimen/size70dp"
         app:animated="true"
         app:animation_duration="20000"
         app:background_color="@android:color/transparent"
@@ -45,10 +45,10 @@
         app:ring_width="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="@dimen/size16dp"
+        android:layout_marginTop="@dimen/size32dp"
         android:padding="6dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="@dimen/size16dp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/easy_game"
@@ -76,17 +76,17 @@
 
         <Button
             android:id="@+id/easy_one"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
+            android:layout_width="@dimen/size105dp"
+            android:layout_height="@dimen/size105dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/font1"
             android:gravity="bottom|center"
-            android:paddingBottom="24dp"
+            android:paddingBottom="@dimen/size24dp"
             android:textColor="@color/buttonTextColor"
-            android:textSize="17sp"
+            android:textSize="@dimen/size17sp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,29 +94,29 @@
 
         <Button
             android:id="@+id/easy_two"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
+            android:layout_width="@dimen/size105dp"
+            android:layout_height="@dimen/size105dp"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/font1"
             android:gravity="bottom|center"
-            android:paddingBottom="24dp"
+            android:paddingBottom="@dimen/size24dp"
             android:textColor="@color/buttonTextColor"
-            android:textSize="17sp"
+            android:textSize="@dimen/size17sp"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/easy_one" />
 
         <Button
             android:id="@+id/easy_three"
-            android:layout_width="105dp"
-            android:layout_height="105dp"
+            android:layout_width="@dimen/size105dp"
+            android:layout_height="@dimen/size105dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/font1"
             android:gravity="bottom|center"
-            android:paddingBottom="24dp"
+            android:paddingBottom="@dimen/size24dp"
             android:textColor="@color/buttonTextColor"
-            android:textSize="17sp"
+            android:textSize="@dimen/size17sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -125,8 +125,8 @@
 
     <View
         android:id="@+id/content2"
-        android:layout_width="170dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/size170dp"
+        android:layout_height="@dimen/size70dp"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,14 +145,14 @@
         android:padding="8dp"
         android:text="@string/time_freezers_3"
         android:textColor="@color/buttonTextColor"
-        android:textSize="20sp"
+        android:textSize="@dimen/size20sp"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="200dp"
+        android:layout_width="@dimen/size200dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -161,6 +161,7 @@
         android:fontFamily="@font/font2"
         android:text="@string/this_is_only_the_demo_feel_free_to_practise_here_anytime"
         android:textAlignment="center"
+        android:textSize="@dimen/size14sp"
         android:textColor="@color/buttonTextColor"
         app:layout_constraintBottom_toTopOf="@+id/time_freezer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,10 +180,10 @@
 
     <ImageButton
         android:id="@+id/home"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/size50dp"
+        android:layout_height="@dimen/size50dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/size16dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
         android:foreground="?selectableItemBackgroundBorderless"
@@ -190,6 +191,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/score"
         app:srcCompat="@drawable/ic_home"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="@dimen/size16dp" />
 
 </android.support.constraint.ConstraintLayout>

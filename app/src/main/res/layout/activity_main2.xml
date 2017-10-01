@@ -9,8 +9,8 @@
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loader"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/size120dp"
+        android:layout_height="@dimen/size120dp"
         app:indicatorName="PacmanIndicator"
         style="@style/AVLoadingIndicatorView.Large"
         app:layout_constraintBottom_toTopOf="@id/adView"
@@ -23,7 +23,7 @@
         android:id="@+id/nested"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/size32dp"
         app:layout_constraintBottom_toTopOf="@id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +41,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ranking"
                 android:textColor="@color/buttonTextColor"
-                android:textSize="26sp"
+                android:textSize="@dimen/size26sp"
                 android:fontFamily="@font/font1" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="@dimen/size22sp"
                 android:text="Top Beginners"
                 android:textColor="@color/buttonTextColor"
                 android:layout_marginTop="32dp"
@@ -56,12 +56,12 @@
                 android:id="@+id/easy_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="@dimen/size24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="@dimen/size22sp"
                 android:text="Top Intermediates"
                 android:textColor="@color/buttonTextColor"
                 android:layout_marginTop="32dp"
@@ -71,12 +71,12 @@
                 android:id="@+id/medium_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="@dimen/size24dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="@dimen/size22sp"
                 android:textColor="@color/buttonTextColor"
                 android:text="Top Professionals"
                 android:layout_marginTop="32dp"
@@ -86,8 +86,8 @@
                 android:id="@+id/hard_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginTop="@dimen/size24dp"
+                android:layout_marginBottom="@dimen/size20dp"/>
 
         </LinearLayout>
 

@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/size70dp"
+        android:layout_height="@dimen/size70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
@@ -42,7 +42,7 @@
                 android:text="Translation Credits"
                 android:layout_marginTop="20dp"
                 android:textColor="@color/FIVE"
-                android:textSize="20sp" />
+                android:textSize="@dimen/size20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,17 +78,17 @@
             <View
                 android:layout_width="220dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/size20dp"
                 android:background="@color/FIVE" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/size20dp"
                 android:fontFamily="@font/font1"
                 android:text="Font Credits"
                 android:textColor="@color/FIVE"
-                android:textSize="20sp" />
+                android:textSize="@dimen/size20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Iconnice"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Gregor Cresnar"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -114,7 +114,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Linh Pham"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -123,7 +123,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Icon Works"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -132,7 +132,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Appzgear"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Freepick"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -150,7 +150,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Vector Market"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -159,7 +159,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Smashicons"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -168,7 +168,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="SimpleIcon"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -177,7 +177,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Roundicons"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
@@ -185,14 +185,14 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/font2"
                 android:text="Trinh Ho"
-                android:textSize="16sp"
+                android:textSize="@dimen/size16sp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="220dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="@dimen/size20dp"
+                android:layout_marginBottom="@dimen/size20dp"
                 android:background="@color/FIVE" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

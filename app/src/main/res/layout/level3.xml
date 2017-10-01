@@ -8,11 +8,11 @@
 
     <Button
         android:id="@+id/hard_one"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
+        android:layout_marginStart="@dimen/size24dp"
         android:textColor="@color/buttonTextColor"
-        android:textSize="16sp"
+        android:textSize="@dimen/size16sp"
         app:layout_constraintBottom_toTopOf="@+id/hard_three"
         app:layout_constraintEnd_toStartOf="@+id/hard_three"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,16 +22,16 @@
         android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center"
-        android:paddingBottom="24dp"
-        android:layout_marginLeft="24dp" />
+        android:paddingBottom="@dimen/size24dp"
+        android:layout_marginLeft="@dimen/size24dp" />
 
     <Button
         android:id="@+id/hard_two"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
+        android:layout_marginEnd="@dimen/size24dp"
         android:textColor="@color/buttonTextColor"
-        android:textSize="16sp"
+        android:textSize="@dimen/size16sp"
         app:layout_constraintBottom_toTopOf="@+id/hard_three"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/hard_three"
@@ -41,32 +41,32 @@
         android:shadowColor="@color/BLACK"
         android:fontFamily="@font/font1"
         android:gravity="bottom|center"
-        android:paddingBottom="24dp"
-        android:layout_marginRight="24dp" />
+        android:paddingBottom="@dimen/size24dp"
+        android:layout_marginRight="@dimen/size24dp" />
 
     <Button
         android:id="@+id/hard_three"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
         android:textColor="@color/buttonTextColor"
-        android:textSize="16sp"
+        android:textSize="@dimen/size16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="bottom|center"
-        android:paddingBottom="24dp"
+        android:paddingBottom="@dimen/size24dp"
         android:shadowDy="1"
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK" />
 
     <Button
         android:id="@+id/hard_four"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
+        android:layout_marginStart="@dimen/size24dp"
         android:textColor="@color/buttonTextColor"
-        android:textSize="16sp"
+        android:textSize="@dimen/size16sp"
         android:fontFamily="@font/font1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/hard_three"
@@ -76,17 +76,17 @@
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
         android:gravity="bottom|center"
-        android:paddingBottom="24dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp" />
+        android:paddingBottom="@dimen/size24dp"
+        android:layout_marginBottom="@dimen/size24dp"
+        android:layout_marginLeft="@dimen/size24dp" />
 
     <Button
         android:id="@+id/hard_five"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="@dimen/size100dp"
+        android:layout_height="@dimen/size100dp"
+        android:layout_marginEnd="@dimen/size24dp"
         android:textColor="@color/buttonTextColor"
-        android:textSize="16sp"
+        android:textSize="@dimen/size16sp"
         android:fontFamily="@font/font1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
         android:shadowRadius="1"
         android:shadowColor="@color/BLACK"
         android:gravity="bottom|center"
-        android:paddingBottom="24dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginRight="24dp" />
+        android:paddingBottom="@dimen/size24dp"
+        android:layout_marginBottom="@dimen/size24dp"
+        android:layout_marginRight="@dimen/size24dp" />
 </android.support.constraint.ConstraintLayout>

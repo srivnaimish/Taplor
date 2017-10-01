@@ -127,12 +127,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         about_game = findViewById(R.id.about_game);
         game_colors = findViewById(R.id.game_colors);
         credits = findViewById(R.id.credits);
-
+/*
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Games.API).addScope(Games.SCOPE_GAMES)
-                .build();
+                .build();*/
 
         mHelper = new IabHelper(this, AppConstants.KEY);
         mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
     public void launchEasyLevel(View v) {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+       // if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             GameFragment gamesFragment = new GameFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("LEVEL", 0);
@@ -200,13 +200,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
-        }else {
+        /*}else {
             MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
-        }
+        }*/
     }
 
     public void launchMediumLevel(View v) {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+        //if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             GameFragment gamesFragment = new GameFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("LEVEL", 1);
@@ -217,13 +217,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
-        }else {
+        /*}else {
             MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
-        }
+        }*/
     }
 
     public void launchHardLevel(View v) {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+        //if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             GameFragment gamesFragment = new GameFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("LEVEL", 2);
@@ -234,9 +234,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             ft.replace(R.id.container, gamesFragment);
             ft.addToBackStack("GamesFragment");
             ft.commit();
-        }else {
+        /*}else {
             MyToast.showLong(this,"Make sure you have a working internet Connection and Google Play Games installed");
-        }
+        }*/
     }
 
     public Runnable mProgressRunner = new Runnable() {
@@ -296,10 +296,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onStart() {
         super.onStart();
-        if (!mInSignInFlow && !mExplicitSignOut) {
+        /*if (!mInSignInFlow && !mExplicitSignOut) {
             // auto sign in
             mGoogleApiClient.connect();
-        }
+        }*/
         FirebaseMessaging.getInstance().subscribeToTopic("Statistics");
     }
 
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
+//        mGoogleApiClient.disconnect();
     }
 
     @Override
