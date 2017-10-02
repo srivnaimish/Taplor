@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="size150dp">200dp</dimen>
+    <dimen name="size50sp">65sp</dimen>
+    <dimen name="size16sp">24sp</dimen>
+    <dimen name="size120dp">150dp</dimen>
+    <dimen name="size32dp">48dp</dimen>
+    <dimen name="size26sp">39sp</dimen>
+    <dimen name="size24dp">36dp</dimen>
+    <dimen name="size22sp">33sp</dimen>
+    <dimen name="size20dp">30dp</dimen>
+    <dimen name="size70dp">105dp</dimen>
+    <dimen name="size60sp">90sp</dimen>
+    <dimen name="size17sp">26sp</dimen>
+    <dimen name="size16dp">24dp</dimen>
+    <dimen name="size4dp">6dp</dimen>
+    <dimen name="size13sp">20sp</dimen>
+    <dimen name="size50dp">75dp</dimen>
+    <dimen name="size60dp">80dp</dimen>
+    <dimen name="size20sp">30sp</dimen>
+    <dimen name="size13dp">20dp</dimen>
+    <dimen name="size14sp">21sp</dimen>
+    <dimen name="size18sp">27sp</dimen>
+    <dimen name="size70sp">105sp</dimen>
+    <dimen name="size100dp">150dp</dimen>
+    <dimen name="size105dp">160dp</dimen>
+    <dimen name="size170dp">220dp</dimen>
+    <dimen name="size200dp">300dp</dimen>
+    <dimen name="size40dp">60dp</dimen>
+    <dimen name="size30dp">45dp</dimen>
+    <dimen name="size8dp">12dp</dimen>
+    <dimen name="size28sp">42sp</dimen>
+    <dimen name="size32sp">48sp</dimen>
+    <dimen name="size110dp">155dp</dimen>
+    <dimen name="size220dp">275dp</dimen>
+    <dimen name="size21sp">32sp</dimen>
+    <dimen name="size90dp">135dp</dimen>
+    <dimen name="size12dp">18dp</dimen>
+</resources>

@@ -231,7 +231,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
         game_over_dialog.setVisibility(View.VISIBLE);
         dialog_score.setText("" + score);
         ans.setText(answer);
-       /* switch (level) {
+        switch (level) {
             case 0:
                 Games.Leaderboards.submitScore(((MainActivity) getActivity()).mGoogleApiClient, getString(R.string.leaderboard_beginners), score);
 
@@ -366,7 +366,7 @@ public class GameFragment extends Fragment implements View.OnClickListener {
                                     getString(R.string.achievement_taplor_conquerer));
                 }
                 break;
-        }*/
+        }
         if (!AppConstants.paid3 && !AppConstants.paid4) {
 
         }

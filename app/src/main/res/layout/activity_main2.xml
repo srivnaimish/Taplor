@@ -13,18 +13,20 @@
         android:layout_height="@dimen/size120dp"
         app:indicatorName="PacmanIndicator"
         style="@style/AVLoadingIndicatorView.Large"
-        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+
         />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nested"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="@dimen/size32dp"
-        app:layout_constraintBottom_toTopOf="@id/adView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,75 +35,68 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/font1"
                 android:text="@string/ranking"
                 android:textColor="@color/buttonTextColor"
-                android:textSize="@dimen/size26sp"
-                android:fontFamily="@font/font1" />
+                android:textSize="@dimen/size26sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size22sp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/font1"
                 android:text="Top Beginners"
                 android:textColor="@color/buttonTextColor"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/font1"/>
+                android:textSize="@dimen/size22sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/easy_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size24dp"/>
+                android:layout_marginTop="@dimen/size24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size22sp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/font1"
                 android:text="Top Intermediates"
                 android:textColor="@color/buttonTextColor"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/font1"/>
+                android:textSize="@dimen/size22sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/medium_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size24dp"/>
+                android:layout_marginTop="@dimen/size24dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size22sp"
-                android:textColor="@color/buttonTextColor"
-                android:text="Top Professionals"
                 android:layout_marginTop="32dp"
-                android:fontFamily="@font/font1"/>
+                android:fontFamily="@font/font1"
+                android:text="Top Professionals"
+                android:textColor="@color/buttonTextColor"
+                android:textSize="@dimen/size22sp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/hard_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size24dp"
-                android:layout_marginBottom="@dimen/size20dp"/>
+                android:layout_marginBottom="@dimen/size20dp"
+                android:layout_marginTop="@dimen/size24dp" />
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/banner2_ad_id"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintEnd_toEndOf="parent"
-        ads:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

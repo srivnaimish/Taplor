@@ -60,8 +60,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder( RecyclerView.ViewHolder holder, int position) {
-        ((PlayerViewHolder) holder).name.setText(list.get(position).getName());
-        ((PlayerViewHolder) holder).score.setText(""+list.get(position).getScore());
+        ((PlayerViewHolder) holder).name.setText(list.get(position).name);
+        ((PlayerViewHolder) holder).score.setText(""+list.get(position).score);
         ((PlayerViewHolder)holder).imageView.setImageResource(imageList.get(position));
     }
 

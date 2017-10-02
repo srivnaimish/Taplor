@@ -7,6 +7,7 @@
     <string name="ad_app_id" translatable="false">ca-app-pub-6347670393184607~3659000768</string>
     <string name="banner_ad_id" translatable="false">ca-app-pub-6347670393184607/8528184060</string>
     <string name="banner2_ad_id" translatable="false">ca-app-pub-6347670393184607/4351590742</string>
+    <string name="interstitial_ad_id">ca-app-pub-6347670393184607/6427315082</string>
     <!--Home Screen-->
     <string name="easy">Beginner</string>
     <string name="medium">Intermediate</string>
@@ -32,7 +33,7 @@
     <string name="credits">Credits</string>
     <string name="share">Share</string>
     <string name="review">Review</string>
-    <string name="Version">v 1.0.0.9</string>
+    <string name="Version">v 1.0.0.13</string>
     <!--Game Over PopUp-->
     <string name="game_over">GAME OVER</string>
     <string name="your_score">Your Concentration Score</string>
@@ -59,4 +60,5 @@
     <string name="translation_help_sub">Help us translate the app to your language and get your name featured here.</string>
     <string name="warning">Not connected to Internet.\nYour High score won\'t be saved</string>
     <string name="ranking">Rankings</string>
+
 </resources>

@@ -13,8 +13,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,7 @@ import com.riseapps.taplor.Executor.RecyclerViewAdapter;
 import com.riseapps.taplor.Model.Player;
 import com.riseapps.taplor.R;
 import com.riseapps.taplor.Utils.AppConstants;
+import com.riseapps.taplor.Widgets.MyToast;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class Main2Activity extends AppCompatActivity {
     private ConstraintLayout background;
     private NestedScrollView nestedScrollView;
     private AVLoadingIndicatorView avLoadingIndicatorView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,24 +107,27 @@ public class Main2Activity extends AppCompatActivity {
         });
 
         mDatabase = FirebaseDatabase.getInstance().getReference("Hard");
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Player player = ds.getValue(Player.class);
-                    hardPlayers.add(player);
+        try {
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        Player player = ds.getValue(Player.class);
+                        hardPlayers.add(player);
+                    }
+                    recyclerViewAdapter = new RecyclerViewAdapter(Main2Activity.this, hardView, hardPlayers);
+                    hardView.setAdapter(recyclerViewAdapter);
                 }
-                recyclerViewAdapter = new RecyclerViewAdapter(Main2Activity.this, hardView, hardPlayers);
-                hardView.setAdapter(recyclerViewAdapter);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    //Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+        }catch (Exception e){
+            MyToast.showShort(this,e.getMessage());
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -148,11 +155,19 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void run() {
                 if (AppConstants.paid3 || AppConstants.paid4) {
-                    mAdView.setVisibility(View.GONE);
                 } else {
+                    mInterstitialAd = new InterstitialAd(Main2Activity.this);
+                    mInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_id));
                     AdRequest adRequest = new AdRequest.Builder()
                             .build();
-                    mAdView.loadAd(adRequest);
+                    mInterstitialAd.loadAd(adRequest);
+                    mInterstitialAd.setAdListener(new AdListener(){
+                        @Override
+                        public void onAdLoaded() {
+                            super.onAdLoaded();
+                            mInterstitialAd.show();
+                        }
+                    });
                 }
 
             }
